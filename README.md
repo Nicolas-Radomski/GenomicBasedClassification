@@ -11,7 +11,7 @@ The Python script GenomicBasedClassification:1.0.py was prepared and tested with
 - numpy==1.26.4
 - tqdm==4.67.1
 - tqdm-joblib==0.0.4
-# implemented classifiers
+# Implemented classifiers
 - support vector classification (SVC)
 - k-nearest neighbors (KNN)
 - decision tree classifier (DT)
