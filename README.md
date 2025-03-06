@@ -115,17 +115,17 @@ options:
 # Expected input files
 ## phenotypes and datasets for modeling (e.g. phenotype_dataset.tsv)
 ```
-sample		phenotype	dataset
-S0.1.01	pig		training
-S0.1.02	poultry	training
-S0.1.03	poultry	training
-S0.1.04	pig		training
-S0.1.05	poultry	training
-S0.1.06	poultry	training
-S0.1.07	pig		testing
-S0.1.08	poultry	training
-S0.1.09	pig		testing
-S0.1.10	pig		testing
+sample    phenotype	dataset
+S0.1.01   pig		training
+S0.1.02   poultry	training
+S0.1.03   poultry	training
+S0.1.04   pig		training
+S0.1.05   poultry	training
+S0.1.06   poultry	training
+S0.1.07   pig		testing
+S0.1.08   poultry	training
+S0.1.09   pig		testing
+S0.1.10   pig		testing
 ```
 ## genomic data for modeling (e.g. genomic_profiles_for_modeling.tsv). "A" and "L" stand for alleles and locus, respectively.
 ```
