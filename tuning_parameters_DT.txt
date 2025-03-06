@@ -1,0 +1,10 @@
+{
+'criterion': ['gini', 'entropy'], # criteria to split the tree (Gini impurity or Entropy)
+'splitter': ['best', 'random'], # splitter for deciding how to split at each node
+'max_depth': [None, 5, 10, 15, 20], # maximum depth of the tree
+'min_samples_split': [2, 5, 10], # minimum number of samples required to split an internal node
+'min_samples_leaf': [1, 5, 10], # minimum number of samples required to be at a leaf node
+'max_features': ['sqrt', 'log2', None], # number of features to consider at each split
+'max_leaf_nodes': [None, 10, 20], # maximum number of leaf nodes
+'random_state': [42] # for reproducibility
+}

@@ -1,0 +1,6 @@
+{
+'n_neighbors': list(range(5, 10)), # keep the number of neighbors low
+'algorithm': ['auto'], # try 'auto' for simplicity
+'metric': ['minkowski'], # use Minkowski distance (default)
+'leaf_size': [30], # restrict leaf size range
+}

@@ -1,0 +1,90 @@
+########################
+####### context  #######
+########################
+The scikit-learn (sklearn) Python library-based workflow was inspired by an older caret R library-based version (https://doi.org/10.1186/s12864-023-09667-w), incorporating the independence of modeling (i.e. training and testing) and prediction (i.e. based on a pre-built model), the management of classification parameters, and the estimation of probabilities associated with predictions.
+########################
+###### reference  ######
+########################
+Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare Camma, Adriano Di Pasquale and Nicolas Radomski (2023) Harmonization of supervised machine learning practices for efficient source attribution of Listeria monocytogenes based on genomic data. 2023, BMC Genomics, 24(560):1-19, https://doi.org/10.1186/s12864-023-09667-w
+########################
+##### repositories #####
+########################
+Please, site GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification) and/or Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification).
+########################
+### acknowledgements ###
+########################
+Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed at improving the algorithm.
+########################
+####### versions #######
+########################
+GenomicBasedClassification: 1.0 (released in March 2025)
+python: 3.12
+argparse: 1.1
+pandas: 2.2.2
+imblearn: 0.13.0
+sklearn: 1.5.2
+pickle: 4.0
+xgboost: 2.1.3
+numpy: 1.26.4
+tqdm: 4.67.1
+tqdm-joblib: 0.0.4
+########################
+####### arguments ######
+########################
+subcommand='prediction'
+inputpath_mutations='genomic_profiles_for_prediction.tsv'
+inputpath_model='MyDirectory/SVC_FirstAnalysis_model.obj'
+inputpath_features='MyDirectory/SVC_FirstAnalysis_features.obj'
+inputpath_encoded_features='MyDirectory/SVC_FirstAnalysis_encoded_features.obj'
+INPUTPATH_ENCODED_CLASSES=None
+outputpath='MyDirectory'
+prefix='SVC_SecondAnalysis'
+debug=20
+warnings=False
+nocheck=False
+########################
+######## checks ########
+########################
+The warnings were ignored
+The traceback level has been set to 20
+The recommended versions of Python and packages were properly controlled
+The number of expected rows (i.e. >= 1) and columns (i.e. >= 4) of the input file of mutations was properly controled (i.e. 20 and 12 , respectively)
+The encoded classes were not provided for a model other than the XGB model
+The classifier of the provided best model was properly recognized: SVC
+The classifier of the provided best model and potentially encoded classes were properly provided
+The output directory already existed
+########################
+###### execution #######
+########################
+The script started on 2025-03-06 16:00:50.678815
+The script stoped on 2025-03-06 16:00:50.693703
+The script lasted 0 days, 0 hrs, 0 mins and 0.01 secs
+########################
+##### output files #####
+########################
+MyDirectory/SVC_SecondAnalysis_prediction.tsv
+MyDirectory/SVC_SecondAnalysis_prediction_log.txt
+########################
+## prediction dataset ##
+########################
+ sample prediction    fruit      pig  poultry
+S2.1.01        pig 0.053027 0.877370 0.069604
+S2.1.02        pig 0.053245 0.877114 0.069642
+S2.1.03    poultry 0.112244 0.038595 0.849161
+S2.1.04        pig 0.059040 0.872974 0.067986
+S2.1.05    poultry 0.169319 0.057622 0.773059
+S2.1.06    poultry 0.111858 0.034669 0.853472
+S2.1.07        pig 0.165442 0.690147 0.144411
+S2.1.08    poultry 0.111583 0.036818 0.851599
+S2.1.09        pig 0.090236 0.858482 0.051282
+S2.1.10        pig 0.069125 0.885048 0.045826
+S2.1.11    poultry 0.092746 0.053580 0.853674
+S2.1.12        pig 0.078553 0.878488 0.042959
+S2.1.13    poultry 0.070590 0.064745 0.864665
+S2.1.14      fruit 0.818732 0.098786 0.082481
+S2.1.15      fruit 0.915708 0.046858 0.037434
+S2.1.16      fruit 0.805119 0.141404 0.053477
+S2.1.17      fruit 0.413116 0.457022 0.129862
+S2.1.18      fruit 0.851300 0.079838 0.068862
+S2.1.19      fruit 0.830329 0.115278 0.054393
+S2.1.20      fruit 0.915708 0.046858 0.037434

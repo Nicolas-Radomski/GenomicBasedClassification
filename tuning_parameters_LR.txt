@@ -1,0 +1,8 @@
+{
+'solver': ['saga'], # saga is the only solver that supports the 'elasticnet' penalty
+'penalty': ['elasticnet'], # use elasticnet penalty
+'l1_ratio': [0.1, 0.5, 0.9], # controls the balance between L1 and L2 regularization
+'max_iter': [2000, 5000, 10000], # increased the max_iter to allow more iterations for convergence
+'C': [0.001, 0.01, 0.1, 1.0], # regularization strength; smaller values are stronger regularization
+'tol': [1e-5, 1e-4, 1e-3], # tolerance for stopping criteria
+}

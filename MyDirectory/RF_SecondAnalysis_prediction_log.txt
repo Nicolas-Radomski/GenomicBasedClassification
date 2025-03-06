@@ -1,0 +1,90 @@
+########################
+####### context  #######
+########################
+The scikit-learn (sklearn) Python library-based workflow was inspired by an older caret R library-based version (https://doi.org/10.1186/s12864-023-09667-w), incorporating the independence of modeling (i.e. training and testing) and prediction (i.e. based on a pre-built model), the management of classification parameters, and the estimation of probabilities associated with predictions.
+########################
+###### reference  ######
+########################
+Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare Camma, Adriano Di Pasquale and Nicolas Radomski (2023) Harmonization of supervised machine learning practices for efficient source attribution of Listeria monocytogenes based on genomic data. 2023, BMC Genomics, 24(560):1-19, https://doi.org/10.1186/s12864-023-09667-w
+########################
+##### repositories #####
+########################
+Please, site GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification) and/or Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification).
+########################
+### acknowledgements ###
+########################
+Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed at improving the algorithm.
+########################
+####### versions #######
+########################
+GenomicBasedClassification: 1.0 (released in March 2025)
+python: 3.12
+argparse: 1.1
+pandas: 2.2.2
+imblearn: 0.13.0
+sklearn: 1.5.2
+pickle: 4.0
+xgboost: 2.1.3
+numpy: 1.26.4
+tqdm: 4.67.1
+tqdm-joblib: 0.0.4
+########################
+####### arguments ######
+########################
+subcommand='prediction'
+inputpath_mutations='genomic_profiles_for_prediction.tsv'
+inputpath_model='MyDirectory/RF_FirstAnalysis_model.obj'
+inputpath_features='MyDirectory/RF_FirstAnalysis_features.obj'
+inputpath_encoded_features='MyDirectory/RF_FirstAnalysis_encoded_features.obj'
+INPUTPATH_ENCODED_CLASSES=None
+outputpath='MyDirectory'
+prefix='RF_SecondAnalysis'
+debug=20
+warnings=False
+nocheck=False
+########################
+######## checks ########
+########################
+The warnings were ignored
+The traceback level has been set to 20
+The recommended versions of Python and packages were properly controlled
+The number of expected rows (i.e. >= 1) and columns (i.e. >= 4) of the input file of mutations was properly controled (i.e. 20 and 12 , respectively)
+The encoded classes were not provided for a model other than the XGB model
+The classifier of the provided best model was properly recognized: RandomForestClassifier
+The classifier of the provided best model and potentially encoded classes were properly provided
+The output directory already existed
+########################
+###### execution #######
+########################
+The script started on 2025-03-06 16:00:45.450118
+The script stoped on 2025-03-06 16:00:45.470226
+The script lasted 0 days, 0 hrs, 0 mins and 0.02 secs
+########################
+##### output files #####
+########################
+MyDirectory/RF_SecondAnalysis_prediction.tsv
+MyDirectory/RF_SecondAnalysis_prediction_log.txt
+########################
+## prediction dataset ##
+########################
+ sample prediction    fruit      pig  poultry
+S2.1.01        pig 0.050833 0.914014 0.035153
+S2.1.02        pig 0.033333 0.842494 0.124172
+S2.1.03    poultry 0.045877 0.075137 0.878986
+S2.1.04        pig 0.114357 0.855897 0.029746
+S2.1.05    poultry 0.365416 0.087238 0.547346
+S2.1.06    poultry 0.030179 0.018571 0.951250
+S2.1.07        pig 0.115320 0.832444 0.052236
+S2.1.08    poultry 0.028939 0.037727 0.933333
+S2.1.09        pig 0.129635 0.869312 0.001053
+S2.1.10        pig 0.325734 0.665175 0.009091
+S2.1.11    poultry 0.042035 0.031299 0.926667
+S2.1.12        pig 0.063752 0.935196 0.001053
+S2.1.13    poultry 0.010000 0.050667 0.939333
+S2.1.14      fruit 0.890714 0.099286 0.010000
+S2.1.15      fruit 0.842778 0.134722 0.022500
+S2.1.16      fruit 0.879186 0.082008 0.038806
+S2.1.17        pig 0.144412 0.493154 0.362434
+S2.1.18      fruit 0.832778 0.110556 0.056667
+S2.1.19      fruit 0.897500 0.100000 0.002500
+S2.1.20      fruit 0.842778 0.134722 0.022500

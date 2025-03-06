@@ -1,0 +1,7 @@
+{
+'n_estimators': [50, 100, 200], # reasonable choices for number of trees
+'max_depth': [10, 15, 20],  # limit max_depth
+'min_samples_split': [2, 5, 10], # adjust this to avoid overfitting
+'max_features': ['sqrt', 'log2'], # limit number of features used in each tree
+'bootstrap': [True, False] # control bootstrapping
+}
