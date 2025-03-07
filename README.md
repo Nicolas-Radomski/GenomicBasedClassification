@@ -12,11 +12,11 @@ The Python script GenomicBasedClassification:1.0.py was prepared and tested with
 - tqdm==4.67.1
 - tqdm-joblib==0.0.4
 # Implemented classifiers
-- support vector classification (SVC)
-- k-nearest neighbors (KNN)
 - decision tree classifier (DT)
-- random forest (RF)
+- k-nearest neighbors (KNN)
 - logistic regression (LR)
+- random forest (RF)
+- support vector classification (SVC)
 - extreme gradient boosting (XGB)
 # Recommended environments
 ## install Python libraries with pip
