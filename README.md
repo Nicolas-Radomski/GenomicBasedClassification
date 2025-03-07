@@ -96,7 +96,7 @@ options:
                         Absolute or relative input path of a tab-separated values (tsv) file including profiles of mutations. First column: sample identifiers identical to those in the input file
                         of phenotypes and datasets (header: e.g. sample). Other columns: profiles of mutations (header: labels of mutations). [MANDATORY]
   -t INPUTPATH_MODEL, --model INPUTPATH_MODEL
-                        Absolute or relative input path of a saved (sav) file including a trained scikit-learn model. [MANDATORY]
+                        Absolute or relative input path of an object (obj) file including a trained scikit-learn model. [MANDATORY]
   -f INPUTPATH_FEATURES, --features INPUTPATH_FEATURES
                         Absolute or relative input path of an object (obj) file including trained scikit-learn features (i.e. mutations). [MANDATORY]
   -ef INPUTPATH_ENCODED_FEATURES, --encodedfeatures INPUTPATH_ENCODED_FEATURES
