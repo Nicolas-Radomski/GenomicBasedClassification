@@ -386,8 +386,8 @@ Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed 
 # Reference
 Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare Camma, Adriano Di Pasquale and Nicolas Radomski (2023) Harmonization of supervised machine learning practices for efficient source attribution of Listeria monocytogenes based on genomic data. 2023, BMC Genomics, 24(560):1-19, https://doi.org/10.1186/s12864-023-09667-w
 # Repositories
-Please, site:
-- https://github.com/Nicolas-Radomski/GenomicBasedClassification
-- https://hub.docker.com/r/nicolasradomski/genomicbasedclassification
+- GitHub: https://github.com/Nicolas-Radomski/GenomicBasedClassification
+- Docker Hub: https://hub.docker.com/r/nicolasradomski/genomicbasedclassification
+- R users: https://github.com/Nicolas-Radomski/GenomicBasedMachineLearning
 # Author
 Nicolas Radomski
