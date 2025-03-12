@@ -227,7 +227,7 @@ parser_prediction.add_argument(
 	dest='inputpath_model', 
 	action='store', 
 	required=True, 
-	help='Absolute or relative input path of a saved (sav) file including a trained scikit-learn model. [MANDATORY]'
+	help='Absolute or relative input path of an object (obj) file including a trained scikit-learn model. [MANDATORY]'
 	)
 parser_prediction.add_argument(
 	'-f', '--features', 
