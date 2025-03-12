@@ -245,7 +245,7 @@ parser_prediction.add_argument(
 	)
 parser_prediction.add_argument(
 	'-ec', '--encodedclasses', 
-	dest='INPUTPATH_ENCODED_CLASSES', 
+	dest='inputpath_encoded_classes', 
 	action='store', 
 	required=False, 
 	help='Absolute or relative input path of an object (obj) file including trained scikit-learn encoded classes (i.e. phenotypes) for the XGB model. [OPTIONAL]'
@@ -321,7 +321,7 @@ elif args.subcommand == 'prediction':
 	INPUTPATH_MUTATIONS=args.inputpath_mutations
 	INPUTPATH_FEATURES=args.inputpath_features
 	INPUTPATH_ENCODED_FEATURES=args.inputpath_encoded_features
-	INPUTPATH_ENCODED_CLASSES=args.INPUTPATH_ENCODED_CLASSES
+	INPUTPATH_ENCODED_CLASSES=args.inputpath_encoded_classes
 	INPUTPATH_MODEL=args.inputpath_model
 	OUTPUTPATH=args.outputpath
 	PREFIX=args.prefix
