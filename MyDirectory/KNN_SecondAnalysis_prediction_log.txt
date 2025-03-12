@@ -36,7 +36,7 @@ inputpath_mutations='genomic_profiles_for_prediction.tsv'
 inputpath_model='MyDirectory/KNN_FirstAnalysis_model.obj'
 inputpath_features='MyDirectory/KNN_FirstAnalysis_features.obj'
 inputpath_encoded_features='MyDirectory/KNN_FirstAnalysis_encoded_features.obj'
-INPUTPATH_ENCODED_CLASSES=None
+inputpath_encoded_classes=None
 outputpath='MyDirectory'
 prefix='KNN_SecondAnalysis'
 debug=20
@@ -56,9 +56,9 @@ The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-06 16:00:16.098996
-The script stoped on 2025-03-06 16:00:16.152908
-The script lasted 0 days, 0 hrs, 0 mins and 0.05 secs
+The script started on 2025-03-12 17:26:55.073454
+The script stoped on 2025-03-12 17:26:55.132100
+The script lasted 0 days, 0 hrs, 0 mins and 0.06 secs
 ########################
 ##### output files #####
 ########################
@@ -67,24 +67,24 @@ MyDirectory/KNN_SecondAnalysis_prediction_log.txt
 ########################
 ## prediction dataset ##
 ########################
- sample prediction    fruit      pig  poultry
-S2.1.01        pig 0.000000 1.000000 0.000000
-S2.1.02        pig 0.000000 0.888889 0.111111
-S2.1.03    poultry 0.000000 0.000000 1.000000
-S2.1.04        pig 0.000000 1.000000 0.000000
-S2.1.05    poultry 0.444444 0.000000 0.555556
-S2.1.06    poultry 0.000000 0.000000 1.000000
-S2.1.07        pig 0.111111 0.888889 0.000000
-S2.1.08    poultry 0.000000 0.000000 1.000000
-S2.1.09        pig 0.000000 1.000000 0.000000
-S2.1.10        pig 0.333333 0.666667 0.000000
-S2.1.11    poultry 0.000000 0.000000 1.000000
-S2.1.12        pig 0.000000 1.000000 0.000000
-S2.1.13    poultry 0.000000 0.000000 1.000000
-S2.1.14      fruit 1.000000 0.000000 0.000000
-S2.1.15      fruit 1.000000 0.000000 0.000000
-S2.1.16      fruit 1.000000 0.000000 0.000000
-S2.1.17        pig 0.111111 0.444444 0.444444
-S2.1.18      fruit 1.000000 0.000000 0.000000
-S2.1.19      fruit 1.000000 0.000000 0.000000
-S2.1.20      fruit 1.000000 0.000000 0.000000
+ sample prediction  fruit  pig  poultry
+S2.1.01        pig    0.0  1.0      0.0
+S2.1.02        pig    0.0  0.8      0.2
+S2.1.03    poultry    0.0  0.0      1.0
+S2.1.04        pig    0.0  1.0      0.0
+S2.1.05      fruit    0.8  0.0      0.2
+S2.1.06    poultry    0.0  0.0      1.0
+S2.1.07        pig    0.0  1.0      0.0
+S2.1.08    poultry    0.0  0.0      1.0
+S2.1.09        pig    0.0  1.0      0.0
+S2.1.10        pig    0.2  0.8      0.0
+S2.1.11    poultry    0.0  0.0      1.0
+S2.1.12        pig    0.0  1.0      0.0
+S2.1.13    poultry    0.0  0.0      1.0
+S2.1.14      fruit    1.0  0.0      0.0
+S2.1.15      fruit    1.0  0.0      0.0
+S2.1.16      fruit    1.0  0.0      0.0
+S2.1.17        pig    0.2  0.6      0.2
+S2.1.18      fruit    1.0  0.0      0.0
+S2.1.19      fruit    1.0  0.0      0.0
+S2.1.20      fruit    1.0  0.0      0.0

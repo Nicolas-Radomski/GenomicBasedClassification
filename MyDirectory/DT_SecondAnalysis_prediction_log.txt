@@ -36,7 +36,7 @@ inputpath_mutations='genomic_profiles_for_prediction.tsv'
 inputpath_model='MyDirectory/DT_FirstAnalysis_model.obj'
 inputpath_features='MyDirectory/DT_FirstAnalysis_features.obj'
 inputpath_encoded_features='MyDirectory/DT_FirstAnalysis_encoded_features.obj'
-INPUTPATH_ENCODED_CLASSES=None
+inputpath_encoded_classes=None
 outputpath='MyDirectory'
 prefix='DT_SecondAnalysis'
 debug=20
@@ -56,9 +56,9 @@ The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-06 16:49:00.798728
-The script stoped on 2025-03-06 16:49:00.813669
-The script lasted 0 days, 0 hrs, 0 mins and 0.01 secs
+The script started on 2025-03-12 17:26:46.977656
+The script stoped on 2025-03-12 17:26:46.993103
+The script lasted 0 days, 0 hrs, 0 mins and 0.02 secs
 ########################
 ##### output files #####
 ########################
@@ -67,24 +67,24 @@ MyDirectory/DT_SecondAnalysis_prediction_log.txt
 ########################
 ## prediction dataset ##
 ########################
- sample prediction  fruit   pig  poultry
-S2.1.01        pig  0.000 1.000    0.000
-S2.1.02        pig  0.000 0.875    0.125
-S2.1.03    poultry  0.000 0.000    1.000
-S2.1.04        pig  0.000 1.000    0.000
-S2.1.05        pig  0.375 0.625    0.000
-S2.1.06    poultry  0.000 0.000    1.000
-S2.1.07        pig  0.000 1.000    0.000
-S2.1.08    poultry  0.000 0.000    1.000
-S2.1.09        pig  0.000 1.000    0.000
-S2.1.10        pig  0.375 0.625    0.000
-S2.1.11    poultry  0.000 0.000    1.000
-S2.1.12        pig  0.000 1.000    0.000
-S2.1.13    poultry  0.000 0.000    1.000
-S2.1.14      fruit  1.000 0.000    0.000
-S2.1.15      fruit  1.000 0.000    0.000
-S2.1.16        pig  0.125 0.500    0.375
-S2.1.17      fruit  1.000 0.000    0.000
-S2.1.18        pig  0.375 0.625    0.000
-S2.1.19      fruit  1.000 0.000    0.000
-S2.1.20      fruit  1.000 0.000    0.000
+ sample prediction  fruit      pig  poultry
+S2.1.01        pig  0.000 1.000000 0.000000
+S2.1.02        pig  0.000 0.888889 0.111111
+S2.1.03    poultry  0.000 0.000000 1.000000
+S2.1.04        pig  0.000 1.000000 0.000000
+S2.1.05      fruit  0.625 0.000000 0.375000
+S2.1.06    poultry  0.000 0.000000 1.000000
+S2.1.07        pig  0.000 1.000000 0.000000
+S2.1.08    poultry  0.000 0.000000 1.000000
+S2.1.09        pig  0.000 1.000000 0.000000
+S2.1.10        pig  0.375 0.625000 0.000000
+S2.1.11    poultry  0.000 0.000000 1.000000
+S2.1.12        pig  0.000 1.000000 0.000000
+S2.1.13    poultry  0.000 0.000000 1.000000
+S2.1.14        pig  0.000 1.000000 0.000000
+S2.1.15      fruit  1.000 0.000000 0.000000
+S2.1.16        pig  0.000 1.000000 0.000000
+S2.1.17        pig  0.000 1.000000 0.000000
+S2.1.18      fruit  1.000 0.000000 0.000000
+S2.1.19      fruit  1.000 0.000000 0.000000
+S2.1.20      fruit  1.000 0.000000 0.000000

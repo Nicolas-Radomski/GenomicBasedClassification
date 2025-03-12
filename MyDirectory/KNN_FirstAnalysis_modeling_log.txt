@@ -71,15 +71,15 @@ The training and testing datasets were constructed based on the 'manual' setting
 The number of samples per class in the training and testing datasets was properly controlled to be higher than the set limit (i.e. 10)
 The provided classifier was properly recognized: k-nearest neighbors (KNN)
 The tuning parameters were provided by the user: {'n_neighbors': 5, 6, 7, 8, 9, 'algorithm': 'auto', 'metric': 'minkowski', 'leaf_size': 30}
-The best parameters during model cross-validation were: {'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 9}
-The best accuracy during model cross-validation was: 0.8938
+The best parameters during model cross-validation were: {'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 5}
+The best accuracy during model cross-validation was: 0.9062
 The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-06 16:00:12.607105
-The script stoped on 2025-03-06 16:00:14.491210
-The script lasted 0 days, 0 hrs, 0 mins and 1.88 secs
+The script started on 2025-03-12 17:26:49.877264
+The script stoped on 2025-03-12 17:26:51.577589
+The script lasted 0 days, 0 hrs, 0 mins and 1.7 secs
 ########################
 ##### output files #####
 ########################
@@ -103,243 +103,243 @@ MyDirectory/KNN_FirstAnalysis_modeling_log.txt
 ########################
 from the training dataset: 
 phenotype  fruit  pig  poultry
-    fruit     48    4        4
+    fruit     52    4        0
       pig      0   56        0
-  poultry      0    5       43
+  poultry      3    5       40
 from the testing dataset: 
 phenotype  fruit  pig  poultry
-    fruit     12    1        1
+    fruit     13    1        0
       pig      0   14        0
-  poultry      0    0       12
+  poultry      2    0       10
 NB: The expectation and prediction are represented by rows and columns, respectively. 
 ########################
 ### metrics per class ##
 ########################
 from the training dataset: 
 phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-    fruit 104   0   8  48       56    0.9500       0.8571       1.0000     1.0000  0.8571    0.9231       0.8864
+    fruit 101   3   4  52       56    0.9562       0.9286       0.9712     0.9455  0.9286    0.9370       0.9034
       pig  95   9   0  56       56    0.9438       1.0000       0.9135     0.8615  1.0000    0.9256       0.8808
-  poultry 108   4   5  43       48    0.9438       0.8958       0.9643     0.9149  0.8958    0.9052       0.8653
+  poultry 112   0   8  40       48    0.9500       0.8333       1.0000     1.0000  0.8333    0.9091       0.8750
 from the testing dataset: 
 phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-    fruit  26   0   2  12       14     0.950       0.8571       1.0000     1.0000  0.8571    0.9231       0.8864
+    fruit  24   2   1  13       14     0.925       0.9286       0.9231     0.8667  0.9286    0.8966       0.8378
       pig  25   1   0  14       14     0.975       1.0000       0.9615     0.9333  1.0000    0.9655       0.9459
-  poultry  27   1   0  12       12     0.975       1.0000       0.9643     0.9231  1.0000    0.9600       0.9419
+  poultry  28   0   2  10       12     0.950       0.8333       1.0000     1.0000  0.8333    0.9091       0.8750
 NB: The term 'support' corresponds to TP + FN. 
 ########################
 #### global metrics ####
 ########################
 from the training dataset: 
  accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-   0.9187       0.9177       0.9592     0.9255  0.9177     0.918       0.8778
+    0.925       0.9206       0.9615     0.9357  0.9206    0.9239       0.8868
 from the testing dataset: 
  accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-     0.95       0.9524       0.9753     0.9521  0.9524    0.9495        0.925
+    0.925       0.9206       0.9615     0.9333  0.9206    0.9237       0.8868
 ########################
 ### training dataset ###
 ########################
- sample expectation prediction    fruit      pig  poultry
-S0.1.01         pig        pig 0.000000 1.000000 0.000000
-S0.1.02     poultry        pig 0.000000 0.888889 0.111111
-S0.1.05     poultry    poultry 0.444444 0.000000 0.555556
-S0.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S0.1.07         pig        pig 0.000000 0.888889 0.111111
-S0.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S0.1.09         pig        pig 0.000000 1.000000 0.000000
-S0.1.10         pig        pig 0.333333 0.666667 0.000000
-S0.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S0.1.12         pig        pig 0.000000 1.000000 0.000000
-S0.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S0.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S0.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S0.1.16       fruit        pig 0.111111 0.444444 0.444444
-S0.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S0.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S0.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S0.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S1.1.01         pig        pig 0.000000 1.000000 0.000000
-S1.1.02         pig        pig 0.000000 0.888889 0.111111
-S1.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S1.1.04         pig        pig 0.000000 1.000000 0.000000
-S1.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S1.1.07         pig        pig 0.000000 0.888889 0.111111
-S1.1.09         pig        pig 0.000000 1.000000 0.000000
-S1.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S1.1.12         pig        pig 0.000000 1.000000 0.000000
-S1.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S1.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S1.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S1.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S1.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S2.1.02         pig        pig 0.000000 0.888889 0.111111
-S2.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S2.1.04         pig        pig 0.000000 1.000000 0.000000
-S2.1.05       fruit    poultry 0.444444 0.000000 0.555556
-S2.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S2.1.07         pig        pig 0.000000 0.888889 0.111111
-S2.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S2.1.09         pig        pig 0.000000 1.000000 0.000000
-S2.1.10         pig        pig 0.333333 0.666667 0.000000
-S2.1.12         pig        pig 0.000000 1.000000 0.000000
-S2.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S2.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S2.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S2.1.16         pig        pig 0.111111 0.444444 0.444444
-S2.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S3.1.01         pig        pig 0.000000 1.000000 0.000000
-S3.1.02         pig        pig 0.000000 0.888889 0.111111
-S3.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S3.1.04         pig        pig 0.000000 1.000000 0.000000
-S3.1.05       fruit    poultry 0.444444 0.000000 0.555556
-S3.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S3.1.07         pig        pig 0.000000 0.888889 0.111111
-S3.1.09         pig        pig 0.000000 1.000000 0.000000
-S3.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S3.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S3.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S3.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S3.1.16         pig        pig 0.111111 0.444444 0.444444
-S3.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S3.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S3.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S4.1.01         pig        pig 0.000000 1.000000 0.000000
-S4.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S4.1.04         pig        pig 0.000000 1.000000 0.000000
-S4.1.05       fruit    poultry 0.444444 0.000000 0.555556
-S4.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S4.1.09         pig        pig 0.000000 1.000000 0.000000
-S4.1.10         pig        pig 0.333333 0.666667 0.000000
-S4.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S4.1.12         pig        pig 0.000000 1.000000 0.000000
-S4.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S4.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S4.1.16         pig        pig 0.111111 0.444444 0.444444
-S4.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S4.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S5.1.01         pig        pig 0.000000 1.000000 0.000000
-S5.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S5.1.05       fruit    poultry 0.444444 0.000000 0.555556
-S5.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S5.1.07         pig        pig 0.000000 0.888889 0.111111
-S5.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S5.1.10         pig        pig 0.333333 0.666667 0.000000
-S5.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S5.1.12         pig        pig 0.000000 1.000000 0.000000
-S5.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S5.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S5.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S5.1.16         pig        pig 0.111111 0.444444 0.444444
-S5.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S5.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S5.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S5.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S6.1.02         pig        pig 0.000000 0.888889 0.111111
-S6.1.04         pig        pig 0.000000 1.000000 0.000000
-S6.1.05     poultry    poultry 0.444444 0.000000 0.555556
-S6.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S6.1.07         pig        pig 0.000000 0.888889 0.111111
-S6.1.09         pig        pig 0.000000 1.000000 0.000000
-S6.1.10       fruit        pig 0.333333 0.666667 0.000000
-S6.1.12         pig        pig 0.000000 1.000000 0.000000
-S6.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S6.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S6.1.16     poultry        pig 0.111111 0.444444 0.444444
-S6.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S6.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S6.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S7.1.01         pig        pig 0.000000 1.000000 0.000000
-S7.1.02         pig        pig 0.000000 0.888889 0.111111
-S7.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S7.1.04         pig        pig 0.000000 1.000000 0.000000
-S7.1.05     poultry    poultry 0.444444 0.000000 0.555556
-S7.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S7.1.07         pig        pig 0.000000 0.888889 0.111111
-S7.1.09         pig        pig 0.000000 1.000000 0.000000
-S7.1.10       fruit        pig 0.333333 0.666667 0.000000
-S7.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S7.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S7.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S7.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S7.1.16     poultry        pig 0.111111 0.444444 0.444444
-S7.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S7.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S7.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S7.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S8.1.01         pig        pig 0.000000 1.000000 0.000000
-S8.1.02         pig        pig 0.000000 0.888889 0.111111
-S8.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S8.1.04         pig        pig 0.000000 1.000000 0.000000
-S8.1.05     poultry    poultry 0.444444 0.000000 0.555556
-S8.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S8.1.07         pig        pig 0.000000 0.888889 0.111111
-S8.1.09         pig        pig 0.000000 1.000000 0.000000
-S8.1.10       fruit        pig 0.333333 0.666667 0.000000
-S8.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S8.1.12         pig        pig 0.000000 1.000000 0.000000
-S8.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S8.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S8.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S8.1.16     poultry        pig 0.111111 0.444444 0.444444
-S8.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S8.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S8.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S8.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S9.1.01         pig        pig 0.000000 1.000000 0.000000
-S9.1.02         pig        pig 0.000000 0.888889 0.111111
-S9.1.04         pig        pig 0.000000 1.000000 0.000000
-S9.1.05     poultry    poultry 0.444444 0.000000 0.555556
-S9.1.06     poultry    poultry 0.000000 0.000000 1.000000
-S9.1.09         pig        pig 0.000000 1.000000 0.000000
-S9.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S9.1.12         pig        pig 0.000000 1.000000 0.000000
-S9.1.13     poultry    poultry 0.000000 0.000000 1.000000
-S9.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S9.1.15       fruit      fruit 1.000000 0.000000 0.000000
-S9.1.16     poultry        pig 0.111111 0.444444 0.444444
-S9.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S9.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S9.1.20       fruit      fruit 1.000000 0.000000 0.000000
+ sample expectation prediction  fruit  pig  poultry
+S0.1.01         pig        pig    0.0  1.0      0.0
+S0.1.02     poultry        pig    0.0  0.8      0.2
+S0.1.03     poultry    poultry    0.0  0.0      1.0
+S0.1.04         pig        pig    0.0  1.0      0.0
+S0.1.05     poultry      fruit    0.8  0.0      0.2
+S0.1.07         pig        pig    0.0  1.0      0.0
+S0.1.08     poultry    poultry    0.0  0.0      1.0
+S0.1.09         pig        pig    0.0  1.0      0.0
+S0.1.10         pig        pig    0.2  0.8      0.0
+S0.1.11     poultry    poultry    0.0  0.0      1.0
+S0.1.13     poultry    poultry    0.0  0.0      1.0
+S0.1.14       fruit      fruit    1.0  0.0      0.0
+S0.1.15       fruit      fruit    1.0  0.0      0.0
+S0.1.16       fruit        pig    0.2  0.6      0.2
+S0.1.17       fruit      fruit    1.0  0.0      0.0
+S0.1.19       fruit      fruit    1.0  0.0      0.0
+S0.1.20       fruit      fruit    1.0  0.0      0.0
+S1.1.01         pig        pig    0.0  1.0      0.0
+S1.1.02         pig        pig    0.0  0.8      0.2
+S1.1.03     poultry    poultry    0.0  0.0      1.0
+S1.1.05       fruit      fruit    0.8  0.0      0.2
+S1.1.06     poultry    poultry    0.0  0.0      1.0
+S1.1.07         pig        pig    0.0  1.0      0.0
+S1.1.08     poultry    poultry    0.0  0.0      1.0
+S1.1.09         pig        pig    0.0  1.0      0.0
+S1.1.11     poultry    poultry    0.0  0.0      1.0
+S1.1.12         pig        pig    0.0  1.0      0.0
+S1.1.13     poultry    poultry    0.0  0.0      1.0
+S1.1.14       fruit      fruit    1.0  0.0      0.0
+S1.1.15       fruit      fruit    1.0  0.0      0.0
+S1.1.16         pig        pig    0.2  0.6      0.2
+S1.1.17       fruit      fruit    1.0  0.0      0.0
+S1.1.18       fruit      fruit    1.0  0.0      0.0
+S1.1.19       fruit      fruit    1.0  0.0      0.0
+S1.1.20       fruit      fruit    1.0  0.0      0.0
+S2.1.01         pig        pig    0.0  1.0      0.0
+S2.1.02         pig        pig    0.0  0.8      0.2
+S2.1.04         pig        pig    0.0  1.0      0.0
+S2.1.05       fruit      fruit    0.8  0.0      0.2
+S2.1.06     poultry    poultry    0.0  0.0      1.0
+S2.1.07         pig        pig    0.0  1.0      0.0
+S2.1.08     poultry    poultry    0.0  0.0      1.0
+S2.1.09         pig        pig    0.0  1.0      0.0
+S2.1.10         pig        pig    0.0  1.0      0.0
+S2.1.11     poultry    poultry    0.0  0.0      1.0
+S2.1.12         pig        pig    0.0  1.0      0.0
+S2.1.13     poultry    poultry    0.0  0.0      1.0
+S2.1.14       fruit      fruit    1.0  0.0      0.0
+S2.1.15       fruit      fruit    1.0  0.0      0.0
+S2.1.16         pig        pig    0.2  0.6      0.2
+S2.1.17       fruit      fruit    1.0  0.0      0.0
+S2.1.18       fruit      fruit    1.0  0.0      0.0
+S2.1.19       fruit      fruit    1.0  0.0      0.0
+S2.1.20       fruit      fruit    1.0  0.0      0.0
+S3.1.01         pig        pig    0.0  1.0      0.0
+S3.1.02         pig        pig    0.0  0.8      0.2
+S3.1.03     poultry    poultry    0.0  0.0      1.0
+S3.1.04         pig        pig    0.0  1.0      0.0
+S3.1.05       fruit      fruit    0.8  0.0      0.2
+S3.1.07         pig        pig    0.0  1.0      0.0
+S3.1.08     poultry    poultry    0.0  0.0      1.0
+S3.1.09         pig        pig    0.0  1.0      0.0
+S3.1.10         pig        pig    0.2  0.8      0.0
+S3.1.12         pig        pig    0.0  1.0      0.0
+S3.1.13     poultry    poultry    0.0  0.0      1.0
+S3.1.14       fruit      fruit    1.0  0.0      0.0
+S3.1.15       fruit      fruit    1.0  0.0      0.0
+S3.1.16         pig        pig    0.2  0.6      0.2
+S3.1.17       fruit      fruit    1.0  0.0      0.0
+S3.1.18       fruit      fruit    1.0  0.0      0.0
+S3.1.20       fruit      fruit    1.0  0.0      0.0
+S4.1.02         pig        pig    0.0  0.8      0.2
+S4.1.03     poultry    poultry    0.0  0.0      1.0
+S4.1.04         pig        pig    0.0  1.0      0.0
+S4.1.05       fruit      fruit    0.8  0.0      0.2
+S4.1.06     poultry    poultry    0.0  0.0      1.0
+S4.1.07         pig        pig    0.0  1.0      0.0
+S4.1.08     poultry    poultry    0.0  0.0      1.0
+S4.1.09         pig        pig    0.0  1.0      0.0
+S4.1.10         pig        pig    0.2  0.8      0.0
+S4.1.12         pig        pig    0.0  1.0      0.0
+S4.1.17       fruit      fruit    1.0  0.0      0.0
+S4.1.18       fruit      fruit    1.0  0.0      0.0
+S4.1.19       fruit      fruit    1.0  0.0      0.0
+S4.1.20       fruit      fruit    1.0  0.0      0.0
+S5.1.02         pig        pig    0.0  0.8      0.2
+S5.1.03     poultry    poultry    0.0  0.0      1.0
+S5.1.04         pig        pig    0.0  1.0      0.0
+S5.1.05       fruit      fruit    0.8  0.0      0.2
+S5.1.06     poultry    poultry    0.0  0.0      1.0
+S5.1.08     poultry    poultry    0.0  0.0      1.0
+S5.1.10         pig        pig    0.2  0.8      0.0
+S5.1.11     poultry    poultry    0.0  0.0      1.0
+S5.1.13     poultry    poultry    0.0  0.0      1.0
+S5.1.15       fruit      fruit    1.0  0.0      0.0
+S5.1.17       fruit      fruit    1.0  0.0      0.0
+S5.1.18       fruit      fruit    1.0  0.0      0.0
+S5.1.19       fruit      fruit    1.0  0.0      0.0
+S5.1.20       fruit      fruit    1.0  0.0      0.0
+S6.1.02         pig        pig    0.0  0.8      0.2
+S6.1.03     poultry    poultry    0.0  0.0      1.0
+S6.1.04         pig        pig    0.0  1.0      0.0
+S6.1.05     poultry      fruit    0.8  0.0      0.2
+S6.1.08     poultry    poultry    0.0  0.0      1.0
+S6.1.09         pig        pig    0.0  1.0      0.0
+S6.1.10       fruit        pig    0.2  0.8      0.0
+S6.1.12         pig        pig    0.0  1.0      0.0
+S6.1.13     poultry    poultry    0.0  0.0      1.0
+S6.1.14       fruit      fruit    1.0  0.0      0.0
+S6.1.15       fruit      fruit    1.0  0.0      0.0
+S6.1.16     poultry        pig    0.2  0.6      0.2
+S6.1.17       fruit      fruit    1.0  0.0      0.0
+S6.1.18       fruit      fruit    1.0  0.0      0.0
+S6.1.20       fruit      fruit    1.0  0.0      0.0
+S7.1.01         pig        pig    0.0  1.0      0.0
+S7.1.02         pig        pig    0.0  0.8      0.2
+S7.1.03     poultry    poultry    0.0  0.0      1.0
+S7.1.06     poultry    poultry    0.0  0.0      1.0
+S7.1.07         pig        pig    0.0  1.0      0.0
+S7.1.08     poultry    poultry    0.0  0.0      1.0
+S7.1.09         pig        pig    0.0  1.0      0.0
+S7.1.11     poultry    poultry    0.0  0.0      1.0
+S7.1.14       fruit      fruit    1.0  0.0      0.0
+S7.1.16     poultry        pig    0.2  0.6      0.2
+S7.1.17       fruit      fruit    1.0  0.0      0.0
+S7.1.19       fruit      fruit    1.0  0.0      0.0
+S8.1.01         pig        pig    0.0  1.0      0.0
+S8.1.02         pig        pig    0.0  0.8      0.2
+S8.1.03     poultry    poultry    0.0  0.0      1.0
+S8.1.04         pig        pig    0.0  1.0      0.0
+S8.1.05     poultry      fruit    0.8  0.0      0.2
+S8.1.06     poultry    poultry    0.0  0.0      1.0
+S8.1.07         pig        pig    0.0  1.0      0.0
+S8.1.08     poultry    poultry    0.0  0.0      1.0
+S8.1.09         pig        pig    0.0  1.0      0.0
+S8.1.10       fruit        pig    0.2  0.8      0.0
+S8.1.11     poultry    poultry    0.0  0.0      1.0
+S8.1.12         pig        pig    0.0  1.0      0.0
+S8.1.13     poultry    poultry    0.0  0.0      1.0
+S8.1.15       fruit      fruit    1.0  0.0      0.0
+S8.1.16     poultry        pig    0.2  0.6      0.2
+S8.1.19       fruit      fruit    1.0  0.0      0.0
+S8.1.20       fruit      fruit    1.0  0.0      0.0
+S9.1.01         pig        pig    0.0  1.0      0.0
+S9.1.02         pig        pig    0.0  0.8      0.2
+S9.1.03     poultry    poultry    0.0  0.0      1.0
+S9.1.04         pig        pig    0.0  1.0      0.0
+S9.1.06     poultry    poultry    0.0  0.0      1.0
+S9.1.07         pig        pig    0.0  1.0      0.0
+S9.1.09         pig        pig    0.0  1.0      0.0
+S9.1.10       fruit        pig    0.2  0.8      0.0
+S9.1.11     poultry    poultry    0.0  0.0      1.0
+S9.1.12         pig        pig    0.0  1.0      0.0
+S9.1.13     poultry    poultry    0.0  0.0      1.0
+S9.1.14       fruit      fruit    1.0  0.0      0.0
+S9.1.15       fruit      fruit    1.0  0.0      0.0
+S9.1.16     poultry        pig    0.2  0.6      0.2
+S9.1.17       fruit      fruit    1.0  0.0      0.0
+S9.1.18       fruit      fruit    1.0  0.0      0.0
+S9.1.20       fruit      fruit    1.0  0.0      0.0
 ########################
 ### testing  dataset ###
 ########################
- sample expectation prediction    fruit      pig  poultry
-S0.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S0.1.04         pig        pig 0.000000 1.000000 0.000000
-S1.1.05       fruit    poultry 0.444444 0.000000 0.555556
-S1.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S1.1.10         pig        pig 0.333333 0.666667 0.000000
-S1.1.16         pig        pig 0.111111 0.444444 0.444444
-S1.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S1.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S2.1.01         pig        pig 0.000000 1.000000 0.000000
-S2.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S2.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S2.1.18       fruit      fruit 1.000000 0.000000 0.000000
-S2.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S3.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S3.1.10         pig        pig 0.333333 0.666667 0.000000
-S3.1.12         pig        pig 0.000000 1.000000 0.000000
-S3.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S4.1.02         pig        pig 0.000000 0.888889 0.111111
-S4.1.07         pig        pig 0.000000 0.888889 0.111111
-S4.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S4.1.15       fruit      fruit 0.888889 0.111111 0.000000
-S4.1.17       fruit      fruit 1.000000 0.000000 0.000000
-S4.1.20       fruit      fruit 1.000000 0.000000 0.000000
-S5.1.02         pig        pig 0.000000 0.888889 0.111111
-S5.1.04         pig        pig 0.000000 1.000000 0.000000
-S5.1.09         pig        pig 0.000000 1.000000 0.000000
-S6.1.01         pig        pig 0.000000 1.000000 0.000000
-S6.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S6.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S6.1.11     poultry    poultry 0.000000 0.000000 1.000000
-S6.1.14       fruit      fruit 1.000000 0.000000 0.000000
-S6.1.19       fruit      fruit 1.000000 0.000000 0.000000
-S7.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S7.1.12         pig        pig 0.000000 1.000000 0.000000
-S8.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S9.1.03     poultry    poultry 0.000000 0.000000 1.000000
-S9.1.07         pig        pig 0.000000 0.888889 0.111111
-S9.1.08     poultry    poultry 0.000000 0.000000 1.000000
-S9.1.10       fruit        pig 0.333333 0.666667 0.000000
-S9.1.18       fruit      fruit 1.000000 0.000000 0.000000
+ sample expectation prediction  fruit  pig  poultry
+S0.1.06     poultry    poultry    0.0  0.0      1.0
+S0.1.12         pig        pig    0.0  1.0      0.0
+S0.1.18       fruit      fruit    1.0  0.0      0.0
+S1.1.04         pig        pig    0.0  1.0      0.0
+S1.1.10         pig        pig    0.2  0.8      0.0
+S2.1.03     poultry    poultry    0.0  0.0      1.0
+S3.1.06     poultry    poultry    0.0  0.0      1.0
+S3.1.11     poultry    poultry    0.0  0.0      1.0
+S3.1.19       fruit      fruit    1.0  0.0      0.0
+S4.1.01         pig        pig    0.0  1.0      0.0
+S4.1.11     poultry    poultry    0.0  0.0      1.0
+S4.1.13     poultry    poultry    0.0  0.0      1.0
+S4.1.14       fruit      fruit    1.0  0.0      0.0
+S4.1.15       fruit      fruit    1.0  0.0      0.0
+S4.1.16         pig        pig    0.2  0.6      0.2
+S5.1.01         pig        pig    0.0  1.0      0.0
+S5.1.07         pig        pig    0.0  1.0      0.0
+S5.1.09         pig        pig    0.0  1.0      0.0
+S5.1.12         pig        pig    0.0  1.0      0.0
+S5.1.14       fruit      fruit    1.0  0.0      0.0
+S5.1.16         pig        pig    0.2  0.6      0.2
+S6.1.01         pig        pig    0.0  1.0      0.0
+S6.1.06     poultry    poultry    0.0  0.0      1.0
+S6.1.07         pig        pig    0.0  1.0      0.0
+S6.1.11     poultry    poultry    0.0  0.0      1.0
+S6.1.19       fruit      fruit    1.0  0.0      0.0
+S7.1.04         pig        pig    0.0  1.0      0.0
+S7.1.05     poultry      fruit    0.8  0.0      0.2
+S7.1.10       fruit        pig    0.2  0.8      0.0
+S7.1.12         pig        pig    0.0  1.0      0.0
+S7.1.13     poultry    poultry    0.0  0.0      1.0
+S7.1.15       fruit      fruit    1.0  0.0      0.0
+S7.1.18       fruit      fruit    1.0  0.0      0.0
+S7.1.20       fruit      fruit    1.0  0.0      0.0
+S8.1.14       fruit      fruit    1.0  0.0      0.0
+S8.1.17       fruit      fruit    1.0  0.0      0.0
+S8.1.18       fruit      fruit    1.0  0.0      0.0
+S9.1.05     poultry      fruit    0.8  0.0      0.2
+S9.1.08     poultry    poultry    0.0  0.0      1.0
+S9.1.19       fruit      fruit    1.0  0.0      0.0

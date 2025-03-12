@@ -28,11 +28,11 @@ python3.12 GenomicBasedClassification:1.0.py modeling -m genomic_profiles_for_mo
 python3.12 GenomicBasedClassification:1.0.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/XGB_FirstAnalysis_model.obj -f MyDirectory/XGB_FirstAnalysis_features.obj -ef MyDirectory/XGB_FirstAnalysis_encoded_features.obj -ec MyDirectory/XGB_FirstAnalysis_encoded_classes.obj -o MyDirectory -x XGB_SecondAnalysis -de 20
 '''
 # refer to guidelines to set parameters of classifiers
-## support vector classification: SVC (SVC()): https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
-## k-nearest neighbors: KNN (KNeighborsClassifier()): https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 ## decision tree classifier: DT (DecisionTreeClassifier (DT)): https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-## random forest: RF (RandomForestClassifier (RF)): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+## k-nearest neighbors: KNN (KNeighborsClassifier()): https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 ## logistic regression: LR (LogisticRegression (LR)): https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+## random forest: RF (RandomForestClassifier (RF)): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+## support vector classification: SVC (SVC()): https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
 ## extreme gradient boosting: XGB (XGBClassifier (XGB)): https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier
 
 # import packages
@@ -227,7 +227,7 @@ parser_prediction.add_argument(
 	dest='inputpath_model', 
 	action='store', 
 	required=True, 
-	help='Absolute or relative input path of a saved (sav) file including a trained scikit-learn model. [MANDATORY]'
+	help='Absolute or relative input path of an object (obj) file including a trained scikit-learn model. [MANDATORY]'
 	)
 parser_prediction.add_argument(
 	'-f', '--features', 
@@ -245,7 +245,7 @@ parser_prediction.add_argument(
 	)
 parser_prediction.add_argument(
 	'-ec', '--encodedclasses', 
-	dest='INPUTPATH_ENCODED_CLASSES', 
+	dest='inputpath_encoded_classes', 
 	action='store', 
 	required=False, 
 	help='Absolute or relative input path of an object (obj) file including trained scikit-learn encoded classes (i.e. phenotypes) for the XGB model. [OPTIONAL]'
@@ -321,7 +321,7 @@ elif args.subcommand == 'prediction':
 	INPUTPATH_MUTATIONS=args.inputpath_mutations
 	INPUTPATH_FEATURES=args.inputpath_features
 	INPUTPATH_ENCODED_FEATURES=args.inputpath_encoded_features
-	INPUTPATH_ENCODED_CLASSES=args.INPUTPATH_ENCODED_CLASSES
+	INPUTPATH_ENCODED_CLASSES=args.inputpath_encoded_classes
 	INPUTPATH_MODEL=args.inputpath_model
 	OUTPUTPATH=args.outputpath
 	PREFIX=args.prefix
