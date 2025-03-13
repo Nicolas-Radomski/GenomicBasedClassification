@@ -215,16 +215,16 @@ https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClass
 ## genomic profils for prediction (e.g. genomic_profiles_for_prediction.tsv). "A" and "L" stand for alleles and locus, respectively.
 ```
 sample		L_1	L_2	L_3	L_4	L_5	L_6	L_7	L_8	L_9	L_10	L_11
-S2.1.01	    A3	A2	A3	A4	A5	A6	A7	A3	A4	A1	A10
-S2.1.02	    A8	A5	A3	A4	A5	A6	A7	A3	A4	A1	A10
-S2.1.03	    A6	A7	A6	A2	A17	A5	A6	A7	A8	A1	A18
-S2.1.04		  A13	A8	A5	A16	A4	A5	A6	A12	A1	A17
-S2.1.05	    A6	A24	A15	A16	A3	A14	A6	A7	A8	A1	A18
-S2.1.06	    A6	A7	A15	A16	A8	A5	A6	A7	A8	A1	A18
-S2.1.07	    A7	A8	A9	A10	A11	A14	A3	A2	A88	A1	A16
-S2.1.08	    A6	A7	A15	A16	A17	A5	A7	A5	A8	A1	A18
-S2.1.09	    A12	A13	A14	A25	A16	A4	A5		A3	A1	A2
-S2.1.10	    A12	A13	A14	A15	A16	A4	A5	A6	A8	A1	A8
+S2.1.01 	A3	A2	A3	A4	A5	A6	A7	A3	A4	A1	A10
+S2.1.02 	A8	A5	A3	A4	A5	A6	A7	A3	A4	A1	A10
+S2.1.03 	A6	A7	A6	A2	A17	A5	A6	A7	A8	A1	A18
+S2.1.04 	A13	A8	A5	A16	A4	A5	A6	A12	A1	A17
+S2.1.05 	A6	A24	A15	A16	A3	A14	A6	A7	A8	A1	A18
+S2.1.06 	A6	A7	A15	A16	A8	A5	A6	A7	A8	A1	A18
+S2.1.07 	A7	A8	A9	A10	A11	A14	A3	A2	A88	A1	A16
+S2.1.08 	A6	A7	A15	A16	A17	A5	A7	A5	A8	A1	A18
+S2.1.09 	A12	A13	A14	A25	A16	A4	A5		A3	A1	A2
+S2.1.10 	A12	A13	A14	A15	A16	A4	A5	A6	A8	A1	A8
 ```
 # Examples of commands
 ## import the GitHub repository
