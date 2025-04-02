@@ -46,7 +46,7 @@ mamba install -c conda-forge scikit-learn=1.5.2
 mamba install -c conda-forge xgboost=2.1.3
 mamba install -c conda-forge numpy=1.26.4
 mamba install -c conda-forge tqdm=4.67.1
-pip install tqdm-joblib==0.0.4
+mamba install -c nicolasradomski tqdm-joblib=0.0.4
 conda list -n py312
 conda deactivate # after usage
 ```
