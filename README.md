@@ -50,6 +50,13 @@ pip install tqdm-joblib==0.0.4
 conda list -n py312
 conda deactivate # after usage
 ```
+## or install a Conda package
+```
+conda update --all
+conda create -n env_anaconda_GenomicBasedClassification_1.0 -c nicolasradomski -c conda-forge -c defaults genomicbasedclassification
+conda activate env_anaconda_GenomicBasedClassification_1.0
+conda deactivate # after usage
+```
 # Helps
 ## modeling
 ```
@@ -295,7 +302,7 @@ docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomsk
 docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x XGB_FirstAnalysis -da manual -c XGB -k 2 -pa tuning_parameters_XGB.txt -de 20
 docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/XGB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/XGB_FirstAnalysis_features.obj -ef MyDirectoryDockerHub/XGB_FirstAnalysis_encoded_features.obj -ec MyDirectoryDockerHub/XGB_FirstAnalysis_encoded_classes.obj -o MyDirectoryDockerHub -x XGB_SecondAnalysis -de 20
 ```
-## with Conda
+## with a Conda environment
 ### for the DT classifiers
 ```
 python GenomicBasedClassification:1.0.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryConda -x DT_FirstAnalysis -da random -s 80 -c DT -k 5 -pa tuning_parameters_DT.txt -de 20
@@ -325,6 +332,37 @@ python GenomicBasedClassification:1.0.py prediction -m genomic_profiles_for_pred
 ```
 python GenomicBasedClassification:1.0.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x XGB_FirstAnalysis -da manual -c XGB -k 2 -pa tuning_parameters_XGB.txt -de 20
 python GenomicBasedClassification:1.0.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/XGB_FirstAnalysis_model.obj -f MyDirectoryConda/XGB_FirstAnalysis_features.obj -ef MyDirectoryConda/XGB_FirstAnalysis_encoded_features.obj -ec MyDirectoryConda/XGB_FirstAnalysis_encoded_classes.obj -o MyDirectoryConda -x XGB_SecondAnalysis -de 20
+```
+## with a Conda package
+## for the DT classifiers
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryAnaconda -x DT_FirstAnalysis -da random -s 80 -c DT -k 5 -pa tuning_parameters_DT.txt -de 20
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/DT_FirstAnalysis_model.obj -f MyDirectoryAnaconda/DT_FirstAnalysis_features.obj -ef MyDirectoryAnaconda/DT_FirstAnalysis_encoded_features.obj -o MyDirectoryAnaconda -x DT_SecondAnalysis -de 20
+```
+## for the KNN classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x KNN_FirstAnalysis -da manual -c KNN -k 5 -pa tuning_parameters_KNN.txt -de 20
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/KNN_FirstAnalysis_model.obj -f MyDirectoryAnaconda/KNN_FirstAnalysis_features.obj -ef MyDirectoryAnaconda/KNN_FirstAnalysis_encoded_features.obj -o MyDirectoryAnaconda -x KNN_SecondAnalysis -de 20
+```
+## for the LR classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LR_FirstAnalysis -da manual -c LR -k 5 -pa tuning_parameters_LR.txt -de 20
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LR_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LR_FirstAnalysis_features.obj -ef MyDirectoryAnaconda/LR_FirstAnalysis_encoded_features.obj -o MyDirectoryAnaconda -x LR_SecondAnalysis -de 20
+```
+## for the RF classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x RF_FirstAnalysis -da manual -c RF -k 5 -pa tuning_parameters_RF.txt -de 20
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/RF_FirstAnalysis_model.obj -f MyDirectoryAnaconda/RF_FirstAnalysis_features.obj -ef MyDirectoryAnaconda/RF_FirstAnalysis_encoded_features.obj -o MyDirectoryAnaconda -x RF_SecondAnalysis -de 20
+```
+## for the SVC classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x SVC_FirstAnalysis -da manual -c SVC -k 5 -pa tuning_parameters_SVC.txt -de 20
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/SVC_FirstAnalysis_model.obj -f MyDirectoryAnaconda/SVC_FirstAnalysis_features.obj -ef MyDirectoryAnaconda/SVC_FirstAnalysis_encoded_features.obj -o MyDirectoryAnaconda -x SVC_SecondAnalysis -de 20
+```
+## for the XGB classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x XGB_FirstAnalysis -da manual -c XGB -k 2 -pa tuning_parameters_XGB.txt -de 20
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/XGB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/XGB_FirstAnalysis_features.obj -ef MyDirectoryAnaconda/XGB_FirstAnalysis_encoded_features.obj -ec MyDirectoryAnaconda/XGB_FirstAnalysis_encoded_classes.obj -o MyDirectoryAnaconda -x XGB_SecondAnalysis -de 20
 ```
 # Examples of expected output (see inclosed directory called 'MyDirectory')
 ## confusion matrix
@@ -389,6 +427,7 @@ Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare
 # Repositories
 - GitHub: https://github.com/Nicolas-Radomski/GenomicBasedClassification
 - Docker Hub: https://hub.docker.com/r/nicolasradomski/genomicbasedclassification
+- Anaconda Hub: https://anaconda.org/nicolasradomski/genomicbasedclassification
 - R users: https://github.com/Nicolas-Radomski/GenomicBasedMachineLearning
 # Author
 Nicolas Radomski
