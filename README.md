@@ -240,7 +240,7 @@ S2.1.10 	A12	A13	A14	A15	A16	A4	A5	A6	A8	A1	A8
 git clone https://github.com/Nicolas-Radomski/GenomicBasedClassification.git
 cd GenomicBasedClassification
 ```
-## with Python
+## with Python libraries
 ### for the DT classifier
 ```
 python3.12 GenomicBasedClassification:1.0.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectory -x DT_FirstAnalysis -da random -s 80 -c DT -k 5 -pa tuning_parameters_DT.txt -de 20
@@ -271,7 +271,7 @@ python3.12 GenomicBasedClassification:1.0.py prediction -m genomic_profiles_for_
 python3.12 GenomicBasedClassification:1.0.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/DT_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x XGB_FirstAnalysis -da manual -c XGB -k 2 -pa tuning_parameters_XGB.txt -de 20
 python3.12 GenomicBasedClassification:1.0.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/XGB_FirstAnalysis_model.obj -f MyDirectory/XGB_FirstAnalysis_features.obj -ef MyDirectory/XGB_FirstAnalysis_encoded_features.obj -ec MyDirectory/XGB_FirstAnalysis_encoded_classes.obj -o MyDirectory -x XGB_SecondAnalysis -de 20
 ```
-## with Docker
+## with a Docker image
 ### for the DT classifiers
 ```
 docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.0 modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryDockerHub -x DT_FirstAnalysis -da random -s 80 -c DT -k 5 -pa tuning_parameters_DT.txt -de 20
