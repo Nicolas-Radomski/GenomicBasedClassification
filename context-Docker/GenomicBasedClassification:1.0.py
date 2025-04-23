@@ -82,7 +82,7 @@ version = "1.0 (released in March 2025)"
 # create the main parser
 parser = ap.ArgumentParser(
 	prog='GenomicBasedClassification:1.0.py', 
-	description='Perform classification-based modeling or prediction from binary (e.g. presence/absence of genes) of categorical (e.g. allele profiles) genomic data.',
+	description='Perform classification-based modeling or prediction from binary (e.g. presence/absence of genes) or categorical (e.g. allele profiles) genomic data.',
 	epilog=repositories
 	)
 
