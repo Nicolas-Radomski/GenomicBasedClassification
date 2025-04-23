@@ -1,5 +1,5 @@
 # Usage
-The repository GenomicBasedClassification provides a Python (recommended version 3.12) script called GenomicBasedClassification:1.0.py to perform classification-based modeling or prediction from binary (e.g. presence/absence of genes) of categorical (e.g. allele profiles) genomic data.
+The repository GenomicBasedClassification provides a Python (recommended version 3.12) script called GenomicBasedClassification:1.0.py to perform classification-based modeling or prediction from binary (e.g. presence/absence of genes) or categorical (e.g. allele profiles) genomic data.
 # Context
 The scikit-learn (sklearn) Python library-based workflow was inspired by an older caret R library-based version (https://doi.org/10.1186/s12864-023-09667-w), incorporating the independence of modeling (i.e. training and testing) and prediction (i.e. based on a pre-built model), the management of classification parameters, and the estimation of probabilities associated with predictions.
 # Dependencies
