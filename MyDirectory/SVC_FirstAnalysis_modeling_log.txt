@@ -9,43 +9,47 @@ Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare
 ########################
 ##### repositories #####
 ########################
-Please, site GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification) and/or Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification).
+Please cite:
+ GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),
+ Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),
+ and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).
 ########################
 ### acknowledgements ###
 ########################
-Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed at improving the algorithm.
+Many thanks to Andrea De Ruvo and Adriano Di Pasquale for the insightful discussions that helped improve the algorithm.
 ########################
 ####### versions #######
 ########################
-GenomicBasedClassification: 1.0 (released in March 2025)
+GenomicBasedClassification: 1.1.0 (released in May 2025)
 python: 3.12
 argparse: 1.1
+pickle: 4.0
 pandas: 2.2.2
 imblearn: 0.13.0
 sklearn: 1.5.2
-pickle: 4.0
 xgboost: 2.1.3
 numpy: 1.26.4
+joblib: 1.4.2
 tqdm: 4.67.1
 tqdm-joblib: 0.0.4
 ########################
 ####### arguments ######
 ########################
-subcommand='modeling'
-inputpath_mutations='genomic_profiles_for_modeling.tsv'
-inputpath_phenotypes='MyDirectory/DT_FirstAnalysis_phenotype_dataset.tsv'
-dataset='manual'
-splitting=None
-limit=10
-classifier='SVC'
-fold=5
-parameters='tuning_parameters_SVC.txt'
-jobs=-1
-outputpath='MyDirectory'
-prefix='SVC_FirstAnalysis'
-debug=20
-warnings=False
-nocheck=False
+subcommand: modeling
+inputpath_mutations: genomic_profiles_for_modeling.tsv
+inputpath_phenotypes: MyDirectory/DT_FirstAnalysis_phenotype_dataset.tsv
+dataset: manual
+splitting: None
+limit: 10
+classifier: SVC
+fold: 5
+parameters: tuning_parameters_SVC.txt
+jobs: -1
+outputpath: MyDirectory
+prefix: SVC_FirstAnalysis
+debug: 20
+warnings: False
+nocheck: False
 ########################
 ######## samples #######
 ########################
@@ -57,14 +61,14 @@ nocheck=False
 ######## checks ########
 ########################
 The warnings were ignored
-The traceback level has been set to 20
+The traceback level was set to 20
 The recommended versions of Python and packages were properly controlled
 The provided phenotype harbored 3 classes: 'fruit', 'pig', 'poultry'
 The number of recommended rows (i.e. >= 60) and expected columns (i.e. >= 4) of the input file of mutations was properly controled (i.e. 200 and 11 , respectively)
 The number of recommended rows (i.e. >= 60) and expected columns (i.e. = 3) of the input file of phenotypes was properly controled (i.e. 200 and 3 , respectively)
 The absence of missing phenotypes in the input file of phenotypes was properly controled (i.e. the second column)
 The expected datasets (i.e. 'training' or 'testing') in the input file of phenotypes were properly controled (i.e. the third column)
-The sample identifiers were confirmed as identical between the input files of mutations and phenotypes/datasets
+The sorted sample identifiers were confirmed as identical between the input files of mutations and phenotypes/datasets
 The phenotype classes were not encoded for the classifiers other than the XGB classifier
 The provided selection of training/testing datasets (i.e. manual) and percentage of random splitting (i.e. None) were compatible
 The training and testing datasets were constructed based on the 'manual' setting
@@ -72,14 +76,14 @@ The number of samples per class in the training and testing datasets was properl
 The provided classifier was properly recognized: support vector classification (SVC)
 The tuning parameters were provided by the user: {'kernel': 'linear', 'rbf', 'C': 0.1, 1.0, 10, 'gamma': 'scale', 0.001, 'max_iter': 1000, -1, 'tol': 0.0001, 1e-05}
 The best parameters during model cross-validation were: {'C': 0.1, 'gamma': 'scale', 'kernel': 'linear', 'max_iter': 1000, 'tol': 0.0001}
-The best accuracy during model cross-validation was: 0.9
+The best accuracy during model cross-validation was: 0.90625
 The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-12 17:27:46.253798
-The script stoped on 2025-03-12 17:27:48.151490
-The script lasted 0 days, 0 hrs, 0 mins and 1.9 secs
+The script started on 2025-05-08 15:44:23.674263
+The script stoped on 2025-05-08 15:44:24.768042
+The script lasted 0 days, 0 hrs, 0 mins and 1.09 secs
 ########################
 ##### output files #####
 ########################
@@ -103,243 +107,247 @@ MyDirectory/SVC_FirstAnalysis_modeling_log.txt
 ########################
 from the training dataset: 
 phenotype  fruit  pig  poultry
-    fruit     48    3        5
-      pig      3   53        0
+    fruit     50    2        4
+      pig      5   51        0
   poultry      4    1       43
 from the testing dataset: 
 phenotype  fruit  pig  poultry
-    fruit     13    1        0
-      pig      2   12        0
+    fruit     11    2        1
+      pig      0   14        0
   poultry      0    0       12
 NB: The expectation and prediction are represented by rows and columns, respectively. 
 ########################
 ### metrics per class ##
 ########################
 from the training dataset: 
-phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-    fruit  97   7   8  48       56    0.9062       0.8571       0.9327     0.8727  0.8571    0.8648       0.7931
-      pig 100   4   3  53       56    0.9562       0.9464       0.9615     0.9298  0.9464    0.9380       0.9042
-  poultry 107   5   5  43       48    0.9375       0.8958       0.9554     0.8958  0.8958    0.8958       0.8512
+phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC
+    fruit  95   9   6  50       56   0.90625     0.892857     0.913462   0.847458 0.892857  0.869565 0.797133
+      pig 101   3   5  51       56   0.95000     0.910714     0.971154   0.944444 0.910714  0.927272 0.889538
+  poultry 108   4   5  43       48   0.94375     0.895833     0.964286   0.914894 0.895833  0.905263 0.865366
 from the testing dataset: 
-phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-    fruit  24   2   1  13       14     0.925       0.9286       0.9231     0.8667  0.9286    0.8966       0.8378
-      pig  25   1   2  12       14     0.925       0.8571       0.9615     0.9231  0.8571    0.8889       0.8324
-  poultry  28   0   0  12       12     1.000       1.0000       1.0000     1.0000  1.0000    1.0000       1.0000
+phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC
+    fruit  26   0   3  11       14     0.925     0.785714     1.000000   1.000000 0.785714  0.880000 0.839305
+      pig  24   2   0  14       14     0.950     1.000000     0.923077   0.875000 1.000000  0.933333 0.898717
+  poultry  27   1   0  12       12     0.975     1.000000     0.964286   0.923077 1.000000  0.960000 0.943456
 NB: The term 'support' corresponds to TP + FN. 
+NB: MCC stands for Matthews Correlation Coefficient. 
+NB: Sensitivity and recall must be equal, as they are based on the same formula. 
 ########################
 #### global metrics ####
 ########################
 from the training dataset: 
- accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-      0.9       0.8998       0.9499     0.8995  0.8998    0.8996       0.8496
+ accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  Cohen kappa
+      0.9     0.899802     0.949634   0.902265 0.899802    0.9007 0.849903     0.849553
 from the testing dataset: 
- accuracy  sensitivity  specificity  precision  recall  f1-score  Cohen kappa
-    0.925       0.9286       0.9615     0.9299  0.9286    0.9285       0.8872
+ accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  Cohen kappa
+    0.925     0.928571     0.962454   0.932692 0.928571  0.924444 0.893306      0.88743
+NB: MCC stands for Matthews Correlation Coefficient. 
+NB: Sensitivity and recall must be equal, as they are based on the same formula. 
 ########################
 ### training dataset ###
 ########################
  sample expectation prediction    fruit      pig  poultry
-S0.1.01         pig        pig 0.033805 0.896279 0.069916
-S0.1.02     poultry        pig 0.034286 0.895692 0.070022
-S0.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S0.1.04         pig        pig 0.061258 0.888930 0.049812
-S0.1.05     poultry    poultry 0.259697 0.031855 0.708448
-S0.1.07         pig        pig 0.066679 0.880322 0.052999
-S0.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S0.1.09         pig        pig 0.048580 0.923658 0.027762
-S0.1.10         pig        pig 0.067495 0.895970 0.036535
-S0.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S0.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S0.1.14       fruit      fruit 0.882323 0.048196 0.069481
-S0.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S0.1.16       fruit      fruit 0.603893 0.166587 0.229520
-S0.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S0.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S0.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S1.1.01         pig        pig 0.033805 0.896279 0.069916
-S1.1.02         pig        pig 0.034286 0.895692 0.070022
-S1.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S1.1.05       fruit    poultry 0.259697 0.031855 0.708448
-S1.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S1.1.07         pig        pig 0.066679 0.880322 0.052999
-S1.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S1.1.09         pig        pig 0.048580 0.923658 0.027762
-S1.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S1.1.12         pig        pig 0.068088 0.894006 0.037907
-S1.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S1.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S1.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S1.1.16         pig      fruit 0.603893 0.166587 0.229520
-S1.1.17       fruit      fruit 0.879232 0.063332 0.057436
-S1.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S1.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S1.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S2.1.01         pig        pig 0.033805 0.896279 0.069916
-S2.1.02         pig        pig 0.034286 0.895692 0.070022
-S2.1.04         pig        pig 0.045768 0.911837 0.042395
-S2.1.05       fruit    poultry 0.259697 0.031855 0.708448
-S2.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S2.1.07         pig        pig 0.066679 0.880322 0.052999
-S2.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S2.1.09         pig        pig 0.048580 0.923658 0.027762
-S2.1.10         pig        pig 0.074755 0.887520 0.037725
-S2.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S2.1.12         pig        pig 0.068088 0.894006 0.037907
-S2.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S2.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S2.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S2.1.16         pig      fruit 0.603893 0.166587 0.229520
-S2.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S2.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S2.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S2.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S3.1.01         pig        pig 0.033805 0.896279 0.069916
-S3.1.02         pig        pig 0.047267 0.881149 0.071584
-S3.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S3.1.04         pig        pig 0.045768 0.911837 0.042395
-S3.1.05       fruit    poultry 0.259697 0.031855 0.708448
-S3.1.07         pig        pig 0.066679 0.880322 0.052999
-S3.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S3.1.09         pig        pig 0.048580 0.923658 0.027762
-S3.1.10         pig        pig 0.067495 0.895970 0.036535
-S3.1.12         pig        pig 0.068088 0.894006 0.037907
-S3.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S3.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S3.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S3.1.16         pig      fruit 0.603893 0.166587 0.229520
-S3.1.17       fruit      fruit 0.891898 0.061686 0.046416
-S3.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S3.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S4.1.02         pig        pig 0.034286 0.895692 0.070022
-S4.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S4.1.04         pig        pig 0.045768 0.911837 0.042395
-S4.1.05       fruit    poultry 0.259697 0.031855 0.708448
-S4.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S4.1.07         pig        pig 0.066679 0.880322 0.052999
-S4.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S4.1.09         pig        pig 0.048580 0.923658 0.027762
-S4.1.10         pig        pig 0.067495 0.895970 0.036535
-S4.1.12         pig        pig 0.068088 0.894006 0.037907
-S4.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S4.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S4.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S4.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S5.1.02         pig        pig 0.034286 0.895692 0.070022
-S5.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S5.1.04         pig        pig 0.045768 0.911837 0.042395
-S5.1.05       fruit    poultry 0.259697 0.031855 0.708448
-S5.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S5.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S5.1.10         pig        pig 0.067495 0.895970 0.036535
-S5.1.11     poultry    poultry 0.070017 0.049027 0.880955
-S5.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S5.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S5.1.17       fruit      fruit 0.879233 0.063331 0.057436
-S5.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S5.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S5.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S6.1.02         pig        pig 0.034286 0.895692 0.070022
-S6.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S6.1.04         pig        pig 0.045768 0.911837 0.042395
-S6.1.05     poultry    poultry 0.259697 0.031855 0.708448
-S6.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S6.1.09         pig        pig 0.067126 0.901553 0.031321
-S6.1.10       fruit        pig 0.067495 0.895970 0.036535
-S6.1.12         pig        pig 0.068088 0.894006 0.037907
-S6.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S6.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S6.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S6.1.16     poultry      fruit 0.603893 0.166587 0.229520
-S6.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S6.1.18       fruit      fruit 0.881252 0.064321 0.054427
-S6.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S7.1.01         pig        pig 0.033805 0.896279 0.069916
-S7.1.02         pig        pig 0.034286 0.895692 0.070022
-S7.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S7.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S7.1.07         pig        pig 0.066679 0.880322 0.052999
-S7.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S7.1.09         pig        pig 0.068039 0.894154 0.037807
-S7.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S7.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S7.1.16     poultry      fruit 0.603893 0.166587 0.229520
-S7.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S7.1.19       fruit      fruit 0.928397 0.040416 0.031187
-S8.1.01         pig        pig 0.033805 0.896279 0.069916
-S8.1.02         pig        pig 0.034286 0.895692 0.070022
-S8.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S8.1.04         pig        pig 0.045768 0.911837 0.042395
-S8.1.05     poultry    poultry 0.259697 0.031855 0.708448
-S8.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S8.1.07         pig        pig 0.064486 0.878868 0.056646
-S8.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S8.1.09         pig        pig 0.048580 0.923658 0.027762
-S8.1.10       fruit        pig 0.067495 0.895970 0.036535
-S8.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S8.1.12         pig        pig 0.068088 0.894006 0.037907
-S8.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S8.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S8.1.16     poultry      fruit 0.603893 0.166587 0.229520
-S8.1.19       fruit      fruit 0.881761 0.064501 0.053738
-S8.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S9.1.01         pig        pig 0.033805 0.896279 0.069916
-S9.1.02         pig        pig 0.031894 0.912969 0.055137
-S9.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S9.1.04         pig        pig 0.045768 0.911837 0.042395
-S9.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S9.1.07         pig        pig 0.066679 0.880322 0.052999
-S9.1.09         pig        pig 0.048580 0.923658 0.027762
-S9.1.10       fruit        pig 0.067495 0.895970 0.036535
-S9.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S9.1.12         pig        pig 0.068088 0.894006 0.037907
-S9.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S9.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S9.1.15       fruit      fruit 0.881528 0.059672 0.058800
-S9.1.16     poultry      fruit 0.603893 0.166587 0.229520
-S9.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S9.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S9.1.20       fruit      fruit 0.938992 0.032544 0.028463
+S0.1.01         pig        pig 0.024525 0.871925 0.103550
+S0.1.02     poultry        pig 0.024232 0.872205 0.103563
+S0.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S0.1.04         pig        pig 0.038945 0.891364 0.069692
+S0.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S0.1.07         pig        pig 0.052282 0.866593 0.081124
+S0.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S0.1.10         pig        pig 0.049122 0.895874 0.055004
+S0.1.12         pig        pig 0.050020 0.893216 0.056765
+S0.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S0.1.14       fruit      fruit 0.900204 0.043736 0.056060
+S0.1.16       fruit      fruit 0.504028 0.380656 0.115316
+S0.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S0.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S0.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S0.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S1.1.01         pig        pig 0.024525 0.871925 0.103550
+S1.1.02         pig        pig 0.024232 0.872205 0.103563
+S1.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S1.1.05       fruit    poultry 0.151576 0.044510 0.803914
+S1.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S1.1.07         pig        pig 0.052282 0.866593 0.081124
+S1.1.09         pig        pig 0.034549 0.918605 0.046846
+S1.1.10         pig        pig 0.049122 0.895874 0.055004
+S1.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S1.1.12         pig        pig 0.050020 0.893216 0.056765
+S1.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S1.1.16         pig      fruit 0.504028 0.380656 0.115316
+S1.1.17       fruit      fruit 0.899198 0.043618 0.057185
+S1.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S1.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S1.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S2.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S2.1.04         pig        pig 0.025606 0.915970 0.058424
+S2.1.05       fruit    poultry 0.151576 0.044510 0.803914
+S2.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S2.1.07         pig        pig 0.052282 0.866593 0.081124
+S2.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S2.1.09         pig        pig 0.034549 0.918605 0.046846
+S2.1.10         pig        pig 0.049868 0.893680 0.056451
+S2.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S2.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S2.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S2.1.16         pig      fruit 0.504028 0.380656 0.115316
+S2.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S2.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S2.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S2.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S3.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S3.1.04         pig        pig 0.025606 0.915970 0.058424
+S3.1.05       fruit    poultry 0.151576 0.044510 0.803914
+S3.1.07         pig        pig 0.052282 0.866593 0.081124
+S3.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S3.1.09         pig        pig 0.034549 0.918605 0.046846
+S3.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S3.1.12         pig        pig 0.050020 0.893216 0.056765
+S3.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S3.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S3.1.16         pig      fruit 0.504028 0.380656 0.115316
+S3.1.17       fruit      fruit 0.902631 0.043224 0.054145
+S3.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S3.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S3.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S4.1.01         pig        pig 0.024525 0.871925 0.103550
+S4.1.02         pig        pig 0.024232 0.872205 0.103563
+S4.1.04         pig        pig 0.025606 0.915970 0.058424
+S4.1.05       fruit    poultry 0.151576 0.044510 0.803914
+S4.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S4.1.07         pig        pig 0.052282 0.866593 0.081124
+S4.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S4.1.10         pig        pig 0.049122 0.895874 0.055004
+S4.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S4.1.12         pig        pig 0.050020 0.893216 0.056765
+S4.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S4.1.14       fruit      fruit 0.900952 0.043786 0.055262
+S4.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S4.1.16         pig      fruit 0.504028 0.380656 0.115316
+S4.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S4.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S4.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S4.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S5.1.01         pig        pig 0.024525 0.871925 0.103550
+S5.1.02         pig        pig 0.024232 0.872205 0.103563
+S5.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S5.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S5.1.07         pig        pig 0.052282 0.866593 0.081124
+S5.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S5.1.09         pig        pig 0.034549 0.918605 0.046846
+S5.1.10         pig        pig 0.049122 0.895874 0.055004
+S5.1.11     poultry    poultry 0.085472 0.067154 0.847374
+S5.1.12         pig        pig 0.050020 0.893216 0.056765
+S5.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S5.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S5.1.16         pig      fruit 0.504028 0.380656 0.115316
+S5.1.17       fruit      fruit 0.899198 0.043616 0.057187
+S5.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S5.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S6.1.01         pig        pig 0.024525 0.871925 0.103550
+S6.1.02         pig        pig 0.024232 0.872205 0.103563
+S6.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S6.1.05     poultry    poultry 0.151576 0.044510 0.803914
+S6.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S6.1.07         pig        pig 0.052282 0.866593 0.081124
+S6.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S6.1.10       fruit        pig 0.049122 0.895874 0.055004
+S6.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S6.1.12         pig        pig 0.050020 0.893216 0.056765
+S6.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S6.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S6.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S6.1.16     poultry      fruit 0.504028 0.380656 0.115316
+S6.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S6.1.18       fruit      fruit 0.915049 0.042422 0.042529
+S6.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S6.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S7.1.01         pig        pig 0.024525 0.871925 0.103550
+S7.1.02         pig        pig 0.024232 0.872205 0.103563
+S7.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S7.1.04         pig        pig 0.025606 0.915970 0.058424
+S7.1.05     poultry    poultry 0.151576 0.044510 0.803914
+S7.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S7.1.07         pig        pig 0.052282 0.866593 0.081124
+S7.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S7.1.09         pig        pig 0.050002 0.893284 0.056714
+S7.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S7.1.12         pig        pig 0.050020 0.893216 0.056765
+S7.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S7.1.16     poultry      fruit 0.504028 0.380656 0.115316
+S7.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S7.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S7.1.19       fruit      fruit 0.919590 0.034227 0.046183
+S7.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S8.1.01         pig        pig 0.024525 0.871925 0.103550
+S8.1.02         pig        pig 0.024232 0.872205 0.103563
+S8.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S8.1.04         pig        pig 0.025606 0.915970 0.058424
+S8.1.05     poultry    poultry 0.151576 0.044510 0.803914
+S8.1.07         pig        pig 0.051205 0.863487 0.085307
+S8.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S8.1.09         pig        pig 0.034549 0.918605 0.046846
+S8.1.10       fruit        pig 0.049122 0.895874 0.055004
+S8.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S8.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S8.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S8.1.16     poultry      fruit 0.504028 0.380656 0.115316
+S8.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S8.1.18       fruit      fruit 0.916741 0.041390 0.041869
+S8.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S9.1.02         pig        pig 0.021727 0.878881 0.099392
+S9.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S9.1.04         pig        pig 0.025606 0.915970 0.058424
+S9.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S9.1.07         pig        pig 0.052282 0.866593 0.081124
+S9.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S9.1.09         pig        pig 0.034549 0.918605 0.046846
+S9.1.12         pig        pig 0.050020 0.893216 0.056765
+S9.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S9.1.16     poultry      fruit 0.504028 0.380656 0.115316
+S9.1.17       fruit      fruit 0.901973 0.041123 0.056905
+S9.1.18       fruit      fruit 0.916741 0.041390 0.041869
 ########################
 ### testing  dataset ###
 ########################
  sample expectation prediction    fruit      pig  poultry
-S0.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S0.1.12         pig        pig 0.068088 0.894006 0.037907
-S0.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S1.1.04         pig        pig 0.045768 0.911837 0.042395
-S1.1.10         pig        pig 0.067495 0.895970 0.036535
-S2.1.03     poultry    poultry 0.069569 0.036968 0.893463
-S3.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S3.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S3.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S4.1.01         pig        pig 0.033805 0.896279 0.069916
-S4.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S4.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S4.1.14       fruit      fruit 0.851823 0.062051 0.086125
-S4.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S4.1.16         pig      fruit 0.603893 0.166587 0.229520
-S5.1.01         pig        pig 0.033805 0.896279 0.069916
-S5.1.07         pig        pig 0.066679 0.880322 0.052999
-S5.1.09         pig        pig 0.048580 0.923658 0.027762
-S5.1.12         pig        pig 0.068088 0.894006 0.037907
-S5.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S5.1.16         pig      fruit 0.603893 0.166587 0.229520
-S6.1.01         pig        pig 0.033805 0.896279 0.069916
-S6.1.06     poultry    poultry 0.069474 0.034260 0.896266
-S6.1.07         pig        pig 0.066679 0.880322 0.052999
-S6.1.11     poultry    poultry 0.063249 0.044714 0.892037
-S6.1.19       fruit      fruit 0.938992 0.032544 0.028463
-S7.1.04         pig        pig 0.045768 0.911837 0.042395
-S7.1.05     poultry    poultry 0.259697 0.031855 0.708448
-S7.1.10       fruit        pig 0.067495 0.895970 0.036535
-S7.1.12         pig        pig 0.068088 0.894006 0.037907
-S7.1.13     poultry    poultry 0.039676 0.068839 0.891486
-S7.1.15       fruit      fruit 0.877245 0.057648 0.065108
-S7.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S7.1.20       fruit      fruit 0.938992 0.032544 0.028463
-S8.1.14       fruit      fruit 0.891080 0.039963 0.068957
-S8.1.17       fruit      fruit 0.895414 0.051717 0.052869
-S8.1.18       fruit      fruit 0.889910 0.057061 0.053029
-S9.1.05     poultry    poultry 0.259697 0.031855 0.708448
-S9.1.08     poultry    poultry 0.068580 0.027467 0.903953
-S9.1.19       fruit      fruit 0.938992 0.032544 0.028463
+S0.1.05     poultry    poultry 0.151576 0.044510 0.803914
+S0.1.09         pig        pig 0.034549 0.918605 0.046846
+S0.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S0.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S1.1.04         pig        pig 0.025606 0.915970 0.058424
+S1.1.08     poultry    poultry 0.083623 0.049648 0.866729
+S1.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S1.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S2.1.01         pig        pig 0.024525 0.871925 0.103550
+S2.1.02         pig        pig 0.024232 0.872205 0.103563
+S2.1.12         pig        pig 0.050020 0.893216 0.056765
+S2.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S3.1.01         pig        pig 0.024525 0.871925 0.103550
+S3.1.02         pig        pig 0.050979 0.851698 0.097323
+S3.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S3.1.10         pig        pig 0.049122 0.895874 0.055004
+S3.1.14       fruit      fruit 0.904484 0.041637 0.053879
+S4.1.03     poultry    poultry 0.083942 0.051255 0.864803
+S4.1.09         pig        pig 0.034549 0.918605 0.046846
+S5.1.04         pig        pig 0.025606 0.915970 0.058424
+S5.1.05       fruit    poultry 0.151576 0.044510 0.803914
+S5.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S5.1.20       fruit      fruit 0.921763 0.032253 0.045983
+S6.1.04         pig        pig 0.025606 0.915970 0.058424
+S6.1.09         pig        pig 0.058337 0.887390 0.054273
+S7.1.10       fruit        pig 0.049122 0.895874 0.055004
+S7.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S7.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S8.1.06     poultry    poultry 0.083849 0.048405 0.867745
+S8.1.12         pig        pig 0.050020 0.893216 0.056765
+S8.1.15       fruit      fruit 0.917033 0.041604 0.041363
+S8.1.19       fruit      fruit 0.781367 0.115761 0.102872
+S9.1.01         pig        pig 0.024525 0.871925 0.103550
+S9.1.05     poultry    poultry 0.151576 0.044510 0.803914
+S9.1.10       fruit        pig 0.049122 0.895874 0.055004
+S9.1.11     poultry    poultry 0.075146 0.059969 0.864885
+S9.1.13     poultry    poultry 0.044014 0.100329 0.855656
+S9.1.15       fruit      fruit 0.909763 0.050443 0.039794
+S9.1.19       fruit      fruit 0.921763 0.032253 0.045983
+S9.1.20       fruit      fruit 0.921763 0.032253 0.045983

@@ -1,0 +1,15 @@
+scores	parameters
+0.9	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 7
+0.875	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 8
+0.8875	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 9
+0.85625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 10
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 11
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 12
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 13
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 14
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 15
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 16
+0.8625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 17
+0.85625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 18
+0.85625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 19
+0.85625	'algorithm': 'auto', 'leaf_size': 30, 'metric': 'minkowski', 'n_neighbors': 20

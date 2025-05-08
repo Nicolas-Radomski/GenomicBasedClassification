@@ -9,55 +9,59 @@ Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare
 ########################
 ##### repositories #####
 ########################
-Please, site GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification) and/or Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification).
+Please cite:
+ GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),
+ Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),
+ and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).
 ########################
 ### acknowledgements ###
 ########################
-Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed at improving the algorithm.
+Many thanks to Andrea De Ruvo and Adriano Di Pasquale for the insightful discussions that helped improve the algorithm.
 ########################
 ####### versions #######
 ########################
-GenomicBasedClassification: 1.0 (released in March 2025)
+GenomicBasedClassification: 1.1.0 (released in May 2025)
 python: 3.12
 argparse: 1.1
+pickle: 4.0
 pandas: 2.2.2
 imblearn: 0.13.0
 sklearn: 1.5.2
-pickle: 4.0
 xgboost: 2.1.3
 numpy: 1.26.4
+joblib: 1.4.2
 tqdm: 4.67.1
 tqdm-joblib: 0.0.4
 ########################
 ####### arguments ######
 ########################
-subcommand='prediction'
-inputpath_mutations='genomic_profiles_for_prediction.tsv'
-inputpath_model='MyDirectory/DT_FirstAnalysis_model.obj'
-inputpath_features='MyDirectory/DT_FirstAnalysis_features.obj'
-inputpath_encoded_features='MyDirectory/DT_FirstAnalysis_encoded_features.obj'
-inputpath_encoded_classes=None
-outputpath='MyDirectory'
-prefix='DT_SecondAnalysis'
-debug=20
-warnings=False
-nocheck=False
+subcommand: prediction
+inputpath_mutations: genomic_profiles_for_prediction.tsv
+inputpath_model: MyDirectory/DT_FirstAnalysis_model.obj
+inputpath_features: MyDirectory/DT_FirstAnalysis_features.obj
+inputpath_encoded_features: MyDirectory/DT_FirstAnalysis_encoded_features.obj
+inputpath_encoded_classes: None
+outputpath: MyDirectory
+prefix: DT_SecondAnalysis
+debug: 20
+warnings: False
+nocheck: False
 ########################
 ######## checks ########
 ########################
 The warnings were ignored
-The traceback level has been set to 20
+The traceback level was set to 20
 The recommended versions of Python and packages were properly controlled
 The number of expected rows (i.e. >= 1) and columns (i.e. >= 4) of the input file of mutations was properly controled (i.e. 20 and 12 , respectively)
-The encoded classes were not provided for a model other than the XGB model
+The encoded classes were not provided
 The classifier of the provided best model was properly recognized: DecisionTreeClassifier
-The classifier of the provided best model and potentially encoded classes were properly provided
+The classifier of the provided best model was verified for compatibility with encoded classes, which are only used for the XGB classifier
 The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-12 17:26:46.977656
-The script stoped on 2025-03-12 17:26:46.993103
+The script started on 2025-05-08 15:43:03.122019
+The script stoped on 2025-05-08 15:43:03.139429
 The script lasted 0 days, 0 hrs, 0 mins and 0.02 secs
 ########################
 ##### output files #####
@@ -67,24 +71,24 @@ MyDirectory/DT_SecondAnalysis_prediction_log.txt
 ########################
 ## prediction dataset ##
 ########################
- sample prediction  fruit      pig  poultry
-S2.1.01        pig  0.000 1.000000 0.000000
-S2.1.02        pig  0.000 0.888889 0.111111
-S2.1.03    poultry  0.000 0.000000 1.000000
-S2.1.04        pig  0.000 1.000000 0.000000
-S2.1.05      fruit  0.625 0.000000 0.375000
-S2.1.06    poultry  0.000 0.000000 1.000000
-S2.1.07        pig  0.000 1.000000 0.000000
-S2.1.08    poultry  0.000 0.000000 1.000000
-S2.1.09        pig  0.000 1.000000 0.000000
-S2.1.10        pig  0.375 0.625000 0.000000
-S2.1.11    poultry  0.000 0.000000 1.000000
-S2.1.12        pig  0.000 1.000000 0.000000
-S2.1.13    poultry  0.000 0.000000 1.000000
-S2.1.14        pig  0.000 1.000000 0.000000
-S2.1.15      fruit  1.000 0.000000 0.000000
-S2.1.16        pig  0.000 1.000000 0.000000
-S2.1.17        pig  0.000 1.000000 0.000000
-S2.1.18      fruit  1.000 0.000000 0.000000
-S2.1.19      fruit  1.000 0.000000 0.000000
-S2.1.20      fruit  1.000 0.000000 0.000000
+ sample prediction    fruit      pig  poultry
+S2.1.01        pig 0.000000 1.000000 0.000000
+S2.1.02        pig 0.000000 0.875000 0.125000
+S2.1.03        pig 0.000000 1.000000 0.000000
+S2.1.04        pig 0.000000 1.000000 0.000000
+S2.1.05      fruit 0.571429 0.000000 0.428571
+S2.1.06    poultry 0.000000 0.000000 1.000000
+S2.1.07        pig 0.000000 1.000000 0.000000
+S2.1.08    poultry 0.000000 0.000000 1.000000
+S2.1.09        pig 0.000000 1.000000 0.000000
+S2.1.10        pig 0.285714 0.714286 0.000000
+S2.1.11    poultry 0.000000 0.000000 1.000000
+S2.1.12        pig 0.000000 1.000000 0.000000
+S2.1.13    poultry 0.000000 0.000000 1.000000
+S2.1.14        pig 0.000000 1.000000 0.000000
+S2.1.15      fruit 1.000000 0.000000 0.000000
+S2.1.16        pig 0.000000 1.000000 0.000000
+S2.1.17        pig 0.000000 1.000000 0.000000
+S2.1.18      fruit 1.000000 0.000000 0.000000
+S2.1.19        pig 0.000000 1.000000 0.000000
+S2.1.20      fruit 1.000000 0.000000 0.000000

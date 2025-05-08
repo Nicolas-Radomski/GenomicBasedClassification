@@ -1,0 +1,4 @@
+phenotype	TN	FP	FN	TP	support	accuracy	sensitivity	specificity	precision	recall	f1-score	MCC
+fruit	101	3	3	53	56	0.9625	0.946429	0.971154	0.946429	0.946429	0.946429	0.917582
+pig	96	8	0	56	56	0.95	1.0	0.923077	0.875	1.0	0.933333	0.898717
+poultry	112	0	8	40	48	0.95	0.833333	1.0	1.0	0.833333	0.909091	0.881917

@@ -1,0 +1,2 @@
+accuracy	sensitivity	specificity	precision	recall	f1-score	MCC	Cohen kappa
+0.925	0.928571	0.962454	0.932692	0.928571	0.924444	0.893306	0.88743

@@ -9,56 +9,60 @@ Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare
 ########################
 ##### repositories #####
 ########################
-Please, site GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification) and/or Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification).
+Please cite:
+ GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),
+ Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),
+ and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).
 ########################
 ### acknowledgements ###
 ########################
-Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed at improving the algorithm.
+Many thanks to Andrea De Ruvo and Adriano Di Pasquale for the insightful discussions that helped improve the algorithm.
 ########################
 ####### versions #######
 ########################
-GenomicBasedClassification: 1.0 (released in March 2025)
+GenomicBasedClassification: 1.1.0 (released in May 2025)
 python: 3.12
 argparse: 1.1
+pickle: 4.0
 pandas: 2.2.2
 imblearn: 0.13.0
 sklearn: 1.5.2
-pickle: 4.0
 xgboost: 2.1.3
 numpy: 1.26.4
+joblib: 1.4.2
 tqdm: 4.67.1
 tqdm-joblib: 0.0.4
 ########################
 ####### arguments ######
 ########################
-subcommand='prediction'
-inputpath_mutations='genomic_profiles_for_prediction.tsv'
-inputpath_model='MyDirectory/LR_FirstAnalysis_model.obj'
-inputpath_features='MyDirectory/LR_FirstAnalysis_features.obj'
-inputpath_encoded_features='MyDirectory/LR_FirstAnalysis_encoded_features.obj'
-inputpath_encoded_classes=None
-outputpath='MyDirectory'
-prefix='LR_SecondAnalysis'
-debug=20
-warnings=False
-nocheck=False
+subcommand: prediction
+inputpath_mutations: genomic_profiles_for_prediction.tsv
+inputpath_model: MyDirectory/LR_FirstAnalysis_model.obj
+inputpath_features: MyDirectory/LR_FirstAnalysis_features.obj
+inputpath_encoded_features: MyDirectory/LR_FirstAnalysis_encoded_features.obj
+inputpath_encoded_classes: None
+outputpath: MyDirectory
+prefix: LR_SecondAnalysis
+debug: 20
+warnings: False
+nocheck: False
 ########################
 ######## checks ########
 ########################
 The warnings were ignored
-The traceback level has been set to 20
+The traceback level was set to 20
 The recommended versions of Python and packages were properly controlled
 The number of expected rows (i.e. >= 1) and columns (i.e. >= 4) of the input file of mutations was properly controled (i.e. 20 and 12 , respectively)
-The encoded classes were not provided for a model other than the XGB model
+The encoded classes were not provided
 The classifier of the provided best model was properly recognized: LogisticRegression
-The classifier of the provided best model and potentially encoded classes were properly provided
+The classifier of the provided best model was verified for compatibility with encoded classes, which are only used for the XGB classifier
 The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-12 17:27:06.269586
-The script stoped on 2025-03-12 17:27:06.284287
-The script lasted 0 days, 0 hrs, 0 mins and 0.01 secs
+The script started on 2025-05-08 15:43:13.077945
+The script stoped on 2025-05-08 15:43:13.097368
+The script lasted 0 days, 0 hrs, 0 mins and 0.02 secs
 ########################
 ##### output files #####
 ########################
@@ -68,23 +72,23 @@ MyDirectory/LR_SecondAnalysis_prediction_log.txt
 ## prediction dataset ##
 ########################
  sample prediction    fruit      pig  poultry
-S2.1.01        pig 0.115335 0.686540 0.198124
-S2.1.02        pig 0.138547 0.684261 0.177191
-S2.1.03    poultry 0.159543 0.084994 0.755463
-S2.1.04        pig 0.126183 0.786741 0.087075
-S2.1.05    poultry 0.375647 0.179764 0.444589
-S2.1.06    poultry 0.213382 0.080336 0.706282
-S2.1.07        pig 0.228006 0.596768 0.175226
-S2.1.08    poultry 0.122232 0.068731 0.809038
-S2.1.09        pig 0.159945 0.771896 0.068159
-S2.1.10        pig 0.176516 0.740914 0.082570
-S2.1.11    poultry 0.111470 0.106082 0.782448
-S2.1.12        pig 0.146884 0.793039 0.060077
-S2.1.13    poultry 0.144100 0.327938 0.527963
-S2.1.14      fruit 0.625081 0.172078 0.202841
-S2.1.15      fruit 0.864778 0.080015 0.055207
-S2.1.16      fruit 0.608337 0.257511 0.134152
-S2.1.17        pig 0.363424 0.398718 0.237857
-S2.1.18      fruit 0.799245 0.114529 0.086226
-S2.1.19      fruit 0.714347 0.187717 0.097935
-S2.1.20      fruit 0.864778 0.080015 0.055207
+S2.1.01        pig 0.046496 0.865378 0.088127
+S2.1.02        pig 0.052653 0.847549 0.099798
+S2.1.03    poultry 0.036178 0.013748 0.950075
+S2.1.04        pig 0.067845 0.876265 0.055890
+S2.1.05      fruit 0.608803 0.076498 0.314700
+S2.1.06    poultry 0.067772 0.025754 0.906474
+S2.1.07        pig 0.129664 0.767287 0.103049
+S2.1.08    poultry 0.023381 0.008885 0.967735
+S2.1.09        pig 0.041444 0.940838 0.017718
+S2.1.10        pig 0.175144 0.749979 0.074876
+S2.1.11    poultry 0.036178 0.013748 0.950075
+S2.1.12        pig 0.041444 0.940838 0.017718
+S2.1.13    poultry 0.042698 0.130161 0.827141
+S2.1.14      fruit 0.915409 0.022835 0.061756
+S2.1.15      fruit 0.956897 0.030909 0.012194
+S2.1.16      fruit 0.927257 0.052164 0.020578
+S2.1.17        pig 0.172765 0.510087 0.317148
+S2.1.18      fruit 0.953253 0.033523 0.013224
+S2.1.19      fruit 0.964172 0.022092 0.013736
+S2.1.20      fruit 0.956897 0.030909 0.012194

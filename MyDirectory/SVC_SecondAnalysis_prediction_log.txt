@@ -9,56 +9,60 @@ Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare
 ########################
 ##### repositories #####
 ########################
-Please, site GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification) and/or Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification).
+Please cite:
+ GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),
+ Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),
+ and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).
 ########################
 ### acknowledgements ###
 ########################
-Many thanks to Andrea De Ruvo and Adriano Di Pasquale for our discussions aimed at improving the algorithm.
+Many thanks to Andrea De Ruvo and Adriano Di Pasquale for the insightful discussions that helped improve the algorithm.
 ########################
 ####### versions #######
 ########################
-GenomicBasedClassification: 1.0 (released in March 2025)
+GenomicBasedClassification: 1.1.0 (released in May 2025)
 python: 3.12
 argparse: 1.1
+pickle: 4.0
 pandas: 2.2.2
 imblearn: 0.13.0
 sklearn: 1.5.2
-pickle: 4.0
 xgboost: 2.1.3
 numpy: 1.26.4
+joblib: 1.4.2
 tqdm: 4.67.1
 tqdm-joblib: 0.0.4
 ########################
 ####### arguments ######
 ########################
-subcommand='prediction'
-inputpath_mutations='genomic_profiles_for_prediction.tsv'
-inputpath_model='MyDirectory/SVC_FirstAnalysis_model.obj'
-inputpath_features='MyDirectory/SVC_FirstAnalysis_features.obj'
-inputpath_encoded_features='MyDirectory/SVC_FirstAnalysis_encoded_features.obj'
-inputpath_encoded_classes=None
-outputpath='MyDirectory'
-prefix='SVC_SecondAnalysis'
-debug=20
-warnings=False
-nocheck=False
+subcommand: prediction
+inputpath_mutations: genomic_profiles_for_prediction.tsv
+inputpath_model: MyDirectory/SVC_FirstAnalysis_model.obj
+inputpath_features: MyDirectory/SVC_FirstAnalysis_features.obj
+inputpath_encoded_features: MyDirectory/SVC_FirstAnalysis_encoded_features.obj
+inputpath_encoded_classes: None
+outputpath: MyDirectory
+prefix: SVC_SecondAnalysis
+debug: 20
+warnings: False
+nocheck: False
 ########################
 ######## checks ########
 ########################
 The warnings were ignored
-The traceback level has been set to 20
+The traceback level was set to 20
 The recommended versions of Python and packages were properly controlled
 The number of expected rows (i.e. >= 1) and columns (i.e. >= 4) of the input file of mutations was properly controled (i.e. 20 and 12 , respectively)
-The encoded classes were not provided for a model other than the XGB model
+The encoded classes were not provided
 The classifier of the provided best model was properly recognized: SVC
-The classifier of the provided best model and potentially encoded classes were properly provided
+The classifier of the provided best model was verified for compatibility with encoded classes, which are only used for the XGB classifier
 The output directory already existed
 ########################
 ###### execution #######
 ########################
-The script started on 2025-03-12 17:27:50.310592
-The script stoped on 2025-03-12 17:27:50.325445
-The script lasted 0 days, 0 hrs, 0 mins and 0.01 secs
+The script started on 2025-05-08 15:44:25.958247
+The script stoped on 2025-05-08 15:44:25.975504
+The script lasted 0 days, 0 hrs, 0 mins and 0.02 secs
 ########################
 ##### output files #####
 ########################
@@ -68,23 +72,23 @@ MyDirectory/SVC_SecondAnalysis_prediction_log.txt
 ## prediction dataset ##
 ########################
  sample prediction    fruit      pig  poultry
-S2.1.01        pig 0.055356 0.871872 0.072772
-S2.1.02        pig 0.056337 0.870661 0.073002
-S2.1.03    poultry 0.091228 0.048473 0.860299
-S2.1.04        pig 0.081215 0.844107 0.074678
-S2.1.05    poultry 0.415014 0.062254 0.522732
-S2.1.06    poultry 0.091376 0.043945 0.864680
-S2.1.07        pig 0.204958 0.648241 0.146801
-S2.1.08    poultry 0.089779 0.036967 0.873255
-S2.1.09        pig 0.100344 0.851476 0.048180
-S2.1.10        pig 0.075591 0.882440 0.041969
-S2.1.11    poultry 0.082053 0.063926 0.854021
-S2.1.12        pig 0.084556 0.867957 0.047487
-S2.1.13    poultry 0.065636 0.075294 0.859070
-S2.1.14      fruit 0.821550 0.077464 0.100986
-S2.1.15      fruit 0.911302 0.049684 0.039013
-S2.1.16      fruit 0.800769 0.120959 0.078272
-S2.1.17      fruit 0.464437 0.265109 0.270454
-S2.1.18      fruit 0.851927 0.077144 0.070929
-S2.1.19      fruit 0.821310 0.105808 0.072881
-S2.1.20      fruit 0.911302 0.049684 0.039013
+S2.1.01        pig 0.041537 0.862054 0.096410
+S2.1.02        pig 0.041023 0.862571 0.096405
+S2.1.03    poultry 0.110094 0.065426 0.824481
+S2.1.04        pig 0.043779 0.877159 0.079061
+S2.1.05    poultry 0.272273 0.077975 0.649752
+S2.1.06    poultry 0.110271 0.060352 0.829377
+S2.1.07        pig 0.139622 0.711972 0.148407
+S2.1.08    poultry 0.109597 0.063950 0.826453
+S2.1.09        pig 0.075487 0.855366 0.069147
+S2.1.10        pig 0.056882 0.879215 0.063903
+S2.1.11    poultry 0.098449 0.083268 0.818282
+S2.1.12        pig 0.064885 0.874988 0.060127
+S2.1.13    poultry 0.068895 0.113036 0.818070
+S2.1.14      fruit 0.839860 0.079367 0.080773
+S2.1.15      fruit 0.895761 0.046379 0.057860
+S2.1.16      fruit 0.849681 0.094863 0.055456
+S2.1.17        pig 0.326432 0.555434 0.118134
+S2.1.18      fruit 0.870005 0.058688 0.071307
+S2.1.19      fruit 0.855414 0.083200 0.061387
+S2.1.20      fruit 0.895761 0.046379 0.057860
