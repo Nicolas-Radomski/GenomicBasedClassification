@@ -1,5 +1,7 @@
 # install Python and requirements
 FROM ashsmol/python312
+# install system dependencies for lightgbm
+RUN apt-get update && apt-get install -y libgomp1
 # upgrade pip
 RUN pip install --upgrade pip
 # sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions

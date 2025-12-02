@@ -1,0 +1,107 @@
+###########################
+######### context #########
+###########################
+The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 5 feature selection methods, 20 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
+###########################
+######## reference ########
+###########################
+Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare Camma, Adriano Di Pasquale and Nicolas Radomski (2023) Harmonization of supervised machine learning practices for efficient source attribution of Listeria monocytogenes based on genomic data. 2023, BMC Genomics, 24(560):1-19, https://doi.org/10.1186/s12864-023-09667-w
+###########################
+###### repositories  ######
+###########################
+Please cite:
+ GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),
+ Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),
+ and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).
+###########################
+#### acknowledgements  ####
+###########################
+Many thanks to Andrea De Ruvo, Adriano Di Pasquale and ChatGPT for the insightful discussions that helped improve the algorithm.
+###########################
+######## versions  ########
+###########################
+GenomicBasedClassification: 1.3.0 (released in December 2025)
+python: 3.12
+argparse: 1.1
+imblearn: 0.13.0
+pandas: 2.2.2
+sklearn: 1.5.2
+pickle: 4.0
+catboost: 1.2.8
+lightgbm: 4.6.0
+xgboost: 2.1.3
+numpy: 1.26.4
+joblib: 1.5.1
+tqdm: 4.67.1
+tqdm-joblib: 0.0.4
+###########################
+######## arguments  #######
+###########################
+subcommand: prediction
+inputpath_mutations: genomic_profiles_for_prediction.tsv
+inputpath_features: MyDirectory/EN_FirstAnalysis_features.obj
+inputpath_feature_encoder: MyDirectory/EN_FirstAnalysis_feature_encoder.obj
+inputpath_model: MyDirectory/EN_FirstAnalysis_model.obj
+inputpath_class_encoder: None
+outputpath: MyDirectory
+prefix: EN_SecondAnalysis
+digits: 6
+debug: 0
+warnings: False
+nocheck: False
+###########################
+######### checks  #########
+###########################
+The traceback level was set to 0
+The warnings were ignored
+The recommended versions of Python and packages were properly controlled
+The prediction subcommand was used
+The minimum required number of samples in the dataset (i.e., >= 1) and the expected number of columns (i.e., >= 3) in the input file of mutations were properly controlled (i.e., 20 and 12 , respectively)
+The class encoder were not provided
+The input tested mutations include all features required by the trained one-hot encoder
+The following unexpected features in the input tested mutations will be ignored for one-hot encoding: ['L_11']
+The encoded features between training and prediction datasets were confirmed as identical
+The 10 provided features were one-hot encoded into 78 encoded features
+The pipeline expected 25 one-hot encoded features to perform prediction
+The provided best model harbored 3 classes: 'fruit', 'pig', 'poultry'
+The pipeline components of the provided best model were properly recognized: Pipeline(steps=[('feature_selection', SelectFromModel(estimator=LogisticRegression(l1_ratio=0.5, penalty='elasticnet', random_state=42, solver='saga'), max_features=25, threshold=-inf)), ('model', LogisticRegression(l1_ratio=0.3, max_iter=3000, penalty='elasticnet', random_state=42, solver='saga'))])
+The one-hot encoded prediction matrix was reindexed and aligned to match the exact feature names and order expected by the trained pipeline
+The classifier of the provided best model was verified for compatibility with class encoder, which are only used for the XGB classifier
+The output directory already existed
+###########################
+####### execution  ########
+###########################
+The script started on 2025-12-01 11:59:44.922257
+The script stoped on 2025-12-01 11:59:44.948138
+The script lasted 0 days, 0 hrs, 0 mins and 0.03 secs (i.e., 0.03 secs in total)
+###########################
+###### output  files ######
+###########################
+MyDirectory/EN_SecondAnalysis_prediction.tsv
+MyDirectory/EN_SecondAnalysis_prediction_log.txt
+###########################
+### prediction  dataset ###
+###########################
+ sample prediction    fruit      pig  poultry
+S2.1.01        pig 0.027987 0.945400 0.026613
+S2.1.02        pig 0.027987 0.945400 0.026613
+S2.1.03    poultry 0.039760 0.026131 0.934109
+S2.1.04        pig 0.131920 0.845010 0.023070
+S2.1.05    poultry 0.309945 0.307858 0.382198
+S2.1.06    poultry 0.104793 0.047517 0.847690
+S2.1.07        pig 0.087447 0.832258 0.080295
+S2.1.08    poultry 0.039760 0.026131 0.934109
+S2.1.09        pig 0.045588 0.936776 0.017636
+S2.1.10        pig 0.197980 0.750670 0.051349
+S2.1.11    poultry 0.039760 0.026131 0.934109
+S2.1.12        pig 0.024470 0.963483 0.012048
+S2.1.13    poultry 0.047510 0.109546 0.842944
+S2.1.14      fruit 0.824716 0.097209 0.078075
+S2.1.15      fruit 0.859549 0.090897 0.049553
+S2.1.16        pig 0.141366 0.581850 0.276784
+S2.1.17      fruit 0.620466 0.310668 0.068866
+S2.1.18      fruit 0.859549 0.090897 0.049553
+S2.1.19      fruit 0.851104 0.124293 0.024603
+S2.1.20      fruit 0.859549 0.090897 0.049553
+Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
+Note: The p-values are reported for each phenotype of interest. 

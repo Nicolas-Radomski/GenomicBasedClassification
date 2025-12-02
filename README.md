@@ -1,9 +1,9 @@
 # Usage
 The repository GenomicBasedClassification provides a Python (recommended version 3.12) script called GenomicBasedClassification.py to perform classification-based modeling or prediction from binary (e.g., presence/absence of genes) or categorical (e.g., allele profiles) genomic data.
 # Context
-The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 4 feature selection methods, 14 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
+The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 5 feature selection methods, 20 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
 # Version (release)
-1.2.0 (November 2025)
+1.3.0 (December 2025)
 # Dependencies
 The Python script GenomicBasedClassification.py was prepared and tested with the Python version 3.12 and Ubuntu 20.04 LTS Focal Fossa.
 - pandas==2.2.2
@@ -17,22 +17,29 @@ The Python script GenomicBasedClassification.py was prepared and tested with the
 - catboost==1.2.8
 # Implemented feature selection methods
 - SelectKBest (SKB): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html
-- SelectFromModel with L1-regularized Logistic Regression (laSFM): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html
-- SelectFromModel with ElasticNet-regularized Logistic Regression (enSFM): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html
+- SelectFromModel with lasso-regularized logistic regression (laSFM): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html
+- SelectFromModel with elasticnet-regularized logistic regression (enSFM): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html
+- SelectFromModel with ridge-regularized logistic regression (riSFM): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html
 - SelectFromModel with Random Forest (rfSFM): https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html
 # Implemented model classifiers
 - adaboost (ADA): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostClassifier.html
 - catboost (CAT): https://catboost.ai/docs/en/concepts/python-reference_catboostclassifier
-- decision tree classifier (DT): https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
-- extra trees classifier (ET): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html
+- decision tree (DT): https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html
+- elasticnet-regularized logistic regression (EN): https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+- extra trees (ET): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html
+- gradient boosting (GB): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
 - gaussian naive bayes (GNB): https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html
 - histogram-based gradient boosting (HGB): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html
 - k-nearest neighbors (KNN): https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+- lasso-regularized logistic regression (LA): https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+- light gradient boosting machine (LGBM): https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html
 - linear discriminant analysis (LDA): https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html
 - logistic regression (LR): https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 - multi-layer perceptron (MLP): https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html
+- nu support vector (NSV): https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html
 - quadratic discriminant analysis (QDA): https://scikit-learn.org/stable/modules/generated/sklearn.discriminant_analysis.QuadraticDiscriminantAnalysis.html
 - random forest (RF): https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+- ridge-regularized logistic regression (RI): https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
 - support vector classification (SVC): https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
 - extreme gradient boosting (XGB): https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier
 # Recommended environments
@@ -41,93 +48,85 @@ The Python script GenomicBasedClassification.py was prepared and tested with the
 pip3.12 install pandas==2.2.2
 pip3.12 install imbalanced-learn==0.13.0
 pip3.12 install scikit-learn==1.5.2
+pip3.12 install catboost==1.2.8
+pip3.12 install lightgbm==4.6.0
 pip3.12 install xgboost==2.1.3
 pip3.12 install numpy==1.26.4
 pip3.12 install joblib==1.5.1
 pip3.12 install tqdm==4.67.1
 pip3.12 install tqdm-joblib==0.0.4
-pip3.12 install catboost==1.2.8
 ```
 ## or install a Docker image
 ```
-docker pull nicolasradomski/genomicbasedclassification:1.2.0
+docker pull nicolasradomski/genomicbasedclassification:1.3.0
 ```
 ## or install a Conda environment
 ```
 conda update --all
 conda --version # conda 25.7.0
-conda create --name env_conda_GenomicBasedClassification_1.2.0 python=3.12
-conda activate env_conda_GenomicBasedClassification_1.2.0
-python --version # Python 3.12.11
+conda create --name env_conda_GenomicBasedClassification_1.3.0 python=3.12
+conda activate env_conda_GenomicBasedClassification_1.3.0
+python --version # Python 3.12.12
 conda install -c conda-forge mamba=2.0.5
 mamba install -c conda-forge pandas=2.2.2
 mamba install -c conda-forge imbalanced-learn=0.13.0
 mamba install -c conda-forge scikit-learn=1.5.2
+mamba install -c conda-forge catboost=1.2.8
+mamba install -c conda-forge lightgbm==4.6.0
 mamba install -c conda-forge xgboost=2.1.3
 mamba install -c conda-forge numpy=1.26.4
 mamba install -c conda-forge joblib==1.5.1
 mamba install -c conda-forge tqdm=4.67.1
 mamba install -c nicolasradomski tqdm-joblib=0.0.4
-mamba install -c conda-forge catboost=1.2.8
-conda list -n env_conda_GenomicBasedClassification_1.2.0
+conda list -n env_conda_GenomicBasedClassification_1.3.0
 conda deactivate # after usage
 ```
 ## or install a Conda package
 ```
 conda update --all
 conda --version # conda 25.7.0
-conda create -n env_anaconda_GenomicBasedClassification_1.2.0 -c nicolasradomski -c conda-forge -c defaults genomicbasedclassification=1.2.0
-conda activate env_anaconda_GenomicBasedClassification_1.2.0
+conda create -n env_anaconda_GenomicBasedClassification_1.3.0 -c nicolasradomski -c conda-forge -c defaults genomicbasedclassification=1.3.0
+conda activate env_anaconda_GenomicBasedClassification_1.3.0
 conda deactivate # after usage
 ```
 # Helps
 ## modeling
 ```
-usage: GenomicBasedClassification.py modeling [-h] -m INPUTPATH_MUTATIONS -ph INPUTPATH_PHENOTYPES [-da {random,manual}] [-sp SPLITTING] [-l LIMIT]
-                                              [-fs FEATURESELECTION] [-c CLASSIFIER] [-k FOLD] [-pa PARAMETERS] [-j JOBS] [-pi] [-nr NREPEATS]
-                                              [-o OUTPUTPATH] [-x PREFIX] [-di DIGITS] [-de DEBUG] [-w] [-nc]
+usage: GenomicBasedClassification.py modeling [-h] -m INPUTPATH_MUTATIONS -ph INPUTPATH_PHENOTYPES [-da {random,manual}] [-sp SPLITTING] [-l LIMIT] [-fs FEATURESELECTION] [-c CLASSIFIER]
+                                              [-k FOLD] [-pa PARAMETERS] [-j JOBS] [-pi] [-nr NREPEATS] [-o OUTPUTPATH] [-x PREFIX] [-di DIGITS] [-de DEBUG] [-w] [-nc]
 options:
   -h, --help            show this help message and exit
   -m INPUTPATH_MUTATIONS, --mutations INPUTPATH_MUTATIONS
-                        Absolute or relative input path of tab-separated values (tsv) file including profiles of mutations. First column: sample
-                        identifiers identical to those in the input file of phenotypes and datasets (header: e.g., sample). Other columns: profiles
-                        of mutations (header: labels of mutations). [MANDATORY]
+                        Absolute or relative input path of tab-separated values (tsv) file including profiles of mutations. First column: sample identifiers identical to those in the
+                        input file of phenotypes and datasets (header: e.g., sample). Other columns: profiles of mutations (header: labels of mutations). [MANDATORY]
   -ph INPUTPATH_PHENOTYPES, --phenotypes INPUTPATH_PHENOTYPES
-                        Absolute or relative input path of tab-separated values (tsv) file including profiles of phenotypes and datasets. First
-                        column: sample identifiers identical to those in the input file of mutations (header: e.g., sample). Second column:
-                        categorical phenotype (header: e.g., phenotype). Third column: 'training' or 'testing' dataset (header: e.g., dataset).
-                        [MANDATORY]
+                        Absolute or relative input path of tab-separated values (tsv) file including profiles of phenotypes and datasets. First column: sample identifiers identical to
+                        those in the input file of mutations (header: e.g., sample). Second column: categorical phenotype (header: e.g., phenotype). Third column: 'training' or 'testing'
+                        dataset (header: e.g., dataset). [MANDATORY]
   -da {random,manual}, --dataset {random,manual}
-                        Perform random (i.e., 'random') or manual (i.e., 'manual') splitting of training and testing datasets through the holdout
-                        method. [OPTIONAL, DEFAULT: 'random']
+                        Perform random (i.e., 'random') or manual (i.e., 'manual') splitting of training and testing datasets through the holdout method. [OPTIONAL, DEFAULT: 'random']
   -sp SPLITTING, --split SPLITTING
                         Percentage of random splitting to prepare the training dataset through the holdout method. [OPTIONAL, DEFAULT: None]
   -l LIMIT, --limit LIMIT
-                        Recommended minimum of samples per class in both the training and testing datasets to reliably estimate performance metrics.
-                        [OPTIONAL, DEFAULT: 10]
+                        Recommended minimum of samples per class in both the training and testing datasets to reliably estimate performance metrics. [OPTIONAL, DEFAULT: 10]
   -fs FEATURESELECTION, --featureselection FEATURESELECTION
-                        Acronym of the classification-compatible feature selection method to use: SelectKBest (SKB), SelectFromModel with
-                        L1-regularized Logistic Regression (laSFM), SelectFromModel with ElasticNet-regularized Logistic Regression (enSFM), or
-                        SelectFromModel with Random Forest (rfSFM). These methods are suitable for high-dimensional binary or categorical-encoded
-                        features. [OPTIONAL, DEFAULT: None]
+                        Acronym of the classification-compatible feature selection method to use: SelectKBest (SKB), SelectFromModel with lasso-regularized logistic regression (laSFM),
+                        SelectFromModel with elasticNet-regularized logistic regression (enSFM), SelectFromModel with ridge-regularized logistic regression (riSFM), or SelectFromModel
+                        with random forest (rfSFM). These methods are suitable for high-dimensional binary or categorical-encoded features. [OPTIONAL, DEFAULT: None]
   -c CLASSIFIER, --classifier CLASSIFIER
-                        Acronym of the classifier to use among adaboost (ADA), catboost (CAT), decision tree classifier (DT), extra trees classifier
-                        (ET), gaussian naive bayes (GNB), histogram-based gradient boosting (HGB), k-nearest neighbors (KNN), linear discriminant
-                        analysis (LDA), logistic regression (LR), multi-layer perceptron (MLP), quadratic discriminant analysis (QDA), random forest
-                        (RF), support vector classification (SVC) or extreme gradient boosting (XGB). [OPTIONAL, DEFAULT: XGB]
-  -k FOLD, --fold FOLD  Value defining k-1 groups of samples used to train against one group of validation through the repeated k-fold cross-
-                        validation method. [OPTIONAL, DEFAULT: 5]
+                        Acronym of the classifier to use among adaboost (ADA), catboost (CAT), decision tree (DT), elasticnet-regularized logistic regression (EN), extra trees (ET),
+                        gradient boosting (GB), gaussian naive bayes (GNB), histogram-based gradient boosting (HGB), k-nearest neighbors (KNN), lasso-regularized logistic regression
+                        (LA), light gradient boosting machine (LGBM), linear discriminant analysis (LDA), logistic regression (LR), multi-layer perceptron (MLP), nu support vector (NSV),
+                        quadratic discriminant analysis (QDA), random forest (RF), ridge-regularized logistic regression (RI), support vector classification (SVC) or extreme gradient
+                        boosting (XGB). [OPTIONAL, DEFAULT: XGB]
+  -k FOLD, --fold FOLD  Value defining k-1 groups of samples used to train against one group of validation through the repeated k-fold cross-validation method. [OPTIONAL, DEFAULT: 5]
   -pa PARAMETERS, --parameters PARAMETERS
-                        Absolute or relative input path of a text (txt) file including tuning parameters compatible with the param_grid argument of
-                        the GridSearchCV function. (OPTIONAL)
-  -j JOBS, --jobs JOBS  Value defining the number of jobs to run in parallel compatible with the n_jobs argument of the GridSearchCV function.
-                        [OPTIONAL, DEFAULT: -1]
+                        Absolute or relative input path of a text (txt) file including tuning parameters compatible with the param_grid argument of the GridSearchCV function. (OPTIONAL)
+  -j JOBS, --jobs JOBS  Value defining the number of jobs to run in parallel compatible with the n_jobs argument of the GridSearchCV function. [OPTIONAL, DEFAULT: -1]
   -pi, --permutationimportance
-                        Compute permutation importance, which can be computationally expensive, especially with many features and/or high repetition
-                        counts. [OPTIONAL, DEFAULT: False]
+                        Compute permutation importance, which can be computationally expensive, especially with many features and/or high repetition counts. [OPTIONAL, DEFAULT: False]
   -nr NREPEATS, --nrepeats NREPEATS
-                        Number of repetitions per feature for permutation importance; higher values provide more stable estimates but increase
-                        runtime. [OPTIONAL, DEFAULT: 10]
+                        Number of repetitions per feature for permutation importance; higher values provide more stable estimates but increase runtime. [OPTIONAL, DEFAULT: 10]
   -o OUTPUTPATH, --output OUTPUTPATH
                         Output path. [OPTIONAL, DEFAULT: .]
   -x PREFIX, --prefix PREFIX
@@ -141,25 +140,21 @@ options:
 ```
 ## prediction
 ```
-usage: GenomicBasedClassification.py prediction [-h] -m INPUTPATH_MUTATIONS -f INPUTPATH_FEATURES -fe INPUTPATH_FEATURE_ENCODER -t INPUTPATH_MODEL
-                                                [-ce INPUTPATH_CLASS_ENCODER] [-o OUTPUTPATH] [-x PREFIX] [-di DIGITS] [-de DEBUG] [-w] [-nc]
+usage: GenomicBasedClassification.py prediction [-h] -m INPUTPATH_MUTATIONS -f INPUTPATH_FEATURES -fe INPUTPATH_FEATURE_ENCODER -t INPUTPATH_MODEL [-ce INPUTPATH_CLASS_ENCODER]
+                                                [-o OUTPUTPATH] [-x PREFIX] [-di DIGITS] [-de DEBUG] [-w] [-nc]
 options:
   -h, --help            show this help message and exit
   -m INPUTPATH_MUTATIONS, --mutations INPUTPATH_MUTATIONS
-                        Absolute or relative input path of a tab-separated values (tsv) file including profiles of mutations. First column: sample
-                        identifiers identical to those in the input file of phenotypes and datasets (header: e.g., sample). Other columns: profiles
-                        of mutations (header: labels of mutations). [MANDATORY]
+                        Absolute or relative input path of a tab-separated values (tsv) file including profiles of mutations. First column: sample identifiers identical to those in the
+                        input file of phenotypes and datasets (header: e.g., sample). Other columns: profiles of mutations (header: labels of mutations). [MANDATORY]
   -f INPUTPATH_FEATURES, --features INPUTPATH_FEATURES
-                        Absolute or relative input path of an object (obj) file including features from the training dataset (i.e., mutations).
-                        [MANDATORY]
+                        Absolute or relative input path of an object (obj) file including features from the training dataset (i.e., mutations). [MANDATORY]
   -fe INPUTPATH_FEATURE_ENCODER, --featureencoder INPUTPATH_FEATURE_ENCODER
-                        Absolute or relative input path of an object (obj) file including encoder from the training dataset (i.e., mutations).
-                        [MANDATORY]
+                        Absolute or relative input path of an object (obj) file including encoder from the training dataset (i.e., mutations). [MANDATORY]
   -t INPUTPATH_MODEL, --model INPUTPATH_MODEL
                         Absolute or relative input path of an object (obj) file including a trained scikit-learn model. [MANDATORY]
   -ce INPUTPATH_CLASS_ENCODER, --classencoder INPUTPATH_CLASS_ENCODER
-                        Absolute or relative input path of an object (obj) file including trained scikit-learn class encoder (i.e., phenotypes) for
-                        the XGB model. [OPTIONAL]
+                        Absolute or relative input path of an object (obj) file including trained scikit-learn class encoder (i.e., phenotypes) for the XGB model. [OPTIONAL]
   -o OUTPUTPATH, --output OUTPUTPATH
                         Absolute or relative output path. [OPTIONAL, DEFAULT: .]
   -x PREFIX, --prefix PREFIX
@@ -219,15 +214,21 @@ S0.1.10 	A12	A13	A14	A15	A16	A4	A5	A6	A8	A8
 - tuning_parameters_ADA.txt
 - tuning_parameters_CAT.txt
 - tuning_parameters_DT.txt
+- tuning_parameters_EN.txt
 - tuning_parameters_ET.txt
+- tuning_parameters_GB.txt
 - tuning_parameters_GNB.txt
 - tuning_parameters_HGB.txt
 - tuning_parameters_KNN.txt
+- tuning_parameters_LA.txt
 - tuning_parameters_LDA.txt
+- tuning_parameters_LGBM.txt
 - tuning_parameters_LR.txt
 - tuning_parameters_MLP.txt
+- tuning_parameters_NSV.txt
 - tuning_parameters_QDA.txt
 - tuning_parameters_RF.txt
+- tuning_parameters_RI.txt
 - tuning_parameters_SVC.txt
 - tuning_parameters_XGB.txt
 ## genomic profils for prediction (e.g., genomic_profiles_for_prediction.tsv). "A" and "L" stand for alleles and locus, respectively.
@@ -247,292 +248,412 @@ S2.1.10 	A12	A13	A14	A15	A16	A4	A5	A6	A8	A1	A8
 # Examples of commands
 ## import the GitHub repository
 ```
-git clone --branch v1.2.0 --single-branch https://github.com/Nicolas-Radomski/GenomicBasedClassification.git
+git clone --branch v1.3.0 --single-branch https://github.com/Nicolas-Radomski/GenomicBasedClassification.git
 cd GenomicBasedClassification
 ```
 ## using Python libraries from pip
 ### without feature selection and with the ADA model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectory -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ADA_FirstAnalysis_model.obj -f MyDirectory/ADA_FirstAnalysis_features.obj -fe MyDirectory/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ADA_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectory -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ADA_FirstAnalysis_model.obj -f MyDirectory/ADA_FirstAnalysis_features.obj -fe MyDirectory/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ADA_SecondAnalysis
 ```
 ### with the SKB feature selection and the CAT model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/CAT_FirstAnalysis_model.obj -f MyDirectory/CAT_FirstAnalysis_features.obj -fe MyDirectory/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x CAT_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/CAT_FirstAnalysis_model.obj -f MyDirectory/CAT_FirstAnalysis_features.obj -fe MyDirectory/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x CAT_SecondAnalysis
 ```
 ### with the laSFM feature selection and the DT model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/DT_FirstAnalysis_model.obj -f MyDirectory/DT_FirstAnalysis_features.obj -fe MyDirectory/DT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x DT_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/DT_FirstAnalysis_model.obj -f MyDirectory/DT_FirstAnalysis_features.obj -fe MyDirectory/DT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x DT_SecondAnalysis
 ```
-### with the enSFM feature selection and the ET model classifier
+### with the enSFM feature selection and the EN model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x ET_FirstAnalysis -da manual -fs enSFM -c ET -k 5 -pa tuning_parameters_ET.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ET_FirstAnalysis_model.obj -f MyDirectory/ET_FirstAnalysis_features.obj -fe MyDirectory/ET_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ET_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x EN_FirstAnalysis -da manual -fs enSFM -c EN -k 5 -pa tuning_parameters_EN.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/EN_FirstAnalysis_model.obj -f MyDirectory/EN_FirstAnalysis_features.obj -fe MyDirectory/EN_FirstAnalysis_feature_encoder.obj -o MyDirectory -x EN_SecondAnalysis
 ```
-### with the rfSFM feature selection and the GNB model classifier
+### with the riSFM feature selection and the ET model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x GNB_FirstAnalysis -da manual -fs rfSFM -c GNB -k 5 -pa tuning_parameters_GNB.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/GNB_FirstAnalysis_model.obj -f MyDirectory/GNB_FirstAnalysis_features.obj -fe MyDirectory/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x GNB_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x ET_FirstAnalysis -da manual -fs riSFM -c ET -k 5 -pa tuning_parameters_ET.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ET_FirstAnalysis_model.obj -f MyDirectory/ET_FirstAnalysis_features.obj -fe MyDirectory/ET_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ET_SecondAnalysis
+```
+### with the rfSFM feature selection and the GB model classifier
+```
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x GB_FirstAnalysis -da manual -fs rfSFM -c GB -k 5 -pa tuning_parameters_GB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/GB_FirstAnalysis_model.obj -f MyDirectory/GB_FirstAnalysis_features.obj -fe MyDirectory/GB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x GB_SecondAnalysis
+```
+### with the SKB feature selection and the GNB model classifier
+```
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x GNB_FirstAnalysis -da manual -fs SKB -c GNB -k 5 -pa tuning_parameters_GNB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/GNB_FirstAnalysis_model.obj -f MyDirectory/GNB_FirstAnalysis_features.obj -fe MyDirectory/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x GNB_SecondAnalysis
 ```
 ### with the SKB feature selection and the HGB model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/HGB_FirstAnalysis_model.obj -f MyDirectory/HGB_FirstAnalysis_features.obj -fe MyDirectory/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x HGB_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/HGB_FirstAnalysis_model.obj -f MyDirectory/HGB_FirstAnalysis_features.obj -fe MyDirectory/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x HGB_SecondAnalysis
 ```
 ### with the SKB feature selection and the KNN model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/KNN_FirstAnalysis_model.obj -f MyDirectory/KNN_FirstAnalysis_features.obj -fe MyDirectory/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectory -x KNN_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/KNN_FirstAnalysis_model.obj -f MyDirectory/KNN_FirstAnalysis_features.obj -fe MyDirectory/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectory -x KNN_SecondAnalysis
+```
+### with the SKB feature selection and the LA model classifier
+```
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LA_FirstAnalysis -da manual -fs SKB -c LA -k 5 -pa tuning_parameters_LA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LA_FirstAnalysis_model.obj -f MyDirectory/LA_FirstAnalysis_features.obj -fe MyDirectory/LA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LA_SecondAnalysis
 ```
 ### with the SKB feature selection and the LDA model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LDA_FirstAnalysis_model.obj -f MyDirectory/LDA_FirstAnalysis_features.obj -fe MyDirectory/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LDA_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LDA_FirstAnalysis_model.obj -f MyDirectory/LDA_FirstAnalysis_features.obj -fe MyDirectory/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LDA_SecondAnalysis
+```
+### with the SKB feature selection and the LGBM model classifier
+```
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LGBM_FirstAnalysis -da manual -fs SKB -c LGBM -k 5 -pa tuning_parameters_LGBM.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LGBM_FirstAnalysis_model.obj -f MyDirectory/LGBM_FirstAnalysis_features.obj -fe MyDirectory/LGBM_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LGBM_SecondAnalysis
 ```
 ### with the SKB feature selection and the LR model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LR_FirstAnalysis_model.obj -f MyDirectory/LR_FirstAnalysis_features.obj -fe MyDirectory/LR_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LR_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LR_FirstAnalysis_model.obj -f MyDirectory/LR_FirstAnalysis_features.obj -fe MyDirectory/LR_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LR_SecondAnalysis
 ```
 ### with the SKB feature selection and the MLP model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/MLP_FirstAnalysis_model.obj -f MyDirectory/MLP_FirstAnalysis_features.obj -fe MyDirectory/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectory -x MLP_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/MLP_FirstAnalysis_model.obj -f MyDirectory/MLP_FirstAnalysis_features.obj -fe MyDirectory/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectory -x MLP_SecondAnalysis
+```
+### with the SKB feature selection and the NSV model classifier
+```
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x NSV_FirstAnalysis -da manual -fs SKB -c NSV -k 5 -pa tuning_parameters_NSV.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/NSV_FirstAnalysis_model.obj -f MyDirectory/NSV_FirstAnalysis_features.obj -fe MyDirectory/NSV_FirstAnalysis_feature_encoder.obj -o MyDirectory -x NSV_SecondAnalysis
 ```
 ### with the SKB feature selection and the QDA model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/QDA_FirstAnalysis_model.obj -f MyDirectory/QDA_FirstAnalysis_features.obj -fe MyDirectory/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x QDA_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/QDA_FirstAnalysis_model.obj -f MyDirectory/QDA_FirstAnalysis_features.obj -fe MyDirectory/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x QDA_SecondAnalysis
 ```
 ### with the SKB feature selection and the RF model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/RF_FirstAnalysis_model.obj -f MyDirectory/RF_FirstAnalysis_features.obj -fe MyDirectory/RF_FirstAnalysis_feature_encoder.obj -o MyDirectory -x RF_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/RF_FirstAnalysis_model.obj -f MyDirectory/RF_FirstAnalysis_features.obj -fe MyDirectory/RF_FirstAnalysis_feature_encoder.obj -o MyDirectory -x RF_SecondAnalysis
+```
+### with the SKB feature selection and the RI model classifier
+```
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x RI_FirstAnalysis -da manual -fs SKB -c RI -k 5 -pa tuning_parameters_RI.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/RI_FirstAnalysis_model.obj -f MyDirectory/RI_FirstAnalysis_features.obj -fe MyDirectory/RI_FirstAnalysis_feature_encoder.obj -o MyDirectory -x RI_SecondAnalysis
 ```
 ### with the SKB feature selection and the SVC model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/SVC_FirstAnalysis_model.obj -f MyDirectory/SVC_FirstAnalysis_features.obj -fe MyDirectory/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectory -x SVC_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/SVC_FirstAnalysis_model.obj -f MyDirectory/SVC_FirstAnalysis_features.obj -fe MyDirectory/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectory -x SVC_SecondAnalysis
 ```
 ### with the SKB feature selection and the XGB model classifier
 ```
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/XGB_FirstAnalysis_model.obj -f MyDirectory/XGB_FirstAnalysis_features.obj -fe MyDirectory/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectory/XGB_FirstAnalysis_class_encoder.obj -o MyDirectory -x XGB_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/XGB_FirstAnalysis_model.obj -f MyDirectory/XGB_FirstAnalysis_features.obj -fe MyDirectory/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectory/XGB_FirstAnalysis_class_encoder.obj -o MyDirectory -x XGB_SecondAnalysis
 ```
 ## using a Docker image
 ### without feature selection and with the ADA model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryDockerHub -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/ADA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/ADA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x ADA_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryDockerHub -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/ADA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/ADA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x ADA_SecondAnalysis
 ```
 ### with the SKB feature selection and the CAT model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/CAT_FirstAnalysis_model.obj -f MyDirectoryDockerHub/CAT_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x CAT_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/CAT_FirstAnalysis_model.obj -f MyDirectoryDockerHub/CAT_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x CAT_SecondAnalysis
 ```
 ### with the laSFM feature selection and the DT model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/DT_FirstAnalysis_model.obj -f MyDirectoryDockerHub/DT_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/DT_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x DT_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/DT_FirstAnalysis_model.obj -f MyDirectoryDockerHub/DT_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/DT_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x DT_SecondAnalysis
 ```
-### with the enSFM feature selection and the ET model classifier
+### with the enSFM feature selection and the EN model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x ET_FirstAnalysis -da manual -fs enSFM -c ET -k 5 -pa tuning_parameters_ET.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/ET_FirstAnalysis_model.obj -f MyDirectoryDockerHub/ET_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/ET_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x ET_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x EN_FirstAnalysis -da manual -fs enSFM -c EN -k 5 -pa tuning_parameters_EN.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/EN_FirstAnalysis_model.obj -f MyDirectoryDockerHub/EN_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/EN_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x EN_SecondAnalysis
 ```
-### with the rfSFM feature selection and the GNB model classifier
+### with the riSFM feature selection and the ET model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x GNB_FirstAnalysis -da manual -fs rfSFM -c GNB -k 5 -pa tuning_parameters_GNB.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/GNB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/GNB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x GNB_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x ET_FirstAnalysis -da manual -fs riSFM -c ET -k 5 -pa tuning_parameters_ET.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/ET_FirstAnalysis_model.obj -f MyDirectoryDockerHub/ET_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/ET_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x ET_SecondAnalysis
+```
+### with the rfSFM feature selection and the GB model classifier
+```
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x GB_FirstAnalysis -da manual -fs rfSFM -c GB -k 5 -pa tuning_parameters_GB.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/GB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/GB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/GB_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x GB_SecondAnalysis
+```
+### with the SKB feature selection and the GNB model classifier
+```
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x GNB_FirstAnalysis -da manual -fs SKB -c GNB -k 5 -pa tuning_parameters_GNB.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/GNB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/GNB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x GNB_SecondAnalysis
 ```
 ### with the SKB feature selection and the HGB model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/HGB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/HGB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x HGB_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/HGB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/HGB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x HGB_SecondAnalysis
 ```
 ### with the SKB feature selection and the KNN model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/KNN_FirstAnalysis_model.obj -f MyDirectoryDockerHub/KNN_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x KNN_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/KNN_FirstAnalysis_model.obj -f MyDirectoryDockerHub/KNN_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x KNN_SecondAnalysis
+```
+### with the SKB feature selection and the LA model classifier
+```
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x LA_FirstAnalysis -da manual -fs SKB -c LA -k 5 -pa tuning_parameters_LA.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/LA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/LA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/LA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x LA_SecondAnalysis
 ```
 ### with the SKB feature selection and the LDA model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/LDA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/LDA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x LDA_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/LDA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/LDA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x LDA_SecondAnalysis
+```
+### with the SKB feature selection and the LGBM model classifier
+```
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x LGBM_FirstAnalysis -da manual -fs SKB -c LGBM -k 5 -pa tuning_parameters_LGBM.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/LGBM_FirstAnalysis_model.obj -f MyDirectoryDockerHub/LGBM_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/LGBM_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x LGBM_SecondAnalysis
 ```
 ### with the SKB feature selection and the LR model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/LR_FirstAnalysis_model.obj -f MyDirectoryDockerHub/LR_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/LR_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x LR_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/LR_FirstAnalysis_model.obj -f MyDirectoryDockerHub/LR_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/LR_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x LR_SecondAnalysis
 ```
 ### with the SKB feature selection and the MLP model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/MLP_FirstAnalysis_model.obj -f MyDirectoryDockerHub/MLP_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x MLP_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/MLP_FirstAnalysis_model.obj -f MyDirectoryDockerHub/MLP_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x MLP_SecondAnalysis
+```
+### with the SKB feature selection and the NSV model classifier
+```
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x NSV_FirstAnalysis -da manual -fs SKB -c NSV -k 5 -pa tuning_parameters_NSV.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/NSV_FirstAnalysis_model.obj -f MyDirectoryDockerHub/NSV_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/NSV_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x NSV_SecondAnalysis
 ```
 ### with the SKB feature selection and the QDA model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/QDA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/QDA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x QDA_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/QDA_FirstAnalysis_model.obj -f MyDirectoryDockerHub/QDA_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x QDA_SecondAnalysis
 ```
 ### with the SKB feature selection and the RF model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/RF_FirstAnalysis_model.obj -f MyDirectoryDockerHub/RF_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/RF_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x RF_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/RF_FirstAnalysis_model.obj -f MyDirectoryDockerHub/RF_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/RF_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x RF_SecondAnalysis
+```
+### with the SKB feature selection and the RI model classifier
+```
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x RI_FirstAnalysis -da manual -fs SKB -c RI -k 5 -pa tuning_parameters_RI.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/RI_FirstAnalysis_model.obj -f MyDirectoryDockerHub/RI_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/RI_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x RI_SecondAnalysis
 ```
 ### with the SKB feature selection and the SVC model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/SVC_FirstAnalysis_model.obj -f MyDirectoryDockerHub/SVC_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x SVC_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/SVC_FirstAnalysis_model.obj -f MyDirectoryDockerHub/SVC_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectoryDockerHub -x SVC_SecondAnalysis
 ```
 ### with the SKB feature selection and the XGB model classifier
 ```
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -de 20 -pi -nr 5
-docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.2.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/XGB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/XGB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectoryDockerHub/XGB_FirstAnalysis_class_encoder.obj -o MyDirectoryDockerHub -x XGB_SecondAnalysis -de 20
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryDockerHub/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryDockerHub -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -pi -nr 5
+docker run --rm --name nicolas -u $(id -u):$(id -g) -v $(pwd):/wd nicolasradomski/genomicbasedclassification:1.3.0 prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryDockerHub/XGB_FirstAnalysis_model.obj -f MyDirectoryDockerHub/XGB_FirstAnalysis_features.obj -fe MyDirectoryDockerHub/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectoryDockerHub/XGB_FirstAnalysis_class_encoder.obj -o MyDirectoryDockerHub -x XGB_SecondAnalysis
 ```
 ## using a Conda environment
 ### without feature selection and with the ADA model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryConda -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/ADA_FirstAnalysis_model.obj -f MyDirectoryConda/ADA_FirstAnalysis_features.obj -fe MyDirectoryConda/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x ADA_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryConda -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/ADA_FirstAnalysis_model.obj -f MyDirectoryConda/ADA_FirstAnalysis_features.obj -fe MyDirectoryConda/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x ADA_SecondAnalysis
 ```
 ### with the SKB feature selection and the CAT model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/CAT_FirstAnalysis_model.obj -f MyDirectoryConda/CAT_FirstAnalysis_features.obj -fe MyDirectoryConda/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x CAT_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/CAT_FirstAnalysis_model.obj -f MyDirectoryConda/CAT_FirstAnalysis_features.obj -fe MyDirectoryConda/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x CAT_SecondAnalysis
 ```
 ### with the laSFM feature selection and the DT model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/DT_FirstAnalysis_model.obj -f MyDirectoryConda/DT_FirstAnalysis_features.obj -fe MyDirectoryConda/DT_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x DT_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/DT_FirstAnalysis_model.obj -f MyDirectoryConda/DT_FirstAnalysis_features.obj -fe MyDirectoryConda/DT_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x DT_SecondAnalysis
 ```
-### with the enSFM feature selection and the ET model classifier
+### with the enSFM feature selection and the EN model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x ET_FirstAnalysis -da manual -fs enSFM -c ET -k 5 -pa tuning_parameters_ET.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/ET_FirstAnalysis_model.obj -f MyDirectoryConda/ET_FirstAnalysis_features.obj -fe MyDirectoryConda/ET_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x ET_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x EN_FirstAnalysis -da manual -fs enSFM -c EN -k 5 -pa tuning_parameters_EN.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/EN_FirstAnalysis_model.obj -f MyDirectoryConda/EN_FirstAnalysis_features.obj -fe MyDirectoryConda/EN_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x EN_SecondAnalysis
 ```
-### with the rfSFM feature selection and the GNB model classifier
+### with the riSFM feature selection and the ET model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x GNB_FirstAnalysis -da manual -fs rfSFM -c GNB -k 5 -pa tuning_parameters_GNB.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/GNB_FirstAnalysis_model.obj -f MyDirectoryConda/GNB_FirstAnalysis_features.obj -fe MyDirectoryConda/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x GNB_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x ET_FirstAnalysis -da manual -fs riSFM -c ET -k 5 -pa tuning_parameters_ET.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/ET_FirstAnalysis_model.obj -f MyDirectoryConda/ET_FirstAnalysis_features.obj -fe MyDirectoryConda/ET_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x ET_SecondAnalysis
+```
+### with the rfSFM feature selection and the GB model classifier
+```
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x GB_FirstAnalysis -da manual -fs rfSFM -c GB -k 5 -pa tuning_parameters_GB.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/GB_FirstAnalysis_model.obj -f MyDirectoryConda/GB_FirstAnalysis_features.obj -fe MyDirectoryConda/GB_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x GB_SecondAnalysis
+```
+### with the SKB feature selection and the GNB model classifier
+```
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x GNB_FirstAnalysis -da manual -fs SKB -c GNB -k 5 -pa tuning_parameters_GNB.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/GNB_FirstAnalysis_model.obj -f MyDirectoryConda/GNB_FirstAnalysis_features.obj -fe MyDirectoryConda/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x GNB_SecondAnalysis
 ```
 ### with the SKB feature selection and the HGB model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/HGB_FirstAnalysis_model.obj -f MyDirectoryConda/HGB_FirstAnalysis_features.obj -fe MyDirectoryConda/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x HGB_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/HGB_FirstAnalysis_model.obj -f MyDirectoryConda/HGB_FirstAnalysis_features.obj -fe MyDirectoryConda/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x HGB_SecondAnalysis
 ```
 ### with the SKB feature selection and the KNN model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/KNN_FirstAnalysis_model.obj -f MyDirectoryConda/KNN_FirstAnalysis_features.obj -fe MyDirectoryConda/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x KNN_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/KNN_FirstAnalysis_model.obj -f MyDirectoryConda/KNN_FirstAnalysis_features.obj -fe MyDirectoryConda/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x KNN_SecondAnalysis
+```
+### with the SKB feature selection and the LA model classifier
+```
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x LA_FirstAnalysis -da manual -fs SKB -c LA -k 5 -pa tuning_parameters_LA.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/LA_FirstAnalysis_model.obj -f MyDirectoryConda/LA_FirstAnalysis_features.obj -fe MyDirectoryConda/LA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x LA_SecondAnalysis
 ```
 ### with the SKB feature selection and the LDA model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/LDA_FirstAnalysis_model.obj -f MyDirectoryConda/LDA_FirstAnalysis_features.obj -fe MyDirectoryConda/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x LDA_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/LDA_FirstAnalysis_model.obj -f MyDirectoryConda/LDA_FirstAnalysis_features.obj -fe MyDirectoryConda/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x LDA_SecondAnalysis
+```
+### with the SKB feature selection and the LGBM model classifier
+```
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x LGBM_FirstAnalysis -da manual -fs SKB -c LGBM -k 5 -pa tuning_parameters_LGBM.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/LGBM_FirstAnalysis_model.obj -f MyDirectoryConda/LGBM_FirstAnalysis_features.obj -fe MyDirectoryConda/LGBM_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x LGBM_SecondAnalysis
 ```
 ### with the SKB feature selection and the LR model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/LR_FirstAnalysis_model.obj -f MyDirectoryConda/LR_FirstAnalysis_features.obj -fe MyDirectoryConda/LR_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x LR_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/LR_FirstAnalysis_model.obj -f MyDirectoryConda/LR_FirstAnalysis_features.obj -fe MyDirectoryConda/LR_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x LR_SecondAnalysis
 ```
 ### with the SKB feature selection and the MLP model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/MLP_FirstAnalysis_model.obj -f MyDirectoryConda/MLP_FirstAnalysis_features.obj -fe MyDirectoryConda/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x MLP_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/MLP_FirstAnalysis_model.obj -f MyDirectoryConda/MLP_FirstAnalysis_features.obj -fe MyDirectoryConda/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x MLP_SecondAnalysis
+```
+### with the SKB feature selection and the NSV model classifier
+```
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x NSV_FirstAnalysis -da manual -fs SKB -c NSV -k 5 -pa tuning_parameters_NSV.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/NSV_FirstAnalysis_model.obj -f MyDirectoryConda/NSV_FirstAnalysis_features.obj -fe MyDirectoryConda/NSV_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x NSV_SecondAnalysis
 ```
 ### with the SKB feature selection and the QDA model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/QDA_FirstAnalysis_model.obj -f MyDirectoryConda/QDA_FirstAnalysis_features.obj -fe MyDirectoryConda/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x QDA_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/QDA_FirstAnalysis_model.obj -f MyDirectoryConda/QDA_FirstAnalysis_features.obj -fe MyDirectoryConda/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x QDA_SecondAnalysis
 ```
 ### with the SKB feature selection and the RF model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/RF_FirstAnalysis_model.obj -f MyDirectoryConda/RF_FirstAnalysis_features.obj -fe MyDirectoryConda/RF_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x RF_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/RF_FirstAnalysis_model.obj -f MyDirectoryConda/RF_FirstAnalysis_features.obj -fe MyDirectoryConda/RF_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x RF_SecondAnalysis
+```
+### with the SKB feature selection and the RI model classifier
+```
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x RI_FirstAnalysis -da manual -fs SKB -c RI -k 5 -pa tuning_parameters_RI.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/RI_FirstAnalysis_model.obj -f MyDirectoryConda/RI_FirstAnalysis_features.obj -fe MyDirectoryConda/RI_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x RI_SecondAnalysis
 ```
 ### with the SKB feature selection and the SVC model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/SVC_FirstAnalysis_model.obj -f MyDirectoryConda/SVC_FirstAnalysis_features.obj -fe MyDirectoryConda/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x SVC_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/SVC_FirstAnalysis_model.obj -f MyDirectoryConda/SVC_FirstAnalysis_features.obj -fe MyDirectoryConda/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectoryConda -x SVC_SecondAnalysis
 ```
 ### with the SKB feature selection and the XGB model classifier
 ```
-python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -de 20 -pi -nr 5
-python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/XGB_FirstAnalysis_model.obj -f MyDirectoryConda/XGB_FirstAnalysis_features.obj -fe MyDirectoryConda/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectoryConda/XGB_FirstAnalysis_class_encoder.obj -o MyDirectoryConda -x XGB_SecondAnalysis -de 20
+python GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryConda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryConda -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -pi -nr 5
+python GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryConda/XGB_FirstAnalysis_model.obj -f MyDirectoryConda/XGB_FirstAnalysis_features.obj -fe MyDirectoryConda/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectoryConda/XGB_FirstAnalysis_class_encoder.obj -o MyDirectoryConda -x XGB_SecondAnalysis
 ```
 ## using a Conda package
 ### without feature selection and with the ADA model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryAnaconda -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/ADA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/ADA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x ADA_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectoryAnaconda -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/ADA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/ADA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x ADA_SecondAnalysis
 ```
 ### with the SKB feature selection and the CAT model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/CAT_FirstAnalysis_model.obj -f MyDirectoryAnaconda/CAT_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x CAT_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/CAT_FirstAnalysis_model.obj -f MyDirectoryAnaconda/CAT_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x CAT_SecondAnalysis
 ```
 ### with the laSFM feature selection and the DT model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/DT_FirstAnalysis_model.obj -f MyDirectoryAnaconda/DT_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/DT_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x DT_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/DT_FirstAnalysis_model.obj -f MyDirectoryAnaconda/DT_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/DT_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x DT_SecondAnalysis
 ```
-### with the enSFM feature selection and the ET model classifier
+### with the enSFM feature selection and the EN model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x ET_FirstAnalysis -da manual -fs enSFM -c ET -k 5 -pa tuning_parameters_ET.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/ET_FirstAnalysis_model.obj -f MyDirectoryAnaconda/ET_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/ET_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x ET_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x EN_FirstAnalysis -da manual -fs enSFM -c EN -k 5 -pa tuning_parameters_EN.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/EN_FirstAnalysis_model.obj -f MyDirectoryAnaconda/EN_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/EN_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x EN_SecondAnalysis
 ```
-### with the rfSFM feature selection and the GNB model classifier
+### with the riSFM feature selection and the ET model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x GNB_FirstAnalysis -da manual -fs rfSFM -c GNB -k 5 -pa tuning_parameters_GNB.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/GNB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/GNB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x GNB_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x ET_FirstAnalysis -da manual -fs riSFM -c ET -k 5 -pa tuning_parameters_ET.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/ET_FirstAnalysis_model.obj -f MyDirectoryAnaconda/ET_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/ET_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x ET_SecondAnalysis
+```
+### with the rfSFM feature selection and the GB model classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x GB_FirstAnalysis -da manual -fs rfSFM -c GB -k 5 -pa tuning_parameters_GB.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/GB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/GB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/GB_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x GB_SecondAnalysis
+```
+### with the SKB feature selection and the GNB model classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x GNB_FirstAnalysis -da manual -fs SKB -c GNB -k 5 -pa tuning_parameters_GNB.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/GNB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/GNB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x GNB_SecondAnalysis
 ```
 ### with the SKB feature selection and the HGB model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/HGB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/HGB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x HGB_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/HGB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/HGB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x HGB_SecondAnalysis
 ```
 ### with the SKB feature selection and the KNN model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/KNN_FirstAnalysis_model.obj -f MyDirectoryAnaconda/KNN_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x KNN_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/KNN_FirstAnalysis_model.obj -f MyDirectoryAnaconda/KNN_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x KNN_SecondAnalysis
+```
+### with the SKB feature selection and the LA model classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LA_FirstAnalysis -da manual -fs SKB -c LA -k 5 -pa tuning_parameters_LA.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/LA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x LA_SecondAnalysis
 ```
 ### with the SKB feature selection and the LDA model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LDA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LDA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x LDA_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LDA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LDA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x LDA_SecondAnalysis
+```
+### with the SKB feature selection and the LGBM model classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LGBM_FirstAnalysis -da manual -fs SKB -c LGBM -k 5 -pa tuning_parameters_LGBM.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LGBM_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LGBM_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/LGBM_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x LGBM_SecondAnalysis
 ```
 ### with the SKB feature selection and the LR model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LR_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LR_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/LR_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x LR_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/LR_FirstAnalysis_model.obj -f MyDirectoryAnaconda/LR_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/LR_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x LR_SecondAnalysis
 ```
 ### with the SKB feature selection and the MLP model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/MLP_FirstAnalysis_model.obj -f MyDirectoryAnaconda/MLP_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x MLP_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/MLP_FirstAnalysis_model.obj -f MyDirectoryAnaconda/MLP_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x MLP_SecondAnalysis
+```
+### with the SKB feature selection and the NSV model classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x NSV_FirstAnalysis -da manual -fs SKB -c NSV -k 5 -pa tuning_parameters_NSV.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/NSV_FirstAnalysis_model.obj -f MyDirectoryAnaconda/NSV_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/NSV_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x NSV_SecondAnalysis
 ```
 ### with the SKB feature selection and the QDA model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/QDA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/QDA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x QDA_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/QDA_FirstAnalysis_model.obj -f MyDirectoryAnaconda/QDA_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x QDA_SecondAnalysis
 ```
 ### with the SKB feature selection and the RF model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/RF_FirstAnalysis_model.obj -f MyDirectoryAnaconda/RF_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/RF_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x RF_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/RF_FirstAnalysis_model.obj -f MyDirectoryAnaconda/RF_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/RF_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x RF_SecondAnalysis
+```
+### with the SKB feature selection and the RI model classifier
+```
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x RI_FirstAnalysis -da manual -fs SKB -c RI -k 5 -pa tuning_parameters_RI.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/RI_FirstAnalysis_model.obj -f MyDirectoryAnaconda/RI_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/RI_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x RI_SecondAnalysis
 ```
 ### with the SKB feature selection and the SVC model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/SVC_FirstAnalysis_model.obj -f MyDirectoryAnaconda/SVC_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x SVC_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/SVC_FirstAnalysis_model.obj -f MyDirectoryAnaconda/SVC_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectoryAnaconda -x SVC_SecondAnalysis
 ```
 ### with the SKB feature selection and the XGB model classifier
 ```
-genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -de 20 -pi -nr 5
-genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/XGB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/XGB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectoryAnaconda/XGB_FirstAnalysis_class_encoder.obj -o MyDirectoryAnaconda -x XGB_SecondAnalysis -de 20
+genomicbasedclassification modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectoryAnaconda/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectoryAnaconda -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -pi -nr 5
+genomicbasedclassification prediction -m genomic_profiles_for_prediction.tsv -t MyDirectoryAnaconda/XGB_FirstAnalysis_model.obj -f MyDirectoryAnaconda/XGB_FirstAnalysis_features.obj -fe MyDirectoryAnaconda/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectoryAnaconda/XGB_FirstAnalysis_class_encoder.obj -o MyDirectoryAnaconda -x XGB_SecondAnalysis
 ```
 # Examples of expected output (see inclosed directory called 'MyDirectory')
 ## feature importance
@@ -583,7 +704,7 @@ L_10_A19    0.001733   0.002360  -0.002564  0.003497
   L_6_A9    0.000000   0.000000   0.000000  0.000000
  L_7_A10    0.000000   0.000000   0.000000  0.000000
 ```
-## confusion  matrix
+## confusion matrix
 ```
 from the training dataset: 
 phenotype  fruit  pig  poultry
@@ -596,7 +717,7 @@ phenotype  fruit  pig  poultry
       pig      0   14        0
   poultry      0    2       10
 ```
-## metrics  per class
+## metrics per class
 ```
 from the training dataset: 
 phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
@@ -609,7 +730,7 @@ phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precisio
       pig  23   3   0  14       14     0.925     1.000000     0.884615   0.823529 1.000000  0.903226 0.853526 0.979396 0.962185 0.916234         0.916234
   poultry  27   1   2  10       12     0.925     0.833333     0.964286   0.909091 0.833333  0.869565 0.818596 0.992560 0.979604 0.963727         0.963727
 ```
-## global  metrics
+## global metrics
 ```
 from the training dataset: 
  accuracy  sensitivity  specificity  precision   recall  f1-score     MCC  Cohen kappa  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped

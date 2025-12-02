@@ -1,9 +1,9 @@
 scores	parameters
-0.93125	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 50
-0.925	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 100
-0.9125	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 50
-0.90625	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 50
-0.9	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 100
-0.9	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 50
-0.9	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 100
-0.84375	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 100
+0.91875	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 50
+0.9125	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 50
+0.90625	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 100
+0.90625	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 50
+0.9	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 50
+0.9	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 100
+0.89375	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=2, min_samples_leaf=5), 'model__learning_rate': 0.05, 'model__n_estimators': 100
+0.8875	'model__algorithm': 'SAMME.R', 'model__estimator': DecisionTreeClassifier(max_depth=1, min_samples_leaf=5), 'model__learning_rate': 0.1, 'model__n_estimators': 100

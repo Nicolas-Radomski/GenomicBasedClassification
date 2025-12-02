@@ -1,0 +1,281 @@
+###########################
+######### context #########
+###########################
+The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 5 feature selection methods, 20 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
+###########################
+######## reference ########
+###########################
+Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare Camma, Adriano Di Pasquale and Nicolas Radomski (2023) Harmonization of supervised machine learning practices for efficient source attribution of Listeria monocytogenes based on genomic data. 2023, BMC Genomics, 24(560):1-19, https://doi.org/10.1186/s12864-023-09667-w
+###########################
+###### repositories  ######
+###########################
+Please cite:
+ GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),
+ Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),
+ and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).
+###########################
+#### acknowledgements  ####
+###########################
+Many thanks to Andrea De Ruvo, Adriano Di Pasquale and ChatGPT for the insightful discussions that helped improve the algorithm.
+###########################
+######## versions  ########
+###########################
+GenomicBasedClassification: 1.3.0 (released in December 2025)
+python: 3.12
+argparse: 1.1
+imblearn: 0.13.0
+numpy: 1.26.4
+pandas: 2.2.2
+pickle: 4.0
+joblib: 1.5.1
+tqdm: 4.67.1
+tqdm-joblib: 0.0.4
+sklearn: 1.5.2
+catboost: 1.2.8
+lightgbm: 4.6.0
+xgboost: 2.1.3
+###########################
+######## arguments  #######
+###########################
+subcommand: modeling
+inputpath_mutations: genomic_profiles_for_modeling.tsv
+inputpath_phenotypes: MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv
+dataset: manual
+splitting: None
+limit: 10
+featureselection: rfSFM
+classifier: GB
+fold: 5
+parameters: tuning_parameters_GB.txt
+jobs: -1
+permutationimportance: True
+nrepeats: 5
+outputpath: MyDirectory
+prefix: GB_FirstAnalysis
+digits: 6
+debug: 0
+warnings: False
+nocheck: False
+###########################
+######### samples  ########
+###########################
+phenotype  dataset  training  testing
+    fruit       70        56       14
+      pig       70        56       14
+  poultry       60        48       12
+###########################
+######### checks  #########
+###########################
+The traceback level was set to 0
+The warnings were ignored
+The recommended versions of Python and packages were properly controlled
+The modeling subcommand was used
+The provided sample limit per class and dataset (i.e., 10) meets or exceeds the recommended minimum (i.e., 10), which is expected to support more reliable performance metrics
+The provided phenotype harbored 3 classes: 'fruit', 'pig', 'poultry'
+The minimum required number of samples in the training/testing datasets (i.e., >= 60) and the expected number of columns (i.e., >= 3) in the input file of mutations were properly controlled (i.e., 200 and 11 , respectively)
+The minimum required number of samples in the training/testing datasets (i.e., >= 60) and the expected number of columns (i.e., = 3) in the input file of phenotypes were properly controlled (i.e., 200 and 3 , respectively)
+The absence of missing phenotypes in the input file of phenotypes was properly controled (i.e., the second column)
+The expected datasets (i.e., 'training' or 'testing') in the input file of phenotypes were properly controled (i.e., the third column)
+The sorted sample identifiers were confirmed as identical between the input files of mutations and phenotypes/datasets
+The phenotype classes were not encoded for the classifiers other than the XGB classifier
+The provided selection of training/testing datasets (i.e., manual) and percentage of random splitting (i.e., None) were compatible
+The training and testing datasets were constructed based on the 'manual' setting
+The number of samples per class in the training and testing datasets was properly controlled to be higher than the set limit (i.e., 10)
+The input tested mutations include all features required by the trained one-hot encoder
+The input tested mutations contain no unexpected features for one-hot encoding
+The encoded features between training and testing datasets were confirmed as identical
+The one-hot encoded column order was harmonized across training and testing datasets to ensure deterministic feature alignment for feature selection and modeling
+The 10 provided features were one-hot encoded into 78 encoded features
+The provided feature selection method was properly recognized: SelectFromModel with random forest (rfSFM)
+The provided classifier was properly recognized: gradient boosting (GB)
+The pipeline components were properly recognized: Pipeline(steps=[('feature_selection', SelectFromModel(estimator=RandomForestClassifier(bootstrap=False, random_state=42))), ('model', GradientBoostingClassifier(random_state=42))])
+The tuning parameters were provided by the user: {'feature_selection__threshold': -inf, 'feature_selection__max_features': 25, 50, 'feature_selection__estimator__n_estimators': 200, 'feature_selection__estimator__max_depth': 5, 10, 'model__n_estimators': 100, 200, 'model__learning_rate': 0.1, 'model__max_depth': 3}
+The cross-validation setting implied: 7 distinct parameter names, 10 parameter value options, 8 parameter combinations, and 40 fits during cross-validation
+The tqdm_joblib progress bars are activated when using two or more jobs
+The best parameters during model cross-validation were: {'feature_selection__estimator__max_depth': 5, 'feature_selection__estimator__n_estimators': 200, 'feature_selection__max_features': 50, 'feature_selection__threshold': -inf, 'model__learning_rate': 0.1, 'model__max_depth': 3, 'model__n_estimators': 100}
+The best accuracy during model cross-validation was: 0.89375
+The pipeline potentially selected and used 50 one-hot encoded features to train the model
+The one-hot encoded feature names were recovered before feature selection
+The best model returned 50 importance values (tree-based impurity reduction (feature_importances_)) for 50 one-hot encoded features
+The permutation importance was requested (i.e., True) and the number of repetitions was explicitly set (i.e., True) to a specific value (i.e., 5)
+The permutation importance was restricted to the features selected upstream (i.e., 50) by the specified feature selection method
+The permutation importance was successfully computed on both training and testing datasets
+The output directory already existed
+###########################
+####### execution  ########
+###########################
+The script started on 2025-12-01 12:00:06.425495
+The script stoped on 2025-12-01 12:00:33.483484
+The script lasted 0 days, 0 hrs, 0 mins and 27.06 secs (i.e., 27.06 secs in total)
+###########################
+###### output  files ######
+###########################
+MyDirectory/GB_FirstAnalysis_count_classes.tsv
+MyDirectory/GB_FirstAnalysis_features.obj
+MyDirectory/GB_FirstAnalysis_feature_encoder.obj
+MyDirectory/GB_FirstAnalysis_model.obj
+MyDirectory/GB_FirstAnalysis_scores_parameters.tsv
+MyDirectory/GB_FirstAnalysis_feature_importances.tsv
+MyDirectory/GB_FirstAnalysis_permutation_importances.tsv
+MyDirectory/GB_FirstAnalysis_confusion_matrix_classes_training.tsv
+MyDirectory/GB_FirstAnalysis_confusion_matrix_classes_testing.tsv
+MyDirectory/GB_FirstAnalysis_metrics_classes_training.tsv
+MyDirectory/GB_FirstAnalysis_metrics_classes_testing.tsv
+MyDirectory/GB_FirstAnalysis_metrics_global_training.tsv
+MyDirectory/GB_FirstAnalysis_metrics_global_testing.tsv
+MyDirectory/GB_FirstAnalysis_prediction_training.tsv
+MyDirectory/GB_FirstAnalysis_prediction_testing.tsv
+MyDirectory/GB_FirstAnalysis_phenotype_dataset.tsv
+MyDirectory/GB_FirstAnalysis_modeling_log.txt
+###########################
+### feature  importance ###
+###########################
+    feature  importance
+     L_1_A6    0.145124
+     L_1_A4    0.126522
+     L_5_A5    0.123858
+     L_4_A7    0.081578
+     L_2_A7    0.081280
+     L_9_A9    0.066729
+     L_6_A4    0.055800
+L_5_missing    0.053352
+    L_1_A12    0.048829
+   L_10_A16    0.038044
+    L_4_A10    0.027793
+     L_9_A8    0.027372
+     L_1_A1    0.025353
+     L_9_A7    0.019919
+   L_10_A19    0.016419
+    L_9_A10    0.016396
+     L_6_A5    0.007584
+    L_6_A14    0.006756
+   L_10_A13    0.006139
+     L_6_A9    0.005461
+Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
+Note: NaN placeholder in case no native or detectable feature importance is available. 
+Note: AdaBoost (ADA) typically produces binary feature importances (0 or 1) because each weak learner splits on only one feature. 
+Note: Boosting models, especially Histogram-based Gradient Boosting (HGB), may yield all-zero feature importances when no meaningful split gains are computed—typically due to strong regularization, shallow trees, or low feature variability. 
+###########################
+# permutation  importance #
+###########################
+    feature  train_mean  train_std  test_mean  test_std
+     L_9_A8    0.122173   0.025482   0.037832  0.016547
+     L_4_A7    0.118318   0.024496   0.155842  0.036818
+     L_5_A5    0.034496   0.014986  -0.137156  0.004200
+     L_2_A7    0.026757   0.008059  -0.029981  0.025686
+     L_1_A6    0.024910   0.007363  -0.034721  0.023692
+     L_1_A4    0.024015   0.015088  -0.006308  0.026864
+     L_6_A5    0.023637   0.016552   0.129029  0.071328
+    L_1_A12    0.014406   0.007773   0.010314  0.014455
+     L_9_A9    0.013311   0.005409  -0.019655  0.018946
+     L_6_A4    0.011559   0.007043   0.004825  0.013817
+    L_7_A10    0.005917   0.005192  -0.002325  0.011881
+     L_9_A7    0.005873   0.003261  -0.004353  0.009588
+L_5_missing    0.005727   0.002645   0.014509  0.079796
+     L_6_A9    0.004544   0.003529  -0.004383  0.009293
+   L_10_A13    0.003618   0.003051  -0.003043  0.008769
+    L_6_A14    0.003548   0.003602   0.093006  0.012930
+     L_1_A1    0.002250   0.002497   0.007553  0.060619
+   L_10_A19    0.002075   0.002545  -0.019236  0.016153
+    L_9_A10    0.001920   0.002070  -0.003853  0.007171
+    L_4_A10    0.001867   0.001689  -0.003960  0.008114
+Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
+Note: Positive permutation importance values indicate features that contribute positively to the model’s performance, while negative values suggest features that degrade performance when included. 
+###########################
+#### confusion  matrix ####
+###########################
+from the training dataset: 
+phenotype  fruit  pig  poultry
+    fruit     49    4        3
+      pig      0   53        3
+  poultry      0    0       48
+from the testing dataset: 
+phenotype  fruit  pig  poultry
+    fruit     11    0        3
+      pig      1   11        2
+  poultry      0    1       11
+Note: The expectation and prediction are represented by rows and columns, respectively. 
+###########################
+#### metrics  per class ###
+###########################
+from the training dataset: 
+phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
+    fruit 104   0   7  49       56   0.95625     0.875000     1.000000   1.000000 0.875000  0.933333 0.905439 0.993733 0.984852 0.975458         0.975458
+      pig 100   4   3  53       56   0.95625     0.946429     0.961538   0.929825 0.946429  0.938054 0.904325 0.994935 0.986317 0.979358         0.979358
+  poultry 106   6   0  48       48   0.96250     1.000000     0.946429   0.888889 1.000000  0.941177 0.917208 0.996280 0.987118 0.983158         0.983158
+from the testing dataset: 
+phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
+    fruit  25   1   3  11       14      0.90     0.785714     0.961538   0.916667 0.785714  0.846154 0.777765 0.987637 0.973214 0.947168         0.947168
+      pig  25   1   3  11       14      0.90     0.785714     0.961538   0.916667 0.785714  0.846154 0.777765 0.971154 0.917550 0.837213         0.837213
+  poultry  23   5   1  11       12      0.85     0.916667     0.821429   0.687500 0.916667  0.785714 0.690425 0.943452 0.932143 0.879130         0.879130
+Note: The term 'support' corresponds to TP + FN. 
+Note: MCC stands for Matthews Correlation Coefficient. 
+Note: Sensitivity and recall must be equal, as they are based on the same formula. 
+Note: In the case of binary phenotype, the negative and positive classes correspond to the first and second classes in alphabetical order, respectively. 
+Note: PRG-AUC can be negative, reflecting below-baseline performance expected with imbalanced data, while PRG-AUC_clipped floors negative gains to zero to separate total performance (including penalties) from above-baseline contributions, coinciding with PRG-AUC when the model stays above baseline. 
+Note: A PRG-AUC close to 0.5 for a specific class does not necessarily indicate poor performance. In binary or one-vs-rest evaluations, it reflects limited precision gain over the random baseline (e.g., SVC). 
+###########################
+##### global  metrics #####
+###########################
+from the training dataset: 
+ accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  Cohen kappa  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
+   0.9375     0.940476     0.969322   0.939571 0.940476  0.937521 0.908568     0.906279 0.994982 0.986095 0.979324         0.979324
+from the testing dataset: 
+ accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  Cohen kappa  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
+    0.825     0.829365     0.914835   0.840278 0.829365  0.826007 0.747175     0.738806 0.967415 0.940969 0.887837         0.887837
+Note: MCC stands for Matthews Correlation Coefficient. 
+Note: Sensitivity and recall must be equal, as they are based on the same formula. 
+Note: PRG-AUC can be negative, reflecting below-baseline performance expected with imbalanced data, while PRG-AUC_clipped floors negative gains to zero to separate total performance (including penalties) from above-baseline contributions, coinciding with PRG-AUC when the model stays above baseline. 
+Note: A global PRG-AUC close to 0.5 does not necessarily indicate poor model performance. In binary problems, it reflects limited precision gain over the random baseline (e.g., SVC). In multiclass settings, it can also result from averaging one-vs-rest curves (e.g., XGB), even when per-class PRG-AUC values are higher. 
+###########################
+#### training  dataset ####
+###########################
+ sample expectation prediction    fruit      pig  poultry
+S0.1.01         pig        pig 0.000530 0.999240 0.000230
+S0.1.03     poultry    poultry 0.000137 0.000013 0.999850
+S0.1.04         pig        pig 0.000369 0.999444 0.000186
+S0.1.05     poultry    poultry 0.331217 0.002132 0.666651
+S0.1.06     poultry    poultry 0.000206 0.000014 0.999780
+S0.1.07         pig        pig 0.000776 0.998892 0.000332
+S0.1.08     poultry    poultry 0.000137 0.000013 0.999850
+S0.1.09         pig        pig 0.001689 0.998146 0.000165
+S0.1.10         pig        pig 0.442633 0.556464 0.000902
+S0.1.12         pig        pig 0.000765 0.999155 0.000080
+S0.1.14       fruit      fruit 0.999038 0.000772 0.000190
+S0.1.15       fruit      fruit 0.999314 0.000298 0.000388
+S0.1.16       fruit    poultry 0.127535 0.373861 0.498604
+S0.1.17       fruit      fruit 0.998185 0.001069 0.000746
+S0.1.19       fruit      fruit 0.999086 0.000544 0.000370
+S0.1.20       fruit      fruit 0.999314 0.000298 0.000388
+S1.1.01         pig        pig 0.000530 0.999240 0.000230
+S1.1.02         pig        pig 0.000530 0.999240 0.000230
+S1.1.06     poultry    poultry 0.000206 0.000014 0.999780
+S1.1.07         pig        pig 0.000776 0.998892 0.000332
+Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
+Note: The p-values are reported for each phenotype of interest. 
+###########################
+##### testing dataset #####
+###########################
+ sample expectation prediction    fruit      pig  poultry
+S0.1.02     poultry        pig 0.000530 0.999240 0.000230
+S0.1.11     poultry    poultry 0.000137 0.000013 0.999850
+S0.1.13     poultry    poultry 0.000311 0.000294 0.999394
+S0.1.18       fruit      fruit 0.998639 0.000632 0.000728
+S1.1.03     poultry    poultry 0.000137 0.000013 0.999850
+S1.1.04         pig        pig 0.000369 0.999444 0.000186
+S1.1.05       fruit    poultry 0.331217 0.002132 0.666651
+S1.1.18       fruit      fruit 0.993344 0.003301 0.003355
+S2.1.01         pig        pig 0.000530 0.999240 0.000230
+S2.1.08     poultry    poultry 0.000137 0.000013 0.999850
+S2.1.10         pig      fruit 0.512405 0.485521 0.002074
+S2.1.11     poultry    poultry 0.000137 0.000013 0.999850
+S2.1.12         pig        pig 0.000765 0.999155 0.000080
+S2.1.15       fruit      fruit 0.999314 0.000298 0.000388
+S2.1.16         pig    poultry 0.127535 0.373861 0.498604
+S3.1.05       fruit    poultry 0.331217 0.002132 0.666651
+S3.1.09         pig        pig 0.001689 0.998146 0.000165
+S3.1.12         pig        pig 0.000765 0.999155 0.000080
+S3.1.20       fruit      fruit 0.999314 0.000298 0.000388
+S4.1.04         pig        pig 0.000369 0.999444 0.000186
+Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
+Note: The p-values are reported for each phenotype of interest. 

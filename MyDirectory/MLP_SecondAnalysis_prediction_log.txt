@@ -1,7 +1,7 @@
 ###########################
 ######### context #########
 ###########################
-The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 4 feature selection methods, 14 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
+The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 5 feature selection methods, 20 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
 ###########################
 ######## reference ########
 ###########################
@@ -20,19 +20,20 @@ Many thanks to Andrea De Ruvo, Adriano Di Pasquale and ChatGPT for the insightfu
 ###########################
 ######## versions  ########
 ###########################
-GenomicBasedClassification: 1.2.0 (released in November 2025)
+GenomicBasedClassification: 1.3.0 (released in December 2025)
 python: 3.12
 argparse: 1.1
-pickle: 4.0
-pandas: 2.2.2
 imblearn: 0.13.0
+pandas: 2.2.2
 sklearn: 1.5.2
+pickle: 4.0
+catboost: 1.2.8
+lightgbm: 4.6.0
 xgboost: 2.1.3
 numpy: 1.26.4
 joblib: 1.5.1
 tqdm: 4.67.1
 tqdm-joblib: 0.0.4
-catboost: 1.2.8
 ###########################
 ######## arguments  #######
 ###########################
@@ -45,13 +46,13 @@ inputpath_class_encoder: None
 outputpath: MyDirectory
 prefix: MLP_SecondAnalysis
 digits: 6
-debug: 20
+debug: 0
 warnings: False
 nocheck: False
 ###########################
 ######### checks  #########
 ###########################
-The traceback level was set to 20
+The traceback level was set to 0
 The warnings were ignored
 The recommended versions of Python and packages were properly controlled
 The prediction subcommand was used
@@ -60,18 +61,18 @@ The class encoder were not provided
 The input tested mutations include all features required by the trained one-hot encoder
 The following unexpected features in the input tested mutations will be ignored for one-hot encoding: ['L_11']
 The encoded features between training and prediction datasets were confirmed as identical
-The 10 provided features were one-hot encoded into 80 encoded features
+The 10 provided features were one-hot encoded into 78 encoded features
 The pipeline expected 50 one-hot encoded features to perform prediction
 The provided best model harbored 3 classes: 'fruit', 'pig', 'poultry'
-The pipeline components of the provided best model were properly recognized: Pipeline(steps=[('feature_selection', SelectKBest(k=50, score_func=<function mutual_info_classif at 0x7f7d5447c9a0>)), ('model', MLPClassifier(alpha=0.001, hidden_layer_sizes=(50,), max_iter=500))])
+The pipeline components of the provided best model were properly recognized: Pipeline(steps=[('feature_selection', SelectKBest(k=50, score_func=<function mutual_info_classif at 0x7f36dcc7c860>)), ('model', MLPClassifier(alpha=0.001, hidden_layer_sizes=(50,), max_iter=500, random_state=42))])
 The one-hot encoded prediction matrix was reindexed and aligned to match the exact feature names and order expected by the trained pipeline
 The classifier of the provided best model was verified for compatibility with class encoder, which are only used for the XGB classifier
 The output directory already existed
 ###########################
 ####### execution  ########
 ###########################
-The script started on 2025-11-05 09:38:41.107470
-The script stoped on 2025-11-05 09:38:41.131389
+The script started on 2025-12-01 12:03:19.266423
+The script stoped on 2025-12-01 12:03:19.291342
 The script lasted 0 days, 0 hrs, 0 mins and 0.02 secs (i.e., 0.02 secs in total)
 ###########################
 ###### output  files ######
@@ -82,25 +83,25 @@ MyDirectory/MLP_SecondAnalysis_prediction_log.txt
 ### prediction  dataset ###
 ###########################
  sample prediction    fruit      pig  poultry
-S2.1.01        pig 0.004658 0.959147 0.036196
-S2.1.02        pig 0.009586 0.885280 0.105134
-S2.1.03    poultry 0.005816 0.001760 0.992424
-S2.1.04        pig 0.002407 0.995610 0.001983
-S2.1.05      fruit 0.538497 0.011665 0.449838
-S2.1.06    poultry 0.024758 0.001098 0.974144
-S2.1.07        pig 0.044054 0.901404 0.054543
-S2.1.08    poultry 0.001692 0.001858 0.996450
-S2.1.09        pig 0.029736 0.967003 0.003261
-S2.1.10        pig 0.111164 0.886464 0.002372
-S2.1.11    poultry 0.001398 0.006802 0.991800
-S2.1.12        pig 0.000869 0.998874 0.000257
-S2.1.13    poultry 0.003858 0.157061 0.839080
-S2.1.14      fruit 0.936852 0.054200 0.008947
-S2.1.15      fruit 0.994636 0.004199 0.001165
-S2.1.16        pig 0.054649 0.738293 0.207058
-S2.1.17        pig 0.363088 0.534193 0.102720
-S2.1.18      fruit 0.957654 0.037582 0.004764
-S2.1.19      fruit 0.963582 0.032595 0.003823
-S2.1.20      fruit 0.994636 0.004199 0.001165
+S2.1.01        pig 0.002463 0.986753 0.010785
+S2.1.02        pig 0.003479 0.988652 0.007869
+S2.1.03    poultry 0.010702 0.002231 0.987067
+S2.1.04        pig 0.075029 0.922486 0.002485
+S2.1.05    poultry 0.298500 0.009176 0.692324
+S2.1.06    poultry 0.033044 0.000558 0.966398
+S2.1.07        pig 0.064265 0.806445 0.129290
+S2.1.08    poultry 0.008565 0.004443 0.986992
+S2.1.09        pig 0.030458 0.967408 0.002134
+S2.1.10        pig 0.415945 0.576453 0.007602
+S2.1.11    poultry 0.008565 0.004443 0.986992
+S2.1.12        pig 0.008050 0.990207 0.001743
+S2.1.13    poultry 0.024845 0.031743 0.943412
+S2.1.14      fruit 0.968519 0.006966 0.024516
+S2.1.15      fruit 0.996650 0.001659 0.001690
+S2.1.16    poultry 0.108438 0.336779 0.554784
+S2.1.17      fruit 0.933218 0.034174 0.032608
+S2.1.18      fruit 0.986129 0.003495 0.010376
+S2.1.19      fruit 0.992466 0.004339 0.003196
+S2.1.20      fruit 0.996650 0.001659 0.001690
 Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
 Note: The p-values are reported for each phenotype of interest. 

@@ -1,9 +1,9 @@
 scores	parameters
-0.9125	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.03
-0.9125	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.1
-0.90625	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.03
-0.90625	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.1
-0.88125	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.03
-0.875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.1
-0.8625	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.1
-0.85625	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f89a74749a0>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.03
+0.89375	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.03
+0.89375	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.1
+0.8875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.03
+0.88125	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.1
+0.875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.1
+0.875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.1
+0.8625	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 5, 'model__learning_rate': 0.03
+0.85625	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7fed1fc68860>, 'model__depth': 6, 'model__l2_leaf_reg': 3, 'model__learning_rate': 0.03

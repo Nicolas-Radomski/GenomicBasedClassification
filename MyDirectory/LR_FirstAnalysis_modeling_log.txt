@@ -1,7 +1,7 @@
 ###########################
 ######### context #########
 ###########################
-The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 4 feature selection methods, 14 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
+The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 5 feature selection methods, 20 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing.
 ###########################
 ######## reference ########
 ###########################
@@ -20,19 +20,20 @@ Many thanks to Andrea De Ruvo, Adriano Di Pasquale and ChatGPT for the insightfu
 ###########################
 ######## versions  ########
 ###########################
-GenomicBasedClassification: 1.2.0 (released in November 2025)
+GenomicBasedClassification: 1.3.0 (released in December 2025)
 python: 3.12
 argparse: 1.1
-pickle: 4.0
-pandas: 2.2.2
 imblearn: 0.13.0
-sklearn: 1.5.2
-xgboost: 2.1.3
 numpy: 1.26.4
+pandas: 2.2.2
+pickle: 4.0
 joblib: 1.5.1
 tqdm: 4.67.1
 tqdm-joblib: 0.0.4
+sklearn: 1.5.2
 catboost: 1.2.8
+lightgbm: 4.6.0
+xgboost: 2.1.3
 ###########################
 ######## arguments  #######
 ###########################
@@ -52,7 +53,7 @@ nrepeats: 5
 outputpath: MyDirectory
 prefix: LR_FirstAnalysis
 digits: 6
-debug: 20
+debug: 0
 warnings: False
 nocheck: False
 ###########################
@@ -65,7 +66,7 @@ phenotype  dataset  training  testing
 ###########################
 ######### checks  #########
 ###########################
-The traceback level was set to 20
+The traceback level was set to 0
 The warnings were ignored
 The recommended versions of Python and packages were properly controlled
 The modeling subcommand was used
@@ -84,27 +85,28 @@ The input tested mutations include all features required by the trained one-hot 
 The input tested mutations contain no unexpected features for one-hot encoding
 The encoded features between training and testing datasets were confirmed as identical
 The one-hot encoded column order was harmonized across training and testing datasets to ensure deterministic feature alignment for feature selection and modeling
-The 10 provided features were one-hot encoded into 80 encoded features
+The 10 provided features were one-hot encoded into 78 encoded features
 The provided feature selection method was properly recognized: SelectKBest (SKB)
 The provided classifier was properly recognized: logistic regression (LR)
-The pipeline components were properly recognized: Pipeline(steps=[('feature_selection', SelectKBest(score_func=functools.partial(<function mutual_info_classif at 0x7f70e59509a0>, random_state=42))), ('model', LogisticRegression())])
-The tuning parameters were provided by the user: {'feature_selection__k': 25, 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f70e59509a0>, 'model__solver': 'saga', 'model__penalty': 'elasticnet', 'model__l1_ratio': 0.3, 0.5, 0.7, 'model__C': 0.01, 0.1, 1.0, 'model__max_iter': 5000}
+The pipeline components were properly recognized: Pipeline(steps=[('feature_selection', SelectKBest(score_func=functools.partial(<function mutual_info_classif at 0x7f05e1c44860>, random_state=42))), ('model', LogisticRegression(random_state=42))])
+The tuning parameters were provided by the user: {'feature_selection__k': 25, 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f05e1c44860>, 'model__solver': 'saga', 'model__penalty': 'elasticnet', 'model__l1_ratio': 0.3, 0.5, 0.7, 'model__C': 0.01, 0.1, 1.0, 'model__max_iter': 5000}
 The cross-validation setting implied: 7 distinct parameter names, 12 parameter value options, 18 parameter combinations, and 90 fits during cross-validation
 The tqdm_joblib progress bars are activated when using two or more jobs
-The best parameters during model cross-validation were: {'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f70e59509a0>, 'model__C': 1.0, 'model__l1_ratio': 0.7, 'model__max_iter': 5000, 'model__penalty': 'elasticnet', 'model__solver': 'saga'}
-The best accuracy during model cross-validation was: 0.93125
-The pipeline potentially selected and used 50 one-hot encoded features to train the model
-The one-hot encoded feature names were recovered from the model or encoder
-The best model returned 50 importance values (absolute coefficient magnitude (coef_)) for 50 one-hot encoded features
+The best parameters during model cross-validation were: {'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f05e1c44860>, 'model__C': 1.0, 'model__l1_ratio': 0.7, 'model__max_iter': 5000, 'model__penalty': 'elasticnet', 'model__solver': 'saga'}
+The best accuracy during model cross-validation was: 0.9125
+The pipeline potentially selected and used 25 one-hot encoded features to train the model
+The one-hot encoded feature names were recovered before feature selection
+The best model returned 25 importance values (absolute coefficient magnitude (coef_)) for 25 one-hot encoded features
 The permutation importance was requested (i.e., True) and the number of repetitions was explicitly set (i.e., True) to a specific value (i.e., 5)
+The permutation importance was restricted to the features selected upstream (i.e., 25) by the specified feature selection method
 The permutation importance was successfully computed on both training and testing datasets
 The output directory already existed
 ###########################
 ####### execution  ########
 ###########################
-The script started on 2025-11-05 09:37:30.908090
-The script stoped on 2025-11-05 09:37:56.082074
-The script lasted 0 days, 0 hrs, 0 mins and 25.17 secs (i.e., 25.17 secs in total)
+The script started on 2025-12-01 12:02:40.361092
+The script stoped on 2025-12-01 12:02:56.658144
+The script lasted 0 days, 0 hrs, 0 mins and 16.3 secs (i.e., 16.3 secs in total)
 ###########################
 ###### output  files ######
 ###########################
@@ -128,27 +130,27 @@ MyDirectory/LR_FirstAnalysis_modeling_log.txt
 ###########################
 ### feature  importance ###
 ###########################
- feature  importance
- L_3_A16    1.288833
- L_4_A17    1.288833
-  L_4_A5    1.069096
-  L_9_A7    0.869791
- L_7_A10    0.869791
-L_10_A13    0.869791
- L_8_A13    0.675259
-L_10_A19    0.623144
-  L_6_A9    0.593284
-  L_8_A3    0.554015
-  L_3_A3    0.554015
-L_10_A10    0.554015
-  L_1_A4    0.453547
-  L_4_A7    0.315057
- L_5_A17    0.222196
-  L_3_A6    0.114419
-  L_9_A8    0.023428
-  L_8_A8    0.013648
-  L_7_A6    0.000000
-  L_6_A4    0.000000
+    feature  importance
+     L_9_A9    1.980058
+     L_9_A7    1.757844
+    L_7_A10    1.757844
+    L_3_A16    1.554178
+     L_4_A7    1.127388
+    L_8_A13    1.070815
+     L_1_A4    0.667334
+     L_3_A6    0.624905
+     L_9_A8    0.412176
+    L_5_A17    0.113127
+    L_9_A12    0.000000
+     L_8_A7    0.000000
+     L_6_A5    0.000000
+L_5_missing    0.000000
+   L_10_A18    0.000000
+    L_5_A16    0.000000
+    L_1_A12    0.000000
+    L_3_A15    0.000000
+    L_3_A14    0.000000
+     L_2_A7    0.000000
 Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
 Note: NaN placeholder in case no native or detectable feature importance is available. 
 Note: AdaBoost (ADA) typically produces binary feature importances (0 or 1) because each weak learner splits on only one feature. 
@@ -157,26 +159,26 @@ Note: Boosting models, especially Histogram-based Gradient Boosting (HGB), may y
 # permutation  importance #
 ###########################
     feature  train_mean  train_std  test_mean  test_std
-     L_9_A7    0.035583   0.002868   0.012331  0.016214
-     L_4_A7    0.019840   0.003345   0.012423  0.016384
-     L_6_A4    0.019840   0.003345   0.012423  0.016384
-     L_7_A5    0.018520   0.001911   0.021731  0.003593
-     L_8_A6    0.017828   0.004774   0.011509  0.012927
-     L_1_A6    0.016481   0.004215  -0.009894  0.006643
-   L_10_A19    0.015955   0.003456  -0.019726  0.013063
-   L_10_A13    0.014161   0.001768   0.004352  0.010963
-    L_4_A15    0.010857   0.003299  -0.007150  0.007111
-L_2_missing    0.010857   0.003299  -0.007150  0.007111
-     L_7_A6    0.006785   0.001746   0.024939  0.005426
-     L_8_A3    0.005859   0.002408  -0.011388  0.004203
-   L_10_A18    0.005726   0.002091  -0.006934  0.004708
-     L_2_A5    0.005447   0.000962  -0.001535  0.004384
-    L_2_A13    0.005062   0.000841   0.000000  0.000000
-    L_5_A11    0.005054   0.003882   0.003218  0.007811
-   L_10_A10    0.005054   0.003882   0.003218  0.007811
-L_7_missing    0.004479   0.001880   0.004392  0.005366
-    L_5_A44    0.004479   0.001880   0.004392  0.005366
-   L_10_A16    0.004479   0.001880   0.004392  0.005366
+     L_9_A9    0.336565   0.024522  -0.011478  0.025699
+L_5_missing    0.153525   0.014071   0.130035  0.087073
+     L_9_A8    0.084491   0.013779   0.090796  0.020317
+     L_9_A7    0.061899   0.010354   0.078893  0.037434
+    L_7_A10    0.061899   0.010354   0.078893  0.037434
+     L_4_A7    0.048785   0.010806   0.053093  0.029128
+    L_3_A16    0.034419   0.008235   0.022975  0.024156
+     L_6_A5    0.026355   0.005732   0.043357  0.014715
+     L_3_A6    0.018668   0.002325   0.026235  0.015606
+     L_1_A6    0.017968   0.005258  -0.006803  0.014959
+     L_2_A7    0.017968   0.005258  -0.006803  0.014959
+    L_8_A13    0.016656   0.004707   0.020731  0.014998
+    L_5_A17    0.012874   0.003087   0.013392  0.009692
+   L_10_A18    0.010205   0.003765  -0.008961  0.011509
+     L_1_A4    0.008618   0.003026   0.011180  0.011738
+    L_1_A12    0.005734   0.003035   0.007183  0.009032
+    L_5_A16    0.002144   0.001680  -0.001789  0.005709
+    L_9_A12    0.001621   0.000502   0.000655  0.002206
+    L_2_A13    0.001588   0.001379  -0.002303  0.004713
+    L_3_A15    0.000774   0.000481   0.001538  0.001643
 Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
 Note: Positive permutation importance values indicate features that contribute positively to the model’s performance, while negative values suggest features that degrade performance when included. 
 ###########################
@@ -184,28 +186,28 @@ Note: Positive permutation importance values indicate features that contribute p
 ###########################
 from the training dataset: 
 phenotype  fruit  pig  poultry
-    fruit     51    2        3
-      pig      2   54        0
-  poultry      3    1       44
+    fruit     50    4        2
+      pig      3   53        0
+  poultry      4    0       44
 from the testing dataset: 
 phenotype  fruit  pig  poultry
-    fruit     10    2        2
-      pig      3   11        0
-  poultry      1    0       11
+    fruit     10    1        3
+      pig      2   12        0
+  poultry      0    1       11
 Note: The expectation and prediction are represented by rows and columns, respectively. 
 ###########################
 #### metrics  per class ###
 ###########################
 from the training dataset: 
 phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
-    fruit  99   5   5  51       56   0.93750     0.910714     0.951923   0.910714 0.910714  0.910714 0.862637 0.991587 0.982892 0.967490         0.967490
-      pig 101   3   2  54       56   0.96875     0.964286     0.971154   0.947368 0.964286  0.955752 0.931688 0.996223 0.989471 0.983658         0.983658
-  poultry 109   3   4  44       48   0.95625     0.916667     0.973214   0.936170 0.916667  0.926316 0.895310 0.994234 0.981571 0.974718         0.974718
+    fruit  97   7   6  50       56   0.91875     0.892857     0.932692   0.877193 0.892857  0.884956 0.822238 0.988067 0.976883 0.954578         0.954578
+      pig 100   4   3  53       56   0.95625     0.946429     0.961538   0.929825 0.946429  0.938054 0.904325 0.994935 0.986317 0.979358         0.979358
+  poultry 110   2   4  44       48   0.96250     0.916667     0.982143   0.956522 0.916667  0.936171 0.910051 0.996280 0.987118 0.983158         0.983158
 from the testing dataset: 
 phenotype  TN  FP  FN  TP  support  accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
-    fruit  22   4   4  10       14     0.800     0.714286     0.846154   0.714286 0.714286  0.714286 0.560440 0.950549 0.921429 0.816447         0.816447
-      pig  24   2   3  11       14     0.875     0.785714     0.923077   0.846154 0.785714  0.814815 0.721798 0.973901 0.940207 0.890225         0.890225
-  poultry  26   2   1  11       12     0.925     0.916667     0.928571   0.846154 0.916667  0.880000 0.826980 0.989583 0.975490 0.961908         0.961908
+    fruit  24   2   4  10       14      0.85     0.714286     0.923077   0.833333 0.714286  0.769231 0.663388 0.971154 0.952381 0.889305         0.889305
+      pig  24   2   2  12       14      0.90     0.857143     0.923077   0.857143 0.857143  0.857143 0.780220 0.980769 0.964744 0.910174         0.910174
+  poultry  25   3   1  11       12      0.90     0.916667     0.892857   0.785714 0.916667  0.846154 0.777765 0.968750 0.946429 0.907070         0.907070
 Note: The term 'support' corresponds to TP + FN. 
 Note: MCC stands for Matthews Correlation Coefficient. 
 Note: Sensitivity and recall must be equal, as they are based on the same formula. 
@@ -216,11 +218,11 @@ Note: A PRG-AUC close to 0.5 for a specific class does not necessarily indicate 
 ##### global  metrics #####
 ###########################
 from the training dataset: 
- accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  Cohen kappa  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
-  0.93125     0.930556      0.96543   0.931418 0.930556  0.930927 0.896621     0.896568 0.994014 0.984645 0.975288         0.975288
-from the testing dataset: 
  accuracy  sensitivity  specificity  precision   recall  f1-score     MCC  Cohen kappa  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
-      0.8     0.805556     0.899267   0.802198 0.805556  0.803034 0.70047     0.699812 0.971345 0.945709 0.889527         0.889527
+  0.91875     0.918651     0.958791    0.92118 0.918651  0.919726 0.87786     0.877705 0.993094 0.983439 0.972364         0.972364
+from the testing dataset: 
+ accuracy  sensitivity  specificity  precision   recall  f1-score      MCC  Cohen kappa  ROC-AUC   PR-AUC  PRG-AUC  PRG-AUC_clipped
+    0.825     0.829365     0.913004   0.825397 0.829365  0.824176 0.740602     0.737828 0.973558 0.954518 0.902183         0.902183
 Note: MCC stands for Matthews Correlation Coefficient. 
 Note: Sensitivity and recall must be equal, as they are based on the same formula. 
 Note: PRG-AUC can be negative, reflecting below-baseline performance expected with imbalanced data, while PRG-AUC_clipped floors negative gains to zero to separate total performance (including penalties) from above-baseline contributions, coinciding with PRG-AUC when the model stays above baseline. 
@@ -229,51 +231,51 @@ Note: A global PRG-AUC close to 0.5 does not necessarily indicate poor model per
 #### training  dataset ####
 ###########################
  sample expectation prediction    fruit      pig  poultry
-S0.1.01         pig        pig 0.022017 0.913643 0.064340
-S0.1.02     poultry        pig 0.035735 0.859834 0.104431
-S0.1.03     poultry    poultry 0.032459 0.007665 0.959876
-S0.1.04         pig        pig 0.075130 0.914653 0.010217
-S0.1.05     poultry    poultry 0.231172 0.049013 0.719814
-S0.1.06     poultry    poultry 0.081338 0.017245 0.901417
-S0.1.08     poultry    poultry 0.029052 0.007692 0.963256
-S0.1.09         pig        pig 0.047415 0.933758 0.018827
-S0.1.10         pig        pig 0.184813 0.743504 0.071683
-S0.1.11     poultry    poultry 0.029052 0.007692 0.963256
-S0.1.12         pig        pig 0.022875 0.968165 0.008960
-S0.1.13     poultry    poultry 0.046382 0.130998 0.822620
-S0.1.15       fruit      fruit 0.969044 0.017260 0.013697
-S0.1.16       fruit      fruit 0.456042 0.253193 0.290765
-S0.1.17       fruit      fruit 0.807981 0.112387 0.079631
-S0.1.18       fruit      fruit 0.952129 0.026691 0.021181
-S0.1.19       fruit      fruit 0.967392 0.018914 0.013694
-S0.1.20       fruit      fruit 0.969044 0.017260 0.013697
-S1.1.01         pig        pig 0.022017 0.913643 0.064340
-S1.1.02         pig        pig 0.035735 0.859834 0.104431
+S0.1.01         pig        pig 0.071942 0.876809 0.051249
+S0.1.03     poultry    poultry 0.042675 0.007178 0.950147
+S0.1.04         pig        pig 0.041227 0.943559 0.015214
+S0.1.05     poultry    poultry 0.159542 0.066154 0.774305
+S0.1.06     poultry    poultry 0.058471 0.021805 0.919724
+S0.1.07         pig        pig 0.071942 0.876809 0.051249
+S0.1.08     poultry    poultry 0.023250 0.009709 0.967041
+S0.1.09         pig        pig 0.055923 0.929130 0.014947
+S0.1.10         pig        pig 0.335492 0.605128 0.059380
+S0.1.12         pig        pig 0.041400 0.947534 0.011065
+S0.1.14       fruit      fruit 0.902446 0.036754 0.060800
+S0.1.15       fruit      fruit 0.957172 0.028436 0.014392
+S0.1.16       fruit      fruit 0.406850 0.269138 0.324012
+S0.1.17       fruit      fruit 0.761847 0.163226 0.074927
+S0.1.19       fruit      fruit 0.967895 0.022488 0.009616
+S0.1.20       fruit      fruit 0.957172 0.028436 0.014392
+S1.1.01         pig        pig 0.071942 0.876809 0.051249
+S1.1.02         pig        pig 0.072196 0.879897 0.047908
+S1.1.06     poultry    poultry 0.058471 0.021805 0.919724
+S1.1.07         pig        pig 0.071942 0.876809 0.051249
 Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
 Note: The p-values are reported for each phenotype of interest. 
 ###########################
 ##### testing dataset #####
 ###########################
  sample expectation prediction    fruit      pig  poultry
-S0.1.07         pig        pig 0.080123 0.875448 0.044429
-S0.1.14       fruit      fruit 0.899622 0.028063 0.072315
-S1.1.03     poultry    poultry 0.032459 0.007665 0.959876
-S1.1.05       fruit    poultry 0.231172 0.049013 0.719814
-S1.1.07         pig        pig 0.080123 0.875448 0.044429
-S1.1.14       fruit      fruit 0.900848 0.027721 0.071432
-S1.1.15       fruit      fruit 0.969044 0.017260 0.013697
-S2.1.12         pig        pig 0.022875 0.968165 0.008960
-S2.1.16         pig      fruit 0.456042 0.253193 0.290765
-S2.1.17       fruit      fruit 0.807981 0.112387 0.079631
-S2.1.19       fruit      fruit 0.967392 0.018914 0.013694
-S3.1.02         pig        pig 0.060585 0.837675 0.101740
-S3.1.04         pig        pig 0.055005 0.937657 0.007338
-S3.1.05       fruit    poultry 0.231172 0.049013 0.719814
-S3.1.06     poultry    poultry 0.081338 0.017245 0.901417
-S3.1.08     poultry    poultry 0.029052 0.007692 0.963256
-S3.1.10         pig        pig 0.184813 0.743504 0.071683
-S3.1.13     poultry    poultry 0.046382 0.130998 0.822620
-S3.1.16         pig      fruit 0.456042 0.253193 0.290765
-S4.1.03     poultry    poultry 0.032459 0.007665 0.959876
+S0.1.02     poultry        pig 0.072196 0.879897 0.047908
+S0.1.11     poultry    poultry 0.023250 0.009709 0.967041
+S0.1.13     poultry    poultry 0.055348 0.145080 0.799572
+S0.1.18       fruit      fruit 0.917967 0.053153 0.028880
+S1.1.03     poultry    poultry 0.042675 0.007178 0.950147
+S1.1.04         pig        pig 0.041365 0.946730 0.011904
+S1.1.05       fruit    poultry 0.159542 0.066154 0.774305
+S1.1.18       fruit      fruit 0.917967 0.053153 0.028880
+S2.1.01         pig        pig 0.071942 0.876809 0.051249
+S2.1.08     poultry    poultry 0.023250 0.009709 0.967041
+S2.1.10         pig        pig 0.333971 0.602383 0.063646
+S2.1.11     poultry    poultry 0.023250 0.009709 0.967041
+S2.1.12         pig        pig 0.041400 0.947534 0.011065
+S2.1.15       fruit      fruit 0.957172 0.028436 0.014392
+S2.1.16         pig      fruit 0.406850 0.269138 0.324012
+S3.1.05       fruit    poultry 0.159542 0.066154 0.774305
+S3.1.09         pig        pig 0.055923 0.929130 0.014947
+S3.1.12         pig        pig 0.041400 0.947534 0.011065
+S3.1.20       fruit      fruit 0.957172 0.028436 0.014392
+S4.1.04         pig        pig 0.041365 0.946730 0.011904
 Note: Up to 20 results are displayed in the log for monitoring purposes, while the full set of results is available in the output files. 
 Note: The p-values are reported for each phenotype of interest. 

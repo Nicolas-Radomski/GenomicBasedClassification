@@ -1,0 +1,7 @@
+scores	parameters
+0.9125	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f24cbc34860>, 'model__C': 1.0, 'model__max_iter': 5000, 'model__penalty': 'l2', 'model__solver': 'lbfgs'
+0.90625	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f24cbc34860>, 'model__C': 0.1, 'model__max_iter': 5000, 'model__penalty': 'l2', 'model__solver': 'lbfgs'
+0.8875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f24cbc34860>, 'model__C': 1.0, 'model__max_iter': 5000, 'model__penalty': 'l2', 'model__solver': 'lbfgs'
+0.86875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f24cbc34860>, 'model__C': 0.01, 'model__max_iter': 5000, 'model__penalty': 'l2', 'model__solver': 'lbfgs'
+0.86875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f24cbc34860>, 'model__C': 0.01, 'model__max_iter': 5000, 'model__penalty': 'l2', 'model__solver': 'lbfgs'
+0.85	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f24cbc34860>, 'model__C': 0.1, 'model__max_iter': 5000, 'model__penalty': 'l2', 'model__solver': 'lbfgs'

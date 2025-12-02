@@ -1,3 +1,3 @@
 scores	parameters
-0.8875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5bd4eac9a0>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__max_iter': 200, 'model__random_state': 42
-0.86875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5bd4eac9a0>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__max_iter': 200, 'model__random_state': 42
+0.84375	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f3685b38860>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__max_iter': 200, 'model__random_state': 42
+0.79375	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f3685b38860>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__max_iter': 200, 'model__random_state': 42

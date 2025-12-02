@@ -3,55 +3,75 @@
 ## pip3.12 install --force-reinstall imbalanced-learn==0.13.0
 ## pip3.12 install --force-reinstall scikit-learn==1.5.2
 ## pip3.12 install --force-reinstall xgboost==2.1.3
+## pip3.12 install --force-reinstall lightgbm==4.6.0
+## pip3.12 install --force-reinstall catboost==1.2.8
 ## pip3.12 install --force-reinstall numpy==1.26.4
 ## pip3.12 install --force-reinstall joblib==1.5.1
 ## pip3.12 install --force-reinstall tqdm==4.67.1
 ## pip3.12 install --force-reinstall tqdm-joblib==0.0.4
-## pip3.12 install --force-reinstall catboost==1.2.8
+
 '''
 # examples of commands
 ## for the ADA classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectory -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ADA_FirstAnalysis_model.obj -f MyDirectory/ADA_FirstAnalysis_features.obj -fe MyDirectory/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ADA_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph phenotype_dataset.tsv -o MyDirectory -x ADA_FirstAnalysis -da random -sp 80 -c ADA -k 5 -pa tuning_parameters_ADA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ADA_FirstAnalysis_model.obj -f MyDirectory/ADA_FirstAnalysis_features.obj -fe MyDirectory/ADA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ADA_SecondAnalysis
 ## for the CAT classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/CAT_FirstAnalysis_model.obj -f MyDirectory/CAT_FirstAnalysis_features.obj -fe MyDirectory/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x CAT_SecondAnalysis -de 20
-# for the DT classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/DT_FirstAnalysis_model.obj -f MyDirectory/DT_FirstAnalysis_features.obj -fe MyDirectory/DT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x DT_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x CAT_FirstAnalysis -da manual -fs SKB -c CAT -k 5 -pa tuning_parameters_CAT.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/CAT_FirstAnalysis_model.obj -f MyDirectory/CAT_FirstAnalysis_features.obj -fe MyDirectory/CAT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x CAT_SecondAnalysis
+## for the DT classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x DT_FirstAnalysis -da manual -fs laSFM -c DT -k 5 -pa tuning_parameters_DT.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/DT_FirstAnalysis_model.obj -f MyDirectory/DT_FirstAnalysis_features.obj -fe MyDirectory/DT_FirstAnalysis_feature_encoder.obj -o MyDirectory -x DT_SecondAnalysis
+## for the EN classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x EN_FirstAnalysis -da manual -fs enSFM -c EN -k 5 -pa tuning_parameters_EN.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/EN_FirstAnalysis_model.obj -f MyDirectory/EN_FirstAnalysis_features.obj -fe MyDirectory/EN_FirstAnalysis_feature_encoder.obj -o MyDirectory -x EN_SecondAnalysis
 ## for the ET classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x ET_FirstAnalysis -da manual -fs enSFM -c ET -k 5 -pa tuning_parameters_ET.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ET_FirstAnalysis_model.obj -f MyDirectory/ET_FirstAnalysis_features.obj -fe MyDirectory/ET_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ET_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x ET_FirstAnalysis -da manual -fs riSFM -c ET -k 5 -pa tuning_parameters_ET.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/ET_FirstAnalysis_model.obj -f MyDirectory/ET_FirstAnalysis_features.obj -fe MyDirectory/ET_FirstAnalysis_feature_encoder.obj -o MyDirectory -x ET_SecondAnalysis
+## for the GB classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x GB_FirstAnalysis -da manual -fs rfSFM -c GB -k 5 -pa tuning_parameters_GB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/GB_FirstAnalysis_model.obj -f MyDirectory/GB_FirstAnalysis_features.obj -fe MyDirectory/GB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x GB_SecondAnalysis
 ## for the GNB classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x GNB_FirstAnalysis -da manual -fs rfSFM -c GNB -k 5 -pa tuning_parameters_GNB.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/GNB_FirstAnalysis_model.obj -f MyDirectory/GNB_FirstAnalysis_features.obj -fe MyDirectory/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x GNB_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x GNB_FirstAnalysis -da manual -fs SKB -c GNB -k 5 -pa tuning_parameters_GNB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/GNB_FirstAnalysis_model.obj -f MyDirectory/GNB_FirstAnalysis_features.obj -fe MyDirectory/GNB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x GNB_SecondAnalysis
 ## for the HGB classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/HGB_FirstAnalysis_model.obj -f MyDirectory/HGB_FirstAnalysis_features.obj -fe MyDirectory/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x HGB_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x HGB_FirstAnalysis -da manual -fs SKB -c HGB -k 5 -pa tuning_parameters_HGB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/HGB_FirstAnalysis_model.obj -f MyDirectory/HGB_FirstAnalysis_features.obj -fe MyDirectory/HGB_FirstAnalysis_feature_encoder.obj -o MyDirectory -x HGB_SecondAnalysis
 ## for the KNN classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/KNN_FirstAnalysis_model.obj -f MyDirectory/KNN_FirstAnalysis_features.obj -fe MyDirectory/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectory -x KNN_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x KNN_FirstAnalysis -da manual -fs SKB -c KNN -k 5 -pa tuning_parameters_KNN.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/KNN_FirstAnalysis_model.obj -f MyDirectory/KNN_FirstAnalysis_features.obj -fe MyDirectory/KNN_FirstAnalysis_feature_encoder.obj -o MyDirectory -x KNN_SecondAnalysis
+## for the LA classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LA_FirstAnalysis -da manual -fs SKB -c LA -k 5 -pa tuning_parameters_LA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LA_FirstAnalysis_model.obj -f MyDirectory/LA_FirstAnalysis_features.obj -fe MyDirectory/LA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LA_SecondAnalysis
 ## for the LDA classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LDA_FirstAnalysis_model.obj -f MyDirectory/LDA_FirstAnalysis_features.obj -fe MyDirectory/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LDA_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LDA_FirstAnalysis -da manual -fs SKB -c LDA -k 5 -pa tuning_parameters_LDA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LDA_FirstAnalysis_model.obj -f MyDirectory/LDA_FirstAnalysis_features.obj -fe MyDirectory/LDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LDA_SecondAnalysis
+## for the LGBM classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LGBM_FirstAnalysis -da manual -fs SKB -c LGBM -k 5 -pa tuning_parameters_LGBM.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LGBM_FirstAnalysis_model.obj -f MyDirectory/LGBM_FirstAnalysis_features.obj -fe MyDirectory/LGBM_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LGBM_SecondAnalysis
 ## for the LR classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LR_FirstAnalysis_model.obj -f MyDirectory/LR_FirstAnalysis_features.obj -fe MyDirectory/LR_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LR_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x LR_FirstAnalysis -da manual -fs SKB -c LR -k 5 -pa tuning_parameters_LR.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/LR_FirstAnalysis_model.obj -f MyDirectory/LR_FirstAnalysis_features.obj -fe MyDirectory/LR_FirstAnalysis_feature_encoder.obj -o MyDirectory -x LR_SecondAnalysis
 ## for the MLP classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/MLP_FirstAnalysis_model.obj -f MyDirectory/MLP_FirstAnalysis_features.obj -fe MyDirectory/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectory -x MLP_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x MLP_FirstAnalysis -da manual -fs SKB -c MLP -k 5 -pa tuning_parameters_MLP.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/MLP_FirstAnalysis_model.obj -f MyDirectory/MLP_FirstAnalysis_features.obj -fe MyDirectory/MLP_FirstAnalysis_feature_encoder.obj -o MyDirectory -x MLP_SecondAnalysis
+## for the NSV classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x NSV_FirstAnalysis -da manual -fs SKB -c NSV -k 5 -pa tuning_parameters_NSV.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/NSV_FirstAnalysis_model.obj -f MyDirectory/NSV_FirstAnalysis_features.obj -fe MyDirectory/NSV_FirstAnalysis_feature_encoder.obj -o MyDirectory -x NSV_SecondAnalysis
 ## for the QDA classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/QDA_FirstAnalysis_model.obj -f MyDirectory/QDA_FirstAnalysis_features.obj -fe MyDirectory/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x QDA_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x QDA_FirstAnalysis -da manual -fs SKB -c QDA -k 5 -pa tuning_parameters_QDA.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/QDA_FirstAnalysis_model.obj -f MyDirectory/QDA_FirstAnalysis_features.obj -fe MyDirectory/QDA_FirstAnalysis_feature_encoder.obj -o MyDirectory -x QDA_SecondAnalysis
 ## for the RF classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/RF_FirstAnalysis_model.obj -f MyDirectory/RF_FirstAnalysis_features.obj -fe MyDirectory/RF_FirstAnalysis_feature_encoder.obj -o MyDirectory -x RF_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x RF_FirstAnalysis -da manual -fs SKB -c RF -k 5 -pa tuning_parameters_RF.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/RF_FirstAnalysis_model.obj -f MyDirectory/RF_FirstAnalysis_features.obj -fe MyDirectory/RF_FirstAnalysis_feature_encoder.obj -o MyDirectory -x RF_SecondAnalysis
+## for the RI classifier
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x RI_FirstAnalysis -da manual -fs SKB -c RI -k 5 -pa tuning_parameters_RI.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/RI_FirstAnalysis_model.obj -f MyDirectory/RI_FirstAnalysis_features.obj -fe MyDirectory/RI_FirstAnalysis_feature_encoder.obj -o MyDirectory -x RI_SecondAnalysis
 ## for the SVC classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/SVC_FirstAnalysis_model.obj -f MyDirectory/SVC_FirstAnalysis_features.obj -fe MyDirectory/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectory -x SVC_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x SVC_FirstAnalysis -da manual -fs SKB -c SVC -k 5 -pa tuning_parameters_SVC.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/SVC_FirstAnalysis_model.obj -f MyDirectory/SVC_FirstAnalysis_features.obj -fe MyDirectory/SVC_FirstAnalysis_feature_encoder.obj -o MyDirectory -x SVC_SecondAnalysis
 ## for the XGB classifier
-python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -de 20 -pi -nr 5
-python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/XGB_FirstAnalysis_model.obj -f MyDirectory/XGB_FirstAnalysis_features.obj -fe MyDirectory/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectory/XGB_FirstAnalysis_class_encoder.obj -o MyDirectory -x XGB_SecondAnalysis -de 20
+python3.12 GenomicBasedClassification.py modeling -m genomic_profiles_for_modeling.tsv -ph MyDirectory/ADA_FirstAnalysis_phenotype_dataset.tsv -o MyDirectory -x XGB_FirstAnalysis -da manual -fs SKB -c XGB -k 5 -pa tuning_parameters_XGB.txt -pi -nr 5
+python3.12 GenomicBasedClassification.py prediction -m genomic_profiles_for_prediction.tsv -t MyDirectory/XGB_FirstAnalysis_model.obj -f MyDirectory/XGB_FirstAnalysis_features.obj -fe MyDirectory/XGB_FirstAnalysis_feature_encoder.obj -ce MyDirectory/XGB_FirstAnalysis_class_encoder.obj -o MyDirectory -x XGB_SecondAnalysis
 '''
 # import packages
 ## standard libraries
@@ -73,6 +93,7 @@ import pandas as pd
 import imblearn as imb
 import sklearn as sk
 import xgboost as xgb
+import lightgbm as lgbm
 import numpy as np
 import joblib as jl
 import tqdm as tq
@@ -83,10 +104,10 @@ from sklearn import set_config
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder, label_binarize
 from sklearn.model_selection import train_test_split, GridSearchCV, ParameterGrid
 from sklearn.metrics import confusion_matrix, multilabel_confusion_matrix, classification_report, accuracy_score, precision_score, recall_score, f1_score, cohen_kappa_score, matthews_corrcoef, roc_auc_score, average_precision_score, precision_recall_curve
-from sklearn.svm import SVC
+from sklearn.svm import SVC, NuSVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, HistGradientBoostingClassifier, ExtraTreesClassifier, AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, HistGradientBoostingClassifier, ExtraTreesClassifier, AdaBoostClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.inspection import permutation_importance
 from sklearn.naive_bayes import GaussianNB
@@ -108,14 +129,14 @@ class SafeCatBoostClassifier(CatBoostClassifier):
 ## set workflow repositories
 repositories = 'Please cite:\n GitHub (https://github.com/Nicolas-Radomski/GenomicBasedClassification),\n Docker Hub (https://hub.docker.com/r/nicolasradomski/genomicbasedclassification),\n and/or Anaconda Hub (https://anaconda.org/nicolasradomski/genomicbasedclassification).'
 ## set the workflow context
-context = "The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 4 feature selection methods, 14 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing."
+context = "The scikit-learn (sklearn)-based Python workflow is inspired by an older caret-based R workflow (https://doi.org/10.1186/s12864-023-09667-w), independently supports both modeling (i.e., training and testing) and prediction (i.e., based on a pre-built model), and implements 5 feature selection methods, 20 model classifiers, hyperparameter tuning, performance metric computation, feature and permutation importance analyses, prediction probability estimation, execution monitoring via progress bars, and parallel processing."
 ## set the initial workflow reference
 reference = "Pierluigi Castelli, Andrea De Ruvo, Andrea Bucciacchio, Nicola D'Alterio, Cesare Camma, Adriano Di Pasquale and Nicolas Radomski (2023) Harmonization of supervised machine learning practices for efficient source attribution of Listeria monocytogenes based on genomic data. 2023, BMC Genomics, 24(560):1-19, https://doi.org/10.1186/s12864-023-09667-w"
 ## set the acknowledgement
 acknowledgements = "Many thanks to Andrea De Ruvo, Adriano Di Pasquale and ChatGPT for the insightful discussions that helped improve the algorithm."
 # set the version and release
-__version__ = "1.2.0"
-__release__ = "November 2025"
+__version__ = "1.3.0"
+__release__ = "December 2025"
 
 # set global sklearn config early
 set_config(transform_output="pandas")
@@ -243,31 +264,43 @@ def compute_prg_auc(y_true, y_scores, eps=1e-12, clip_negative=False):
 
 def count_selected_features(pipeline, encoded_matrix):
 	"""
-	Robust count of features the pipeline expects.
-	Returns the number of columns reaching the final estimator.
-	Handles both Pipeline objects and direct estimators.
+	robust count of features the pipeline expects
+	returns the number of columns reaching the final estimator
+	handles both Pipeline objects and direct estimators
 	"""
-	# if the model is not a pipeline, wrap it temporarily
+	# ensure the object is a pipeline; wrap standalone estimators
 	if not hasattr(pipeline, "named_steps"):
 		pipeline = Pipeline([("model", pipeline)])
 	# check if a feature selection step exists
-	if 'feature_selection' in pipeline.named_steps:
-		fs = pipeline.named_steps['feature_selection']
+	if "feature_selection" in pipeline.named_steps:
+		fs = pipeline.named_steps["feature_selection"]
+		# support_ is the most reliable indicator
 		if hasattr(fs, "support_") and fs.support_ is not None:
 			return int(np.sum(fs.support_))
-		else:
-			# fallback using transform on a single sample
-			try:
-				return fs.transform(encoded_matrix[:1]).shape[1]
-			except Exception:
-				pass
+		# convert to a NumPy float32 array (CAT issue)
+		try:
+			X_np = np.asarray(encoded_matrix, dtype=np.float32)
+		except Exception:
+			X_np = encoded_matrix.values.astype(np.float32)
+		# try transform on a single sample
+		try:
+			return fs.transform(X_np[:1]).shape[1]
+		except Exception:
+			pass
+		# fallback: try full transform
+		try:
+			return fs.transform(X_np).shape[1]
+		except Exception:
+			pass
+		# last resort: selector exists but unusable → full width
+		return int(X_np.shape[1])
 	# no explicit selector → check the estimator directly
-	est = pipeline.named_steps.get('model', pipeline)
+	est = pipeline.named_steps.get("model", pipeline)
 	n_feat = getattr(est, "n_features_in_", None)
-	# try other feature attributes if not found
+	# sklearn 1.3+ compatibility
 	if n_feat is None and hasattr(est, "feature_names_in_"):
 		n_feat = len(est.feature_names_in_)
-	# fallback to encoded matrix width (e.g., CatBoost or XGB older versions)
+	# CatBoost, XGB, HGB often hide n_features_in_
 	if n_feat is None or n_feat == 0:
 		n_feat = encoded_matrix.shape[1]
 	return int(n_feat)
@@ -453,7 +486,7 @@ def main():
 		action='store', 
 		required=False, 
 		default='None', 
-		help='Acronym of the classification-compatible feature selection method to use: SelectKBest (SKB), SelectFromModel with L1-regularized Logistic Regression (laSFM), SelectFromModel with ElasticNet-regularized Logistic Regression (enSFM), or SelectFromModel with Random Forest (rfSFM). These methods are suitable for high-dimensional binary or categorical-encoded features. [OPTIONAL, DEFAULT: None]'
+		help='Acronym of the classification-compatible feature selection method to use: SelectKBest (SKB), SelectFromModel with lasso-regularized logistic regression (laSFM), SelectFromModel with elasticNet-regularized logistic regression (enSFM), SelectFromModel with ridge-regularized logistic regression (riSFM), or SelectFromModel with random forest (rfSFM). These methods are suitable for high-dimensional binary or categorical-encoded features. [OPTIONAL, DEFAULT: None]'
 		)
 	parser_modeling.add_argument(
 		'-c', '--classifier', 
@@ -462,7 +495,7 @@ def main():
 		action='store', 
 		required=False, 
 		default='XGB', 
-		help='Acronym of the classifier to use among adaboost (ADA), catboost (CAT), decision tree classifier (DT), extra trees classifier (ET), gaussian naive bayes (GNB), histogram-based gradient boosting (HGB), k-nearest neighbors (KNN), linear discriminant analysis (LDA), logistic regression (LR), multi-layer perceptron (MLP), quadratic discriminant analysis (QDA), random forest (RF), support vector classification (SVC) or extreme gradient boosting (XGB). [OPTIONAL, DEFAULT: XGB]'
+		help='Acronym of the classifier to use among adaboost (ADA), catboost (CAT), decision tree (DT), elasticnet-regularized logistic regression (EN), extra trees (ET), gradient boosting (GB), gaussian naive bayes (GNB), histogram-based gradient boosting (HGB), k-nearest neighbors (KNN), lasso-regularized logistic regression (LA), linear discriminant analysis (LDA), light gradient boosting machine (LGBM), logistic regression (LR), multi-layer perceptron (MLP), nu support vector (NSV), quadratic discriminant analysis (QDA), random forest (RF), ridge-regularized logistic regression (RI), support vector classification (SVC) or extreme gradient boosting (XGB). [OPTIONAL, DEFAULT: XGB]'
 		)
 	parser_modeling.add_argument(
 		'-k', '--fold', 
@@ -525,7 +558,7 @@ def main():
 	parser_modeling.add_argument(
 		'-di', '--digits', 
 		dest='digits', 
-		type=restricted_int_digits,
+		type=restricted_int_digits, # control >= 0
 		action='store', 
 		required=False, 
 		default=6, 
@@ -534,7 +567,7 @@ def main():
 	parser_modeling.add_argument(
 		'-de', '--debug', 
 		dest='debug', 
-		type=restricted_debug_level, # control 0 or positive int
+		type=restricted_debug_level, # control >= 0
 		action='store', 
 		required=False, 
 		default=0, 
@@ -615,7 +648,7 @@ def main():
 	parser_prediction.add_argument(
 		'-di', '--digits', 
 		dest='digits', 
-		type=restricted_int_digits,
+		type=restricted_int_digits, # control >= 0
 		action='store', 
 		required=False, 
 		default=6, 
@@ -624,7 +657,7 @@ def main():
 	parser_prediction.add_argument(
 		'-de', '--debug', 
 		dest='debug', 
-		type=restricted_debug_level, # control 0 or positive int
+		type=restricted_debug_level, # control >= 0
 		action='store', 
 		required=False, 
 		default=0, 
@@ -729,6 +762,8 @@ def main():
 			raise Exception("numpy 1.26.4 version is recommended")
 		if jl.__version__ != "1.5.1":
 			raise Exception("joblib 1.5.1 version is recommended")
+		if lgbm.__version__ != "4.6.0":
+			raise Exception("lightgbm 4.6.0 version is recommended")
 		if tq.__version__ != "4.67.1":
 			raise Exception("tqdm 4.67.1 version is recommended")
 		if imp.version("tqdm-joblib") != "0.0.4":
@@ -773,7 +808,7 @@ def main():
 		# indentify the type of phenotype classes
 		## make sure that the phenotype is provided in the second column
 		if df_phenotypes.shape[1] < 2:
-			message_number_phenotype_classes = "The presence of phenotype classes in the input file of phenotypes was inproperly controled (i.e., the second column)"
+			message_number_phenotype_classes = "The presence of phenotype in the input file of phenotypes was improperly controlled (i.e., the second column is missing)"
 			raise Exception(message_number_phenotype_classes)
 		## count the phenotype classes
 		### count each phenotype classes
@@ -921,6 +956,9 @@ def main():
 			X_train, X_test, y_train, y_test = train_test_split(
 				X, y, stratify=y, train_size=SPLITTING / 100
 			)
+			# convert y_train and y_test into clean 1-D Series indexed by sample
+			y_train = y_train["phenotype"]
+			y_test  = y_test ["phenotype"]
 		elif DATASET == 'manual':
 			message_dataset = "The training and testing datasets were constructed based on the 'manual' setting"
 			print(message_dataset)
@@ -934,12 +972,14 @@ def main():
 			df_all["dataset"] = df_all["dataset"].astype(str).str.strip().str.lower()
 			# split according to dataset column
 			df_training = df_all[df_all["dataset"] == "training"]
-			df_testing = df_all[df_all["dataset"] == "testing"]
+			df_testing  = df_all[df_all["dataset"] == "testing"]
 			# build X and y dataframes for training/testing
+			## extract numerical genomic features and set sample identifiers as index
 			X_train = df_training.drop(columns=["phenotype", "dataset"]).set_index("sample")
-			y_train = df_training[["sample", "phenotype"]].set_index("sample")
-			X_test  = df_testing.drop(columns=["phenotype", "dataset"]).set_index("sample")
-			y_test  = df_testing[["sample", "phenotype"]].set_index("sample")
+			X_test  = df_testing .drop(columns=["phenotype", "dataset"]).set_index("sample")
+			## extract phenotype as a clean 1-D Series indexed by sample
+			y_train = df_training[["sample", "phenotype"]].set_index("sample")["phenotype"]
+			y_test  = df_testing [ ["sample", "phenotype"]].set_index("sample")["phenotype"]
 
 		# check number of samples per class
 		## retrieve a list of unique classes
@@ -953,9 +993,29 @@ def main():
 		### in the whole dataset
 		count_dataset_lst = df_phenotypes['phenotype'].value_counts().reindex(classes_unique_lst, fill_value=0).tolist()
 		### in the training dataset
-		count_train_lst = y_train['phenotype'].value_counts().reindex(classes_unique_lst, fill_value=0).tolist()
+		#### ensure y_train behaves as 1-D phenotype Series
+		if isinstance(y_train, pd.DataFrame):
+			y_train_series = y_train["phenotype"]
+		else:
+			y_train_series = y_train
+		count_train_lst = (
+			y_train_series
+			.value_counts()
+			.reindex(classes_unique_lst, fill_value=0)
+			.tolist()
+		)
 		### in the testing dataset
-		count_test_lst = y_test['phenotype'].value_counts().reindex(classes_unique_lst, fill_value=0).tolist()
+		#### ensure y_test behaves as 1-D phenotype Series
+		if isinstance(y_test, pd.DataFrame):
+			y_test_series = y_test["phenotype"]
+		else:
+			y_test_series = y_test
+		count_test_lst = (
+			y_test_series
+			.value_counts()
+			.reindex(classes_unique_lst, fill_value=0)
+			.tolist()
+		)
 		## combine horizontally lists into a dataframe
 		count_classes_df = pd.DataFrame({
 			'phenotype': classes_unique_lst,
@@ -1033,7 +1093,7 @@ def main():
 		print(message_ohe_features)
 
 		# prepare elements of the model
-		## initialize the feature selection method (classification-compatible and without tuning parameters: deterministic and repeatable)
+		## initialize the feature selection method (without tuning parameters: deterministic randomness (random_state=42) without repeatability for parallel nondeterminism (n_jobs=1 or thread_count=1))
 		if FEATURESELECTION == 'None':
 			message_feature_selection = "The provided feature selection method was properly recognized: None"
 			print(message_feature_selection)
@@ -1043,81 +1103,92 @@ def main():
 			print(message_feature_selection)
 			selected_feature_selector = SelectKBest(
 				score_func=ft.partial( # partial allow reproducibility
-					mutual_info_classif, # Available score_func options include mutual_info_classif (default), chi2, and f_regression. The latter are provided for advanced users but may not be suitable for categorical or binary targets.
-					random_state=42 # reproducibility
+					mutual_info_classif, # available score_func options include mutual_info_classif (default), chi2, and f_regression. The latter are provided for advanced users but may not be suitable for categorical or binary targets.
+					random_state=42  # deterministic
 				), 
 				k=10 # default top k features can be modified in the parameters file if needed
 			)
 		elif FEATURESELECTION == 'laSFM':
-			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with L1-regularized Logistic Regression (laSFM, classification-compatible Lasso)"
+			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with lasso-regularized logistic regression (laSFM)"
 			print(message_feature_selection)
 			# minimal deterministic setup that still produces sparsity
 			selector_model = LogisticRegression(penalty='l1', solver='liblinear', random_state=42)
 			selected_feature_selector = SelectFromModel(estimator=selector_model, threshold=None)
 		elif FEATURESELECTION == 'enSFM':
-			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with ElasticNet-regularized Logistic Regression (enSFM, classification-compatible ElasticNet)"
+			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with elasticnet-regularized logistic regression (enSFM)"
 			print(message_feature_selection)
 			# minimal deterministic setup; without these, model would be invalid
 			selector_model = LogisticRegression(penalty='elasticnet', solver='saga', l1_ratio=0.5, random_state=42)
 			selected_feature_selector = SelectFromModel(estimator=selector_model, threshold=None)
+		elif FEATURESELECTION == 'riSFM':
+			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with ridge-regularized logistic regression (riSFM)"
+			print(message_feature_selection)
+			# minimal deterministic setup; without these, model would be invalid
+			selector_model = LogisticRegression(penalty='l2', solver='lbfgs', random_state=42)
+			selected_feature_selector = SelectFromModel(estimator=selector_model, threshold=None)
 		elif FEATURESELECTION == 'rfSFM':
-			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with Random Forest (rfSFM)"
+			message_feature_selection = "The provided feature selection method was properly recognized: SelectFromModel with random forest (rfSFM)"
 			print(message_feature_selection)
 			selector_model = RandomForestClassifier(
-				random_state=42, # reproducibility
-				n_jobs=1, # enforce single-thread determinism to ensure identical feature importances across runs and platforms
-				bootstrap=False # # disable bootstrapping to reduce random variability in feature importance computation
+				random_state=42, # deterministic
+				bootstrap=False # disable bootstrapping to reduce random variability in feature importance computation
 			)
 			selected_feature_selector = SelectFromModel(estimator=selector_model, threshold=None)
 		else:
 			message_feature_selection = "The provided feature selection method is not implemented yet"
 			raise Exception(message_feature_selection)
-		## initialize the classifier (without tuning parameters: deterministic and repeatable if possible)
+		## initialize the classifier (without tuning parameters: deterministic randomness (random_state=42) without repeatability for parallel nondeterminism (n_jobs=1 or thread_count=1))
 		if CLASSIFIER == 'ADA':
 			message_classifier = "The provided classifier was properly recognized: adaboost (ADA)"
 			print(message_classifier)
-			selected_classifier = AdaBoostClassifier() # adaboost (ADA)
+			selected_classifier = AdaBoostClassifier(random_state=42) # adaboost (ADA)
 		elif CLASSIFIER == 'CAT':
 			message_classifier = "The provided classifier was properly recognized: CatBoost (CAT)"
 			print(message_classifier)
 			# deterministic configuration for CatBoost
 			# - use random_seed (not random_state) to prevent synonym conflicts
-			# - thread_count=1 avoids nested parallelism with GridSearchCV
 			# - allow_writing_files=False disables CatBoost automatic file outputs
 			# - bootstrap_type='Bayesian' + random_strength=0 ensure reproducible splits
 			# - verbose=False keeps logs clean and avoids stdout clutter
 			if type_phenotype_classes == 'more than two classes':
 				selected_classifier = SafeCatBoostClassifier(
-					loss_function="MultiClass",
-					random_seed=42,
-					thread_count=1,
-					verbose=False,
-					allow_writing_files=False,
-					bootstrap_type="Bayesian",
-					random_strength=0
-				)
+					loss_function="MultiClass", # default loss for classification of multi classes
+					random_seed=42, # deterministic
+					verbose=False, # no stdout spam
+					allow_writing_files=False, # prevent auto logging files
+					bootstrap_type="Bayesian", # deterministic bootstrap
+					random_strength=0 # must be 0 for reproducibility
+				) # catboost (CAT)
 				message_CAT_type_phenotype_classes = ("The CAT classifier was set to manage more than two phenotype classes")
 				print(message_CAT_type_phenotype_classes)
 			elif type_phenotype_classes == 'two classes':
 				selected_classifier = SafeCatBoostClassifier(
-					loss_function="Logloss",
-					random_seed=42,
-					thread_count=1,
-					verbose=False,
-					allow_writing_files=False,
-					bootstrap_type="Bayesian",
-					random_strength=0
+					loss_function="Logloss", # default loss for classification of two classes
+					random_seed=42, # deterministic
+					verbose=False, # no stdout spam
+					allow_writing_files=False, # prevent auto logging files
+					bootstrap_type="Bayesian", # deterministic bootstrap
+					random_strength=0 # must be 0 for reproducibility
 				)
 				message_CAT_type_phenotype_classes = ("The CAT classifier was set to manage two phenotype classes")
 				print(message_CAT_type_phenotype_classes)
 		elif CLASSIFIER == 'DT':
 			message_classifier = "The provided classifier was properly recognized: decision tree classifier (DT)"
 			print(message_classifier)
-			selected_classifier = DecisionTreeClassifier() # decision tree classifier (DT)
+			selected_classifier = DecisionTreeClassifier(random_state=42) # decision tree (DT)
+		elif CLASSIFIER == 'EN':
+			message_classifier = "The provided classifier was properly recognized: elasticNet-regularized logistic regression (EN)"
+			print(message_classifier)
+			# a mix of L1/L2 penalities controlled by l1_ratio corresponds to elasticnet logistic regression, solver saga is required
+			selected_classifier = LogisticRegression(penalty='elasticnet', solver='saga', l1_ratio=0.5, random_state=42) # elasticnet-regularized logistic regression (EN)
 		elif CLASSIFIER == 'ET':
 			message_classifier = "The provided classifier was properly recognized: extra trees classifier (ET)"
 			print(message_classifier)
-			selected_classifier = ExtraTreesClassifier() # extra trees classifier (ET)
+			selected_classifier = ExtraTreesClassifier(random_state=42) # extra trees (ET)
+		elif CLASSIFIER == 'GB':
+			message_classifier = "The provided classifier was properly recognized: gradient boosting (GB)"
+			print(message_classifier)
+			selected_classifier = GradientBoostingClassifier(random_state=42)
 		elif CLASSIFIER == 'GNB':
 			message_classifier = "The provided classifier was properly recognized: gaussian naive bayes (GNB)"
 			print(message_classifier)
@@ -1125,11 +1196,20 @@ def main():
 		elif CLASSIFIER == 'HGB':
 			message_classifier = "The provided classifier was properly recognized: histogram-based gradient boosting (HGB)"
 			print(message_classifier)
-			selected_classifier = HistGradientBoostingClassifier() # histogram-based gradient boosting (HGB)
+			selected_classifier = HistGradientBoostingClassifier(random_state=42) # histogram-based gradient boosting (HGB)
 		elif CLASSIFIER == 'KNN':
 			message_classifier = "The provided classifier was properly recognized: k-nearest neighbors (KNN)"
 			print(message_classifier)
 			selected_classifier = KNeighborsClassifier() # k-nearest neighbors (KNN)
+		elif CLASSIFIER == 'LA':
+			message_classifier = "The provided classifier was properly recognized: lasso-regularized logistic regression (LA)"
+			print(message_classifier)
+			# L1 penalty corresponds to lasso logistic regression, solver liblinear is required
+			selected_classifier = LogisticRegression(penalty='l1', solver='liblinear', random_state=42) # lasso-regularized logistic regression (LA)
+		elif CLASSIFIER == 'LGBM':
+			message_classifier = "The provided classifier was properly recognized: light gradient boosting machine (LGBM)"
+			print(message_classifier)
+			selected_classifier = lgbm.LGBMClassifier(random_state=42, verbose=-1)
 		elif CLASSIFIER == 'LDA':
 			message_classifier = "The provided classifier was properly recognized: linear discriminant analysis (LDA)"
 			print(message_classifier)
@@ -1137,11 +1217,15 @@ def main():
 		elif CLASSIFIER == 'LR':
 			message_classifier = "The provided classifier was properly recognized: logistic regression (LR)"
 			print(message_classifier)
-			selected_classifier = LogisticRegression() # logistic regression (LR)
+			selected_classifier = LogisticRegression(random_state=42) # logistic regression (LR)
 		elif CLASSIFIER == 'MLP':
 			message_classifier = "The provided classifier was properly recognized: multi-layer perceptron (MLP)"
 			print(message_classifier)
-			selected_classifier = MLPClassifier() # multi-layer perceptron (MLP)
+			selected_classifier = MLPClassifier(random_state=42) # multi-layer perceptron (MLP)
+		elif CLASSIFIER == 'NSV':
+			message_classifier = "The provided classifier was properly recognized: nu support vector (NSV)"
+			print(message_classifier)
+			selected_classifier = NuSVC(probability=True)
 		elif CLASSIFIER == 'QDA':
 			message_classifier = "The provided classifier was properly recognized: quadratic discriminant analysis (QDA)"
 			print(message_classifier)
@@ -1150,20 +1234,25 @@ def main():
 		elif CLASSIFIER == 'RF':
 			message_classifier = "The provided classifier was properly recognized: random forest (RF)"
 			print(message_classifier)
-			selected_classifier = RandomForestClassifier() # random forest (RF)
+			selected_classifier = RandomForestClassifier(random_state=42) # random forest (RF)
+		elif CLASSIFIER == 'RI':
+			message_classifier = "The provided classifier was properly recognized: ridge-regularized logistic regression (RI)"
+			print(message_classifier)
+			# L2 penalty corresponds to ridge logistic regression, solver lbfgs is required
+			selected_classifier = LogisticRegression(penalty='l2', solver='lbfgs', random_state=42) # ridge-regularized logistic regression
 		elif CLASSIFIER == 'SVC':
 			message_classifier = "The provided classifier was properly recognized: support vector classification (SVC)"
 			print(message_classifier)
-			selected_classifier = SVC(probability = True) # support vector classification (SVC)
+			selected_classifier = SVC(probability = True, random_state=42) # support vector classification (SVC)
 		elif CLASSIFIER == 'XGB':
 			message_classifier = "The provided classifier was properly recognized: extreme gradient boosting (XGB)"
 			print(message_classifier)
 			if type_phenotype_classes == 'more than two classes':
-				selected_classifier = xgb.XGBClassifier(objective='multi:softprob') # extreme gradient boosting (XGB)
+				selected_classifier = xgb.XGBClassifier(objective='multi:softprob', random_state=42) # extreme gradient boosting (XGB)
 				message_XGB_type_phenotype_classes = "The XGB classifier was set to manage " + type_phenotype_classes + " phenotype classes"
 				print(message_XGB_type_phenotype_classes)
 			elif type_phenotype_classes == 'two classes':
-				selected_classifier = xgb.XGBClassifier(objective = 'binary:logistic') # extreme gradient boosting (XGB)
+				selected_classifier = xgb.XGBClassifier(objective = 'binary:logistic', random_state=42) # extreme gradient boosting (XGB)
 				message_XGB_type_phenotype_classes = "The XGB classifier was set to manage " + type_phenotype_classes + " phenotype classes"
 				print(message_XGB_type_phenotype_classes)
 		else:
@@ -1174,7 +1263,7 @@ def main():
 		### create an empty list
 		steps = []
 		### add feature selection step if specified
-		if FEATURESELECTION in ['SKB', 'laSFM', 'enSFM', 'rfSFM']:
+		if FEATURESELECTION in ['SKB', 'laSFM', 'enSFM', 'riSFM', 'rfSFM']:
 			steps.append(('feature_selection', selected_feature_selector))
 		### add the final model
 		steps.append(('model', selected_classifier))
@@ -1225,15 +1314,18 @@ def main():
 		message_metrics_cv = "The cross-validation setting implied: " + str(n_param_names) + " distinct parameter names, " + str(n_total_values) + " parameter value options, " + str(param_combinations) + " parameter combinations, and " + str(gridsearchcv_fits) + " fits during cross-validation"
 		print(message_metrics_cv)
 
-		## ensure numeric compatibility (astype(np.float32)) with upstream encoding (sparse_output=False) and efficiency (float32 dtype), 
-		### especially for tree-based classifiers (e.g., DecisionTreeClassifier, RandomForestClassifier, XGBClassifier, HistGradientBoostingClassifier)
+		# ensure numeric compatibility (astype(np.float32)) with upstream encoding (sparse_output=False) and efficiency (float32 dtype), 
+		# especially for tree-based classifiers (e.g., DecisionTreeClassifier, RandomForestClassifier, XGBClassifier, HistGradientBoostingClassifier)
 		X_train_encoded_float32 = X_train_encoded.astype(np.float32)
 		X_test_encoded_float32 = X_test_encoded.astype(np.float32)
-		### for classification, keep y as a pandas Series (int or str labels are fine)
-		y_train_series = y_train
-		y_test_series  = y_test
+		# preserve sample IDs and enforce 1-D target vectors
+		train_sample_ids = y_train.index
+		test_sample_ids  = y_test.index
+		# reconstruct clean 1-D Series required by CatBoost and Pandas concat
+		y_train_series = pd.Series(np.ravel(y_train.values), index=train_sample_ids)
+		y_test_series  = pd.Series(np.ravel(y_test.values), index=test_sample_ids)
 
-		## check parallelization and print a message
+		# check parallelization and print a message
 		if JOBS == 1:
 			message_parallelization = "The tqdm_joblib progress bars are deactivated when using one job"
 			print(message_parallelization)
@@ -1297,69 +1389,147 @@ def main():
 		all_scores_parameters_df['parameters'] = all_scores_parameters_df['parameters'].replace(r'[\{\}]', '', regex=True)
 		## sort the dataframe by scores in descending order and reset the index
 		all_scores_parameters_df = all_scores_parameters_df.sort_values(by="scores", ascending=False).reset_index(drop=True)
-		
+
 		# select the best model
 		best_model = model.best_estimator_
-	
+
+		# re-fit only the final estimator (not the entire pipeline)
+		# this is necessary because re-fitting the whole pipeline would overwrite the
+		# feature selection mask learned during GridSearchCV
+		# keeping the original mask ensures consistent selected features between
+		# modeling and prediction subcommands
+		## check if a feature selection step exists inside the pipeline
+		if hasattr(best_model, "named_steps") and ("feature_selection" in best_model.named_steps):
+			# retrieve feature selector and final estimator
+			selector = best_model.named_steps["feature_selection"]
+			final_estimator = best_model.named_steps["model"]
+			# apply the selector to the harmonized one-hot encoded training matrix
+			# use transform() to preserve the exact support_ learned during GridSearchCV
+			try:
+				X_train_selected = selector.transform(X_train_encoded)
+			except Exception:
+				# fallback: selector may require float32
+				X_train_selected = selector.transform(X_train_encoded_float32)
+			# re-fit only the final estimator on selected features
+			final_estimator.fit(X_train_selected, y_train_series)
+			# rebuild the pipeline WITHOUT re-fitting the selector
+			best_model = Pipeline([
+				("feature_selection", selector),
+				("model", final_estimator)
+			])
+		else:
+			# no feature selection method was used
+			# we directly retrieve the final estimator
+			if hasattr(best_model, "named_steps"):
+				final_estimator = best_model.named_steps["model"]
+			else:
+				final_estimator = best_model
+			# re-fit the final estimator on the full harmonized one-hot encoded training matrix
+			# (no feature selection → the estimator expects full encoded matrices)
+			final_estimator.fit(X_train_encoded, y_train_series)
+			# rebuild the pipeline to maintain a consistent structure
+			best_model = Pipeline([
+				("model", final_estimator)
+			])
+		## refresh final estimator reference (required before feature importances and permutation importance)
+		final_estimator = (
+			best_model.named_steps["model"]
+			if hasattr(best_model, "named_steps")
+			else best_model
+		)
+
 		# count features
-		## count the number of features selected by feature selection actually used by the final regressor
+		## count the number of selected one-hot encoded features
 		selected_features_int = count_selected_features(best_model, X_train_encoded)
 		## print a message
-		message_selected_features = ("The pipeline potentially selected and used " + str(selected_features_int) + " one-hot encoded features to train the model")
+		message_selected_features = (
+			"The pipeline potentially selected and used "
+			+ str(selected_features_int)
+			+ " one-hot encoded features to train the model"
+		)
 		print(message_selected_features)
 
 		# output a dataframe of features used by the final model with ranked importance scores
-		# get the final estimator from the pipeline or directly if standalone
-		final_estimator = best_model[-1] if hasattr(best_model, '__getitem__') else best_model
-		# initialize feature name list and selection mask
-		feature_encoded_lst = None
-		support_mask = None
-		try:
-			# check if the model is a pipeline
-			if hasattr(best_model, 'named_steps'):
-				# extract feature names from the encoder or column names
-				if 'encoder' in best_model.named_steps and hasattr(best_model.named_steps['encoder'], 'get_feature_names_out'):
-					feature_encoded_lst = best_model.named_steps['encoder'].get_feature_names_out()
-				else:
-					feature_encoded_lst = X_train_encoded.columns
-				# check for an optional feature selection step
-				if 'feature_selection' in best_model.named_steps:
-					selector = best_model.named_steps['feature_selection']
-					if hasattr(selector, 'get_support'):
-						support_mask = selector.get_support()
-						feature_encoded_lst = np.array(feature_encoded_lst)[support_mask]
-					else:
-						support_mask = np.ones(len(feature_encoded_lst), dtype=bool)
-				else:
-					support_mask = np.ones(len(feature_encoded_lst), dtype=bool)
+		## recover encoded feature names before feature selection
+		if hasattr(best_model, "named_steps"):
+			if "encoder" in best_model.named_steps and hasattr(
+				best_model.named_steps["encoder"], "get_feature_names_out"
+			):
+				encoded_names = best_model.named_steps["encoder"].get_feature_names_out()
 			else:
-				# fallback if not a pipeline
-				feature_encoded_lst = X_train_encoded.columns
-				support_mask = np.ones(len(feature_encoded_lst), dtype=bool)
-			message_importance_encoded_feature_names = "The one-hot encoded feature names were recovered from the model or encoder"
-		except Exception:
-			# fallback on error
-			feature_encoded_lst = X_train_encoded.columns
-			support_mask = np.ones(len(feature_encoded_lst), dtype=bool)
-			message_importance_encoded_feature_names = "The one-hot encoded feature names were not recovered from the model"
+				encoded_names = X_train_encoded.columns
+		else:
+			encoded_names = X_train_encoded.columns
+		## always convert to a clean Python list
+		if hasattr(encoded_names, "tolist"):
+			feature_encoded_lst_full = encoded_names.tolist()
+		else:
+			feature_encoded_lst_full = list(encoded_names)
+		## determine feature selection mask
+		if hasattr(best_model, "named_steps") and "feature_selection" in best_model.named_steps:
+			selector = best_model.named_steps["feature_selection"]
+			if hasattr(selector, "get_support"):
+				support_mask = selector.get_support()
+			else:
+				support_mask = np.ones(len(feature_encoded_lst_full), dtype=bool)
+		else:
+			support_mask = np.ones(len(feature_encoded_lst_full), dtype=bool)
+		## filtered list for feature importance reporting (not for permutation importance)
+		feature_encoded_lst_filtered = np.array(feature_encoded_lst_full)[support_mask].tolist()
+		## print a message
+		message_importance_encoded_feature_names = (
+			"The one-hot encoded feature names were recovered before feature selection"
+		)
 		print(message_importance_encoded_feature_names)
-		# ensure feature names are a Python list
-		if hasattr(feature_encoded_lst, 'tolist'):
-			feature_encoded_lst = feature_encoded_lst.tolist()
-		# extract feature importance depending on classifier type
+		## extract feature importance depending on classifier type
 		try:
-			if hasattr(final_estimator, 'feature_importances_'):
-				# tree-based models such as RF, ET, DT, XGB, ADA expose feature_importances_
+			# catboost must come first (otherwise feature_importances_ steals the branch)
+			if isinstance(final_estimator, cb.CatBoostClassifier):
+				# CatBoost exposes feature importance via get_feature_importance()
+				try:
+					train_pool = cb.Pool(X_train_encoded_float32, y_train_series)
+					importances = final_estimator.get_feature_importance(
+						train_pool, type='PredictionValuesChange'
+					)
+					importance_type = "CatBoost PredictionValuesChange (feature_importance)"
+				except Exception:
+					importances = np.array([np.nan] * len(feature_encoded_lst_filtered))
+					importance_type = "NaN placeholder (CatBoost importance extraction failed)"
+			# LightGBM classifier: supports gain/split feature importance
+			elif isinstance(final_estimator, lgbm.LGBMClassifier):
+				try:
+					# LightGBM supports importance types such as 'gain', 'split', etc.
+					lgbm_importance_type = None
+					# from user parameters (if present)
+					if 'params' in locals():
+						lgbm_importance_type = params.get('model__importance_type', None)
+					# from estimator internal parameters
+					if lgbm_importance_type is None and hasattr(final_estimator, 'get_params'):
+						lgbm_importance_type = final_estimator.get_params().get('importance_type', None)
+					# default importance type
+					if lgbm_importance_type is None:
+						lgbm_importance_type = 'gain'
+
+					# LightGBM stores the low-level booster inside .booster_
+					importances = final_estimator.booster_.feature_importance(
+						importance_type=lgbm_importance_type
+					)
+					importance_type = f"lightgbm's {lgbm_importance_type}-based importance"
+				except Exception:
+					# fallback if extraction fails
+					importances = np.array([np.nan] * len(feature_encoded_lst_filtered))
+					importance_type = "NaN placeholder (LightGBM importance extraction failed)"
+			# tree-based classifiers (RF, ET, DT, ADA, XGB exposes feature_importances_)
+			elif hasattr(final_estimator, 'feature_importances_'):
 				importances = final_estimator.feature_importances_
 				importance_type = "tree-based impurity reduction (feature_importances_)"
+			# histogram-based GBDT (HGB)
 			elif isinstance(final_estimator, HistGradientBoostingClassifier):
-				# robust feature importance extraction for HistGradientBoostingClassifier from sklearn ≥1.5
 				try:
 					from sklearn.ensemble._hist_gradient_boosting.utils import get_feature_importances
 					importances = get_feature_importances(final_estimator, normalize=True)
 				except Exception:
 					importances = np.array([])
-				# if helper failed or returned empty/zero importances → manual aggregation
 				if importances is None or len(importances) == 0 or np.all(importances == 0):
 					n_features = X_train_encoded.shape[1]
 					importances = np.zeros(n_features, dtype=np.float64)
@@ -1371,65 +1541,52 @@ def main():
 								for feat, gain in zip(tree.split_features_, tree.split_gains_):
 									if feat >= 0:
 										importances[int(feat)] += gain
-					# normalize only if any gain was accumulated
-					# keep valid zeros because model supports importances, but all splits yielded 0 gain
 					total_gain = np.sum(importances)
 					if total_gain > 0:
 						importances /= total_gain
 				importance_type = "histogram-based mean impurity reduction (auto fallback to internal split gains)"
+			# quadratic discriminant analysis (QDA)
 			elif isinstance(final_estimator, QuadraticDiscriminantAnalysis):
-				# QDA does not expose coef_ — derive importance from between-class mean differences
 				means = final_estimator.means_
 				if means.ndim == 2:
 					global_mean = np.mean(means, axis=0)
 					importances = np.sum((means - global_mean) ** 2, axis=0)
-					# normalize to sum to 1 for interpretability
 					if np.sum(importances) > 0:
 						importances /= np.sum(importances)
 					importance_type = "variance-normalized between-class mean difference (derived importance)"
 				else:
-					importances = np.array([np.nan] * len(feature_encoded_lst))
+					importances = np.array([np.nan] * len(feature_encoded_lst_filtered))
 					importance_type = "NaN placeholder (QDA means_ missing or invalid)"
-			elif isinstance(final_estimator, cb.CatBoostClassifier):
-				# CatBoost exposes feature importance via get_feature_importance()
-				try:
-					# compute importance using PredictionValuesChange (robust to OHE)
-					train_pool = cb.Pool(X_train_encoded_float32, y_train_series)
-					importances = final_estimator.get_feature_importance(
-						train_pool, type='PredictionValuesChange'
-					)
-					importance_type = "CatBoost PredictionValuesChange (feature_importance)"
-				except Exception:
-					importances = np.array([np.nan] * len(feature_encoded_lst))
-					importance_type = "NaN placeholder (CatBoost importance extraction failed)"
+			# support vector classification (SVC
 			elif isinstance(final_estimator, SVC):
-				# handle both linear and non-linear SVCs, including probability=True
 				kernel_type = getattr(final_estimator, 'kernel', 'unknown')
-				if kernel_type == 'linear' and hasattr(final_estimator, 'coef_') and not getattr(final_estimator, 'probability', False):
-					# linear SVC without probability calibration exposes coefficients directly
+				if kernel_type == 'linear' and hasattr(final_estimator, 'coef_') and not final_estimator.probability:
 					importances = np.abs(final_estimator.coef_.ravel())
 					importance_type = "absolute coefficient magnitude (linear SVC coef_)"
 				else:
-					# probability=True or non-linear kernel (no explicit coefficients)
-					importances = np.array([np.nan] * len(feature_encoded_lst))
-					importance_type = f"NaN placeholder (no native importance for {kernel_type} kernel SVC with probability={final_estimator.probability})"
+					importances = np.array([np.nan] * len(feature_encoded_lst_filtered))
+					importance_type = (
+						"NaN placeholder (no native importance for " + kernel_type +
+						" kernel SVC with probability=" + str(final_estimator.probability) + ")"
+					)
+			# linear models (LR, LDA, etc.)
 			elif hasattr(final_estimator, 'coef_'):
-				# other linear models such as LR or LDA expose coef_
 				importances = np.abs(final_estimator.coef_.ravel())
 				importance_type = "absolute coefficient magnitude (coef_)"
+
+			# default
 			else:
-				# fallback: no native importance available
-				importances = np.array([np.nan] * len(feature_encoded_lst))
+				importances = np.array([np.nan] * len(feature_encoded_lst_filtered))
 				importance_type = "NaN placeholder (no native importance)"
 		except Exception as e:
-			importances = np.array([np.nan] * len(feature_encoded_lst))
+			importances = np.array([np.nan] * len(feature_encoded_lst_filtered))
 			importance_type = "NaN fallback due to extraction error: " + str(e)
-		# handle potential mismatch between feature names and importance values
-		if len(importances) != len(feature_encoded_lst):
-			min_len = min(len(importances), len(feature_encoded_lst))
+		## handle mismatch between feature names and importances
+		if len(importances) != len(feature_encoded_lst_filtered):
+			min_len = min(len(importances), len(feature_encoded_lst_filtered))
 			importances = importances[:min_len]
-			feature_encoded_lst = feature_encoded_lst[:min_len]
-		# print message about extracted importances
+			feature_encoded_lst_filtered = feature_encoded_lst_filtered[:min_len]
+		## print message about extracted importances
 		if CLASSIFIER in ('KNN', 'MLP', 'GNB'):
 			message_importance_count = (
 				"The selected classifier does not expose feature importances natively ("
@@ -1437,47 +1594,57 @@ def main():
 			)
 		else:
 			message_importance_count = (
-				"The best model returned "
-				+ str(len(importances))
-				+ " importance values (" + importance_type + ") for "
-				+ str(len(feature_encoded_lst))
-				+ " one-hot encoded features"
+				"The best model returned " + str(len(importances)) +
+				" importance values (" + importance_type + ") for " +
+				str(len(feature_encoded_lst_filtered)) + " one-hot encoded features"
 			)
 		print(message_importance_count)
-		# ensure importances array is valid (numeric) even for models without native importances
+		## ensure importances array is valid
 		if importances is None or np.all(np.isnan(importances)):
-			importances = np.full(len(feature_encoded_lst), np.nan, dtype=float)
-		# create dataframe of feature importances and round importance values
+			importances = np.full(len(feature_encoded_lst_filtered), np.nan, dtype=float)
+		## create feature importance dataframe
 		feature_importance_df = pd.DataFrame({
-			"feature": feature_encoded_lst,
+			"feature": feature_encoded_lst_filtered,
 			"importance": np.round(importances, digits)
-		})
-		# sort by descending importance
-		feature_importance_df = feature_importance_df.sort_values(by="importance", ascending=False).reset_index(drop=True)
+		}).sort_values(by="importance", ascending=False).reset_index(drop=True)
 
-		# check compatibility between permutation importance (detected after argument parsing) and the number of repetitions (detected before argument parsing)
+		# check compatibility between permutation importance and the number of repetitions
 		set_nrepeats = ('-nr' in sys.argv) or ('--nrepeats' in sys.argv)
 		if (PERMUTATIONIMPORTANCE is True) and (set_nrepeats is True):
-			message_compatibility_permutation_nrepeat = "The permutation importance was requested (i.e., " + str(PERMUTATIONIMPORTANCE) + ") and the number of repetitions was explicitly set (i.e., " + str(set_nrepeats) + ") to a specific value (i.e., " + str(NREPEATS) + ")"
+			message_compatibility_permutation_nrepeat = (
+				"The permutation importance was requested (i.e., " + str(PERMUTATIONIMPORTANCE) +
+				") and the number of repetitions was explicitly set (i.e., " + str(set_nrepeats) +
+				") to a specific value (i.e., " + str(NREPEATS) + ")"
+			)
 			print(message_compatibility_permutation_nrepeat)
 		elif (PERMUTATIONIMPORTANCE is True) and (set_nrepeats is False):
-			message_compatibility_permutation_nrepeat = "The permutation importance was requested (i.e., " + str(PERMUTATIONIMPORTANCE) + ") but the number of repetitions was not set (i.e., " + str(set_nrepeats) + "); the default value is therefore used (i.e., " + str(NREPEATS) + ")"
+			message_compatibility_permutation_nrepeat = (
+				"The permutation importance was requested (i.e., " + str(PERMUTATIONIMPORTANCE) +
+				") but the number of repetitions was not set (i.e., " + str(set_nrepeats) +
+				"); the default value is therefore used (i.e., " + str(NREPEATS) + ")"
+			)
 			print(message_compatibility_permutation_nrepeat)
 		elif (PERMUTATIONIMPORTANCE is False) and (set_nrepeats is True):
-			message_compatibility_permutation_nrepeat = "The permutation importance was not requested (i.e., " + str(PERMUTATIONIMPORTANCE) + ") but the number of repetitions was set (i.e., " + str(set_nrepeats) + "); this setting is consequently ignored (i.e., " + str(NREPEATS) + ")"
+			message_compatibility_permutation_nrepeat = (
+				"The permutation importance was not requested (i.e., " + str(PERMUTATIONIMPORTANCE) +
+				") but the number of repetitions was set (i.e., " + str(set_nrepeats) +
+				"); this setting is consequently ignored (i.e., " + str(NREPEATS) + ")"
+			)
 			print(message_compatibility_permutation_nrepeat)
 		elif (PERMUTATIONIMPORTANCE is False) and (set_nrepeats is False):
-			message_compatibility_permutation_nrepeat = "The permutation importance was not requested (i.e., " + str(PERMUTATIONIMPORTANCE) + ") and the number of repetitions was not set, as expected (i.e., " + str(set_nrepeats) + ")"
+			message_compatibility_permutation_nrepeat = (
+				"The permutation importance was not requested (i.e., " + str(PERMUTATIONIMPORTANCE) +
+				") and the number of repetitions was not set, as expected (i.e., " + str(set_nrepeats) + ")"
+			)
 			print(message_compatibility_permutation_nrepeat)
 
-		# fix nested parallelism issues for RandomForest and ExtraTrees so tqdm_joblib stays accurate
-		# set n_jobs on the *inner* estimator (Pipeline param prefix) instead of the Pipeline itself
+		# fix nested parallelism issues for random forest and extra trees so tqdm_joblib stays accurate
 		if CLASSIFIER in ['RF', 'ET']:
 			try:
-				best_model.set_params(model__n_jobs=1) # enforce single-thread inference during permutation for inner estimator
+				best_model.set_params(model__n_jobs=1)
 			except Exception:
 				if hasattr(best_model, "n_jobs"):
-					best_model.set_params(n_jobs=1) # fallback if model__n_jobs is not available (non-pipeline case)
+					best_model.set_params(n_jobs=1)
 
 		# compute permutation importance only if explicitly requested
 		# use tqdm.auto rather than tqdm library because it automatically chooses the best display format (terminal, notebook, etc.)
@@ -1485,27 +1652,104 @@ def main():
 		# use threading backend to avoid DeprecationWarning from fork and ChildProcessError from the loky backend
 		# threading is slightly slower but ensures smooth tqdm display and avoids nested multiprocessing issues
 		if PERMUTATIONIMPORTANCE is True:
+			# determine which features to use for permutation importance (selected features only)
+			try:
+				if hasattr(best_model, "named_steps") and 'feature_selection' in best_model.named_steps:
+					selector = best_model.named_steps['feature_selection']
+					if hasattr(selector, "get_support"):
+						# retrieve boolean mask of selected features
+						support_mask = selector.get_support()
+						# apply mask directly (do not reorder) on float32-encoded data
+						X_train_perm_df = X_train_encoded_float32.loc[:, support_mask]
+						X_test_perm_df  = X_test_encoded_float32.loc[:, support_mask]
+						# the correct feature names come from the encoder, same order as fit()
+						feature_encoded_perm_lst = np.array(feature_encoded_lst_full)[support_mask].tolist()
+						# print a message
+						message_perm_selection = (
+							"The permutation importance was restricted to the features selected upstream (i.e., "
+							+ str(len(feature_encoded_perm_lst))
+							+ ") by the specified feature selection method"
+						)
+					else:
+						# infer selection from transformed dimension
+						X_train_transformed = selector.transform(X_train_encoded_float32)
+						n_in  = X_train_encoded_float32.shape[1]
+						n_out = X_train_transformed.shape[1]
+						if n_out < n_in:
+							support_mask = np.zeros(n_in, dtype=bool)
+							support_mask[:n_out] = True
+							# use transformed matrices for permutation importance
+							X_train_perm_df = pd.DataFrame(
+								X_train_transformed,
+								columns=np.array(feature_encoded_lst_full)[support_mask].tolist()
+							)
+							X_test_transformed = selector.transform(X_test_encoded_float32)
+							X_test_perm_df = pd.DataFrame(
+								X_test_transformed,
+								columns=np.array(feature_encoded_lst_full)[support_mask].tolist()
+							)
+							feature_encoded_perm_lst = np.array(feature_encoded_lst_full)[support_mask].tolist()
+							message_perm_selection = (
+								"The permutation importance was restricted to the features selected upstream (i.e., "
+								+ str(len(feature_encoded_perm_lst))
+								+ ") using an inferred selection mask because support_ was not available"
+							)
+						else:
+							# no dimensionality reduction performed
+							X_train_perm_df = X_train_encoded_float32.copy()
+							X_test_perm_df  = X_test_encoded_float32.copy()
+							feature_encoded_perm_lst = feature_encoded_lst_full.copy()
+							message_perm_selection = (
+								"The permutation importance was computed on all one-hot encoded features (i.e., "
+								+ str(len(feature_encoded_perm_lst))
+								+ ") because no dimensionality reduction was detected"
+							)
+				else:
+					# no feature selection method was applied
+					X_train_perm_df = X_train_encoded_float32.copy()
+					X_test_perm_df  = X_test_encoded_float32.copy()
+					feature_encoded_perm_lst = feature_encoded_lst_full.copy()
+					message_perm_selection = (
+						"The permutation importance was computed on all one-hot encoded features (i.e., "
+						+ str(len(feature_encoded_perm_lst))
+						+ ") because no feature selection method was used"
+					)
+			except Exception:
+				# fallback if anything unexpected happens
+				X_train_perm_df = X_train_encoded_float32.copy()
+				X_test_perm_df  = X_test_encoded_float32.copy()
+				feature_encoded_perm_lst = feature_encoded_lst_full.copy()
+				message_perm_selection = (
+					"The permutation importance defaulted to all one-hot encoded features (i.e., "
+					+ str(len(feature_encoded_perm_lst))
+					+ ") because selected features could not be recovered from the model"
+				)
+			# print a message
+			print(message_perm_selection)
+			# compute permutation importance
 			try:
 				# compute total number of permutations to estimate progress: one job per feature
-				n_features = X_train_encoded_float32.shape[1]
+				n_features = X_train_perm_df.shape[1]
 				permutation_total = n_features
 				if JOBS == 1:
 					# when using a single thread, tqdm_joblib does not display intermediate updates
 					# in this case, permutation_importance is executed normally without a progress bar
 					permutation_train = permutation_importance(
-						best_model,
-						X_train_encoded_float32,
+						final_estimator, 
+						X_train_perm_df, 
 						y_train_series,
-						n_repeats=NREPEATS,
-						scoring='neg_log_loss',
+						n_repeats=NREPEATS, 
+						random_state=42, # deterministic
+						scoring='neg_log_loss', 
 						n_jobs=1
 					)
 					permutation_test = permutation_importance(
-						best_model,
-						X_test_encoded_float32,
+						final_estimator, 
+						X_test_perm_df, 
 						y_test_series,
-						n_repeats=NREPEATS,
-						scoring='neg_log_loss',
+						n_repeats=NREPEATS, 
+						random_state=42, # deterministic
+						scoring='neg_log_loss', 
 						n_jobs=1
 					)
 				else:
@@ -1521,13 +1765,14 @@ def main():
 					) as progress_bar:
 						with jl.parallel_backend('threading', n_jobs=JOBS):
 							with tqjl.tqdm_joblib(progress_bar):
-								with tpc.threadpool_limits(limits=1): # prevent nested parallelism
+								with tpc.threadpool_limits(limits=1):
 									with ctl.redirect_stdout(io.StringIO()), ctl.redirect_stderr(io.StringIO()):
 										permutation_train = permutation_importance(
-											best_model,
-											X_train_encoded_float32,
+											final_estimator, 
+											X_train_perm_df, 
 											y_train_series,
-											n_repeats=NREPEATS,
+											n_repeats=NREPEATS, 
+											random_state=42, # deterministic
 											scoring='neg_log_loss',
 											n_jobs=JOBS
 										)
@@ -1545,34 +1790,38 @@ def main():
 								with tpc.threadpool_limits(limits=1):
 									with ctl.redirect_stdout(io.StringIO()), ctl.redirect_stderr(io.StringIO()):
 										permutation_test = permutation_importance(
-											best_model,
-											X_test_encoded_float32,
+											final_estimator, 
+											X_test_perm_df, 
 											y_test_series,
-											n_repeats=NREPEATS,
+											n_repeats=NREPEATS, 
+											random_state=42,  # deterministic
 											scoring='neg_log_loss',
 											n_jobs=JOBS
 										)
-					
 				# extract average permutation importance and its standard deviation (train)
 				perm_train_mean = np.round(permutation_train.importances_mean, digits)
-				perm_train_std = np.round(permutation_train.importances_std, digits)
+				perm_train_std  = np.round(permutation_train.importances_std,  digits)
 				# extract average permutation importance and its standard deviation (test)
-				perm_test_mean = np.round(permutation_test.importances_mean, digits)
-				perm_test_std = np.round(permutation_test.importances_std, digits)
+				perm_test_mean  = np.round(permutation_test.importances_mean,  digits)
+				perm_test_std   = np.round(permutation_test.importances_std,   digits)
 				# handle shape mismatch between names and scores
-				min_len = min(len(feature_encoded_lst), len(perm_train_mean), len(perm_test_mean))
-				feature_encoded_lst = feature_encoded_lst[:min_len]
+				min_len = min(
+					len(feature_encoded_perm_lst),
+					len(perm_train_mean),
+					len(perm_test_mean)
+				)
+				feature_encoded_perm_lst = feature_encoded_perm_lst[:min_len]
 				perm_train_mean = perm_train_mean[:min_len]
-				perm_train_std = perm_train_std[:min_len]
-				perm_test_mean = perm_test_mean[:min_len]
-				perm_test_std = perm_test_std[:min_len]
+				perm_train_std  = perm_train_std[:min_len]
+				perm_test_mean  = perm_test_mean[:min_len]
+				perm_test_std   = perm_test_std[:min_len]
 				# combine permutation importances from training and testing
 				permutation_importance_df = pd.DataFrame({
-					'feature': feature_encoded_lst,
+					'feature': feature_encoded_perm_lst,
 					'train_mean': perm_train_mean,
-					'train_std': perm_train_std,
-					'test_mean': perm_test_mean,
-					'test_std': perm_test_std
+					'train_std':  perm_train_std,
+					'test_mean':  perm_test_mean,
+					'test_std':   perm_test_std
 				}).sort_values(by='train_mean', ascending=False).reset_index(drop=True)
 				# message to confirm success
 				message_permutation = (
@@ -1585,7 +1834,7 @@ def main():
 					"An error occurred while computing permutation importance: " + str(e)
 				)
 		else:
-			# if not requested, return empty DataFrame and skip computation
+			# if not requested, return empty DataFrame
 			permutation_importance_df = pd.DataFrame()
 			message_permutation = "The permutation importance was not computed"
 		# print a message
@@ -2034,61 +2283,111 @@ def main():
 			'PRG-AUC_clipped': [round(prg_auc_clipped_test, digits)]
 			})
 
-		# combine expectations and predictions from the training dataset
-		## transform numpy.ndarray into pandas.core.frame.DataFrame
-		y_pred_train_df = pd.DataFrame(y_pred_train)
-		## retrieve the sample index in a column
-		y_train_df = y_train_series.reset_index().rename(columns={"index":"sample"})
-		## concatenate horizontally with reset index
-		combined_train_df = pd.concat([y_train_df.reset_index(drop=True), y_pred_train_df.reset_index(drop=True)], axis=1)
-		## rename variables of headers
-		combined_train_df.rename(columns={'phenotype': 'expectation'}, inplace=True)
-		combined_train_df.rename(columns={0: 'prediction'}, inplace=True)
+		# combine expectation and prediction from the training dataset
+		## convert numpy.ndarray into a dataframe with explicit column name
+		y_pred_train_df = pd.DataFrame(y_pred_train, columns=["prediction"])
+		## rebuild a clean dataframe for expectations using preserved sample IDs
+		y_train_df = pd.DataFrame({
+			"sample": train_sample_ids, # explicit sample identifiers
+			"expectation": y_train_series.values # always 1-dimensional
+		})
+		## concatenate horizontally with index resets
+		combined_train_df = pd.concat(
+			[y_train_df.reset_index(drop=True), # avoids index misalignment
+			y_pred_train_df.reset_index(drop=True)], # avoids index misalignment
+			axis=1,
+			join="inner" # safeguards against accidental row misalignment
+		)
 
-		# combine expectations and predictions from the testing dataset
-		## transform numpy.ndarray into pandas.core.frame.DataFrame
-		y_pred_test_df = pd.DataFrame(y_pred_test)
-		## retrieve the sample index in a column
-		y_test_df = y_test_series.reset_index().rename(columns={"index":"sample"})
-		## concatenate horizontally with reset index
-		combined_test_df = pd.concat([y_test_df.reset_index(drop=True), y_pred_test_df.reset_index(drop=True)], axis=1)
-		## rename variables of headers
-		combined_test_df.rename(columns={'phenotype': 'expectation'}, inplace=True)
-		combined_test_df.rename(columns={0: 'prediction'}, inplace=True)
-		## transform back the phenotype numbers into phenotype classes for the XGB model
+		# combine expectation and prediction from the testing dataset
+		## convert numpy.ndarray into a dataframe with explicit column name
+		y_pred_test_df = pd.DataFrame(y_pred_test, columns=["prediction"])
+		## rebuild a clean dataframe for expectations using preserved sample IDs
+		y_test_df = pd.DataFrame({
+			"sample": test_sample_ids, # explicit sample identifiers
+			"expectation": y_test_series.values # always 1-dimensional
+		})
+		## concatenate horizontally with index resets
+		combined_test_df = pd.concat(
+			[y_test_df.reset_index(drop=True), # avoids index misalignment
+			y_pred_test_df.reset_index(drop=True)], # avoids index misalignment
+			axis=1,
+			join="inner" # safeguards against accidental row misalignment
+		)
+		## transform back phenotype numbers into phenotype classes for the XGB classifier
+		## (XGB is the only classifier that receives encoded class labels)
 		if CLASSIFIER == 'XGB':
 			combined_train_df["expectation"] = class_encoder.inverse_transform(combined_train_df["expectation"])
-			combined_train_df["prediction"] = class_encoder.inverse_transform(combined_train_df["prediction"])
-			combined_test_df["expectation"] = class_encoder.inverse_transform(combined_test_df["expectation"])
-			combined_test_df["prediction"] = class_encoder.inverse_transform(combined_test_df["prediction"])
+			combined_train_df["prediction"]  = class_encoder.inverse_transform(combined_train_df["prediction"])
+			combined_test_df["expectation"]  = class_encoder.inverse_transform(combined_test_df["expectation"])
+			combined_test_df["prediction"]   = class_encoder.inverse_transform(combined_test_df["prediction"])
 
-		# concatenate horizontally the combined predictions and p-values without reset index
+		# concatenate horizontally the combined predictions and p-values
 		## from the training dataset
-		combined_train_df = pd.concat([combined_train_df, y_pvalues_train_df], axis=1)
+		combined_train_df = pd.concat(
+			[combined_train_df.reset_index(drop=True), # avoids index misalignment during concatenation
+			y_pvalues_train_df.reset_index(drop=True)], # avoids index misalignment during concatenation
+			axis=1, join="inner" # safeguards against accidental row misalignment down the line
+		)
 		## from the testing dataset
-		combined_test_df = pd.concat([combined_test_df, y_pvalues_test_df], axis=1)
+		combined_test_df = pd.concat(
+			[combined_test_df.reset_index(drop=True), # avoids index misalignment during concatenation
+			y_pvalues_test_df.reset_index(drop=True)], # avoids index misalignment during concatenation
+			axis=1, join="inner" # safeguards against accidental row misalignment down the line
+		)
 
-		# round digits of a dataframe avoid SettingWithCopyWarning with .copy()
+		# round digits of all numeric columns (use .copy() to avoid SettingWithCopyWarning)
 		## from the training dataset
 		combined_train_df = combined_train_df.copy()
-		combined_train_df[combined_train_df.select_dtypes(include='number').columns] = combined_train_df.select_dtypes(include='number').round(digits)
+		numeric_cols = combined_train_df.select_dtypes(include="number").columns
+		combined_train_df[numeric_cols] = (
+			combined_train_df[numeric_cols].astype(float).round(digits)
+		)
 		## from the testing dataset
 		combined_test_df = combined_test_df.copy()
-		combined_test_df[combined_test_df.select_dtypes(include='number').columns] = combined_test_df.select_dtypes(include='number').round(digits)
+		numeric_cols = combined_test_df.select_dtypes(include="number").columns
+		combined_test_df[numeric_cols] = (
+			combined_test_df[numeric_cols].astype(float).round(digits)
+		)
 
-		# combine phenotypes and datasets to potentially use it as future input
-		## select columns of interest with .copy() to prevents potential SettingWithCopyWarning
-		simplified_train_df = combined_train_df.iloc[:,0:2].copy()
-		simplified_test_df = combined_test_df.iloc[:,0:2].copy()
-		## add a column
-		simplified_train_df['dataset'] = 'training'
-		simplified_test_df['dataset'] = 'testing'
-		## concatenate vertically dataframes
-		simplified_train_test_df = pd.concat([simplified_train_df, simplified_test_df], axis=0, ignore_index=True)
-		## rename variables of header
-		simplified_train_test_df.rename(columns={simplified_train_test_df.columns[1]: 'phenotype'}, inplace=True)
-		## sort by samples
-		simplified_train_test_df = simplified_train_test_df.sort_values(by='sample')
+		# ensure samples are sorted in alphanumerical order
+		## from the training dataset
+		combined_train_df = (
+			combined_train_df
+			.sort_values(by="sample", key=lambda col: col.astype(str))
+			.reset_index(drop=True)
+		)
+		## from the testing dataset
+		combined_test_df = (
+			combined_test_df
+			.sort_values(by="sample", key=lambda col: col.astype(str))
+			.reset_index(drop=True)
+		)
+
+		# build a clean phenotype/dataset file to reuse later
+		## keep only sample identifiers and the phenotype column (the second column in the combined DF)
+		simplified_train_df = combined_train_df.iloc[:, 0:2].copy()
+		simplified_test_df  = combined_test_df.iloc[:, 0:2].copy()
+		## annotate dataset origin
+		simplified_train_df["dataset"] = "training"
+		simplified_test_df["dataset"]  = "testing"
+		## concatenate vertically while safeguarding against accidental column mismatch
+		simplified_train_test_df = pd.concat(
+			[simplified_train_df, simplified_test_df],
+			ignore_index=True,
+			axis=0,
+			join="inner"
+		)
+		## rename phenotype column for clarity (the second column)
+		simplified_train_test_df = simplified_train_test_df.rename(
+			columns={simplified_train_test_df.columns[1]: "phenotype"}
+		).copy()
+		## ensure sample identifiers are sorted and index is reset
+		simplified_train_test_df = (
+			simplified_train_test_df
+			.sort_values("sample")
+			.reset_index(drop=True)
+		)
 
 		# check if the output directory does not exists and make it
 		if not os.path.exists(OUTPUTPATH):
@@ -2166,16 +2465,17 @@ def main():
 		log_file.writelines("GenomicBasedClassification: " + __version__ + " (released in " + __release__ + ")" + "\n")
 		log_file.writelines("python: " + str(sys.version_info[0]) + "." + str(sys.version_info[1]) + "\n")
 		log_file.writelines("argparse: " + str(ap.__version__) + "\n")
-		log_file.writelines("pickle: " + str(pi.format_version) + "\n")
-		log_file.writelines("pandas: " + str(pd.__version__) + "\n")
 		log_file.writelines("imblearn: " + str(imb.__version__) + "\n")
-		log_file.writelines("sklearn: " + str(sk.__version__) + "\n")
-		log_file.writelines("xgboost: " + str(xgb.__version__) + "\n")
 		log_file.writelines("numpy: " + str(np.__version__) + "\n")
+		log_file.writelines("pandas: " + str(pd.__version__) + "\n")
+		log_file.writelines("pickle: " + str(pi.format_version) + "\n")
 		log_file.writelines("joblib: " + str(jl.__version__) + "\n")
 		log_file.writelines("tqdm: " + str(tq.__version__) + "\n")
 		log_file.writelines("tqdm-joblib: " + str(imp.version("tqdm-joblib")) + "\n")
+		log_file.writelines("sklearn: " + str(sk.__version__) + "\n")
 		log_file.writelines("catboost: " + str(imp.version("catboost")) + "\n")
+		log_file.writelines("lightgbm: " + str(lgbm.__version__) + "\n")
+		log_file.writelines("xgboost: " + str(xgb.__version__) + "\n")
 		log_file.writelines(["###########################\n######## arguments  #######\n###########################\n"])
 		for key, value in vars(args).items():
 			log_file.write(f"{key}: {value}\n")
@@ -2214,10 +2514,14 @@ def main():
 		log_file.writelines(message_parallelization + "\n")
 		log_file.writelines(message_best_parameters + "\n")
 		log_file.writelines(message_best_score + "\n")
+
+
 		log_file.writelines(message_selected_features + "\n")
 		log_file.writelines(message_importance_encoded_feature_names + "\n")
 		log_file.writelines(message_importance_count + "\n")
 		log_file.writelines(message_compatibility_permutation_nrepeat + "\n")
+		if PERMUTATIONIMPORTANCE is True:
+			log_file.writelines(message_perm_selection + "\n")
 		log_file.writelines(message_permutation + "\n")
 		if CLASSIFIER == 'QDA':
 			log_file.writelines(message_qda_probabilities + "\n")
@@ -2480,9 +2784,17 @@ def main():
 		# concatenate horizontally the combined predictions and p-values without reset index
 		combined_mutations_df = pd.concat([combined_mutations_df, y_pvalues_mutations_df], axis=1)
 
-		# round digits of a dataframe avoid SettingWithCopyWarning with .copy()
+		# round digits of all numeric columns (use .copy() to avoid SettingWithCopyWarning)
 		combined_mutations_df = combined_mutations_df.copy()
-		combined_mutations_df[combined_mutations_df.select_dtypes(include='number').columns] = combined_mutations_df.select_dtypes(include='number').round(digits)
+		numeric_cols = combined_mutations_df.select_dtypes(include="number").columns
+		combined_mutations_df[numeric_cols] = combined_mutations_df[numeric_cols].astype(float).round(digits)
+
+		# ensure samples are sorted in alphanumerical order
+		combined_mutations_df = (
+			combined_mutations_df
+			.sort_values(by="sample", key=lambda col: col.astype(str))
+			.reset_index(drop=True)
+		)
 
 		# check if the output directory does not exists and make it
 		if not os.path.exists(OUTPUTPATH):
@@ -2517,16 +2829,17 @@ def main():
 		log_file.writelines("GenomicBasedClassification: " + __version__ + " (released in " + __release__ + ")" + "\n")
 		log_file.writelines("python: " + str(sys.version_info[0]) + "." + str(sys.version_info[1]) + "\n")
 		log_file.writelines("argparse: " + str(ap.__version__) + "\n")
-		log_file.writelines("pickle: " + str(pi.format_version) + "\n")
-		log_file.writelines("pandas: " + str(pd.__version__) + "\n")
 		log_file.writelines("imblearn: " + str(imb.__version__) + "\n")
+		log_file.writelines("pandas: " + str(pd.__version__) + "\n")
 		log_file.writelines("sklearn: " + str(sk.__version__) + "\n")
+		log_file.writelines("pickle: " + str(pi.format_version) + "\n")
+		log_file.writelines("catboost: " + str(imp.version("catboost")) + "\n")
+		log_file.writelines("lightgbm: " + str(lgbm.__version__) + "\n")
 		log_file.writelines("xgboost: " + str(xgb.__version__) + "\n")
 		log_file.writelines("numpy: " + str(np.__version__) + "\n")
 		log_file.writelines("joblib: " + str(jl.__version__) + "\n")
 		log_file.writelines("tqdm: " + str(tq.__version__) + "\n")
 		log_file.writelines("tqdm-joblib: " + str(imp.version("tqdm-joblib")) + "\n")
-		log_file.writelines("catboost: " + str(imp.version("catboost")) + "\n")
 		log_file.writelines(["###########################\n######## arguments  #######\n###########################\n"])
 		for key, value in vars(args).items():
 			log_file.write(f"{key}: {value}\n")

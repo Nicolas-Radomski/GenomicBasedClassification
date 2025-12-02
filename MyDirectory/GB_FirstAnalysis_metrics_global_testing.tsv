@@ -1,0 +1,2 @@
+accuracy	sensitivity	specificity	precision	recall	f1-score	MCC	Cohen kappa	ROC-AUC	PR-AUC	PRG-AUC	PRG-AUC_clipped
+0.825	0.829365	0.914835	0.840278	0.829365	0.826007	0.747175	0.738806	0.967415	0.940969	0.887837	0.887837

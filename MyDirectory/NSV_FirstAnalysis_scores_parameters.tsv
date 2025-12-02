@@ -1,0 +1,5 @@
+scores	parameters
+0.91875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7fa835d00860>, 'model__gamma': 'scale', 'model__kernel': 'rbf', 'model__nu': 0.3
+0.9	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7fa835d00860>, 'model__gamma': 'scale', 'model__kernel': 'rbf', 'model__nu': 0.5
+0.89375	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7fa835d00860>, 'model__gamma': 'scale', 'model__kernel': 'rbf', 'model__nu': 0.3
+0.85625	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7fa835d00860>, 'model__gamma': 'scale', 'model__kernel': 'rbf', 'model__nu': 0.5

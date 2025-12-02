@@ -1,0 +1,25 @@
+scores	parameters
+0.875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 10, 'model__n_estimators': 100
+0.875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 5, 'model__n_estimators': 100
+0.86875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': -1, 'model__n_estimators': 200
+0.86875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__n_estimators': 200
+0.86875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__n_estimators': 100
+0.86875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 10, 'model__n_estimators': 200
+0.86875	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 5, 'model__n_estimators': 200
+0.85625	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__n_estimators': 100
+0.85625	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': -1, 'model__n_estimators': 200
+0.85625	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': -1, 'model__n_estimators': 100
+0.85	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__n_estimators': 200
+0.84375	'feature_selection__k': 50, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': -1, 'model__n_estimators': 100
+0.8375	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': -1, 'model__n_estimators': 100
+0.83125	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 5, 'model__n_estimators': 200
+0.825	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': -1, 'model__n_estimators': 200
+0.81875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__n_estimators': 100
+0.81875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__n_estimators': 200
+0.81875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': -1, 'model__n_estimators': 100
+0.81875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 5, 'model__n_estimators': 100
+0.8125	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 10, 'model__n_estimators': 200
+0.8125	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 10, 'model__n_estimators': 200
+0.80625	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.1, 'model__max_depth': 5, 'model__n_estimators': 100
+0.8	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': 10, 'model__n_estimators': 100
+0.7875	'feature_selection__k': 25, 'feature_selection__score_func': <function mutual_info_classif at 0x7f5abb430860>, 'model__learning_rate': 0.05, 'model__max_depth': -1, 'model__n_estimators': 200
